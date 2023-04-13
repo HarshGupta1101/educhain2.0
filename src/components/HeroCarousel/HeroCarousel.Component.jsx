@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import HeroSlider from "react-slick";
+// import axios from "axios";
 
 //Arrow components
 import { NextArrow, PrevArrow } from "./Arrows.Component";
 
 const HeroCarousel = () => {
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState(['https://res.cloudinary.com/diczskxkx/image/upload/v1681378842/MicrosoftTeams-image_2_nqm4gf.png','https://res.cloudinary.com/diczskxkx/image/upload/v1681379408/MicrosoftTeams-image_3_wnp1bl.png','https://res.cloudinary.com/diczskxkx/image/upload/v1676156102/jjmhk8bkgrkezbbskieh.webp']);
 
 
     const settingsLG = {
         arrows: true,
         autoplay: true,
         centerMode: true,
-        centerPadding: "200px",
+        centerPadding: "300px",
         slidesToShow: 1,
         infinite: true,
         slideToScroll: 1,
@@ -35,9 +36,9 @@ const HeroCarousel = () => {
             <div className="lg:hidden">
                 <HeroSlider {...settings}>
                     {images.map((image) => (
-                        <div className="w-full h-56 md:h-80 py-3">
+                        <div className="w-full h-58 md:h-80 py-3">
                             <img
-                                src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
+                                src={image}
                                 alt="Hero Banner"
                                 className="w-full h-full rounded-md object-center "
                             />
@@ -50,7 +51,7 @@ const HeroCarousel = () => {
                     {images.map((image) => (
                         <div className="w-full h-96 px-2 py-3">
                             <img
-                                src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
+                                src={image}
                                 alt="Hero Banner"
                                 className="w-full h-full rounded-md object-center "
                             />

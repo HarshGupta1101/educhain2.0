@@ -4,6 +4,15 @@ import HomePage from './pages/Home.Page';
 import DefaultLayout from './layouts/Default.Layout';
 import SignIn from './components/SignIn/SignIn.Component';
 import SignUp from './components/SignUp/SignUp.Component';
+// import axios from 'axios';
+
+// Import css files
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+// axios.defaults.baseURL = "https://api.themoviedb.org/3";
+// axios.defaults.params = {};
+// axios.defaults.params["api_key"] = "7d6db67791d1fc8dd41512aa8b5be970";
 
 function App() {
   return (

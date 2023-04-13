@@ -6,7 +6,7 @@ body{
   background-color: #F5F5F5 !important;
 }
 
-/* .slick-prev {
+.slick-prev {
   left: 3% !important;
   z-index: 1;
 }
@@ -14,4 +14,4 @@ body{
 .slick-next {
   right: 3% !important;
   z-index: 1;
-} */
+}
