@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const theme = createTheme();
 
@@ -25,6 +26,18 @@ export default function SignUp() {
       password: data.get('password'),
     });
   };
+
+  const [credentials, setCredentials] = useState({
+    check: false,
+    })
+
+  const inputChanged = () => {
+    if(!credentials.check){
+      setCredentials({...credentials, check: true});
+    }else{
+      setCredentials({...credentials, check: false});
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -57,16 +70,6 @@ export default function SignUp() {
                   autoFocus
                 />
               </Grid>
-              {/* <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   required
@@ -88,12 +91,24 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              {/* <Grid item xs={12}>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="Do You Belong To An NGO ?" name="check" value={credentials.check} onChange={inputChanged}
                 />
-              </Grid> */}
+              </Grid>
+              { credentials.check && (
+                <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="accessCode"
+                  label="Access Code"
+                  name="accessCode"
+                  autoComplete="family-name"
+                />
+              </Grid>)
+              }
             </Grid>
             <Button
               type="submit"
