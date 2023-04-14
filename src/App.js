@@ -4,6 +4,7 @@ import HomePage from './pages/Home.Page';
 import DefaultLayout from './layouts/Default.Layout';
 import SignIn from './components/SignIn/SignIn.Component';
 import SignUp from './components/SignUp/SignUp.Component';
+import NGORegistration from './components/NGORegistration/NGORegistration.Component'
 // import axios from 'axios';
 
 // Import css files
@@ -29,6 +30,7 @@ function App() {
         />
         <Route path='/login' exact element={<SignIn />} />
         <Route path='/register' exact element={<SignUp />} />
+        <Route path='/ngoregistration' exact element={<NGORegistration />} />
       </Routes>
     </BrowserRouter>
   );

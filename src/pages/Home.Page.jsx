@@ -4,6 +4,7 @@ import CategoriesSlider from '../components/Categories/Categories.Component';
 import TrendingCourse from '../components/TrendingCourse/TrendingCourse.Component';
 import Footer from '../components/Footer/Footer.Component'
 import About from '../components/About/About.Component';
+import NGOReg from '../components/NGORegistration/NGORegBanner.Component';
 
 function HomePage() {
   const [topCourses, setTopCourses] = useState([
@@ -69,6 +70,9 @@ function HomePage() {
       </div>
       <div className='container mx-auto px-4 md:px-12 my-8'>
         <About />
+      </div>
+      <div className='container mx-auto px-4 md:px-12 my-8'>
+        <NGOReg />
       </div>
       <div className='bg-premier-800 py-6'>
         <Footer/>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
 
 const Poster = (props) => {
   return (
@@ -16,7 +15,7 @@ const Poster = (props) => {
         <div className='px-4 pb-2'>
           <h3 className='text-lg font-bold text-gray-700'>{props.title}</h3>
           <p className='text-xs text-gray-500 mb-2'>By {props.instructor}</p>
-          <h3 className='mb-4'>Ⓝ{props.coursePrice}</h3>
+          <h3 className='mb-4 font-bold'>Ⓝ {props.coursePrice}</h3>
           <div className='flex gap-2'>
           <button class="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">See Details</button>
           <button class="rounded bg-black text-white p-2 hover:text-black hover:bg-white hover:border-2 hover:border-black">Add To Cart</button>
