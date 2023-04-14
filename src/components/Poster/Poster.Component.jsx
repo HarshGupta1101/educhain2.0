@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const Poster = (props) => {
   return (
@@ -17,8 +18,8 @@ const Poster = (props) => {
           <p className='text-xs text-gray-500 mb-2'>By {props.instructor}</p>
           <h3 className='mb-3 font-bold'>Ⓝ {props.coursePrice}</h3>
           <div className='flex gap-2'>
-          <button class="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">See Details</button>
-          <button class="rounded bg-black text-white p-2 hover:text-black hover:bg-white hover:border-2 hover:border-black">Add To Cart</button>
+          <button class="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">Details</button>
+          <button class="rounded bg-black text-white p-2 hover:text-black hover:bg-white hover:border-2 hover:border-black"><AddShoppingCartIcon className='mx-3'/></button>
           </div>
         </div>
       </div>
