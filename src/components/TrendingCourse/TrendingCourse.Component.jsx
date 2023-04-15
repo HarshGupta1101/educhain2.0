@@ -44,7 +44,7 @@ const TrendingCourse = (props) => {
     <>
       <div className='flex flex-col items-start sm:ml-3 ml-0 mb-6'>
         <h3 className='text-3xl font-bold text-black'>{title}</h3>
-        <p className='text-sm text-gray-800'>{subtitle}</p>
+        <p className='text-sm text-gray-500'>{subtitle}</p>
       </div>
       <Slider {...settings}>
         {posters.map((each) => (
