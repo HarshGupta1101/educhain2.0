@@ -6,9 +6,12 @@ import SignIn from './components/SignIn/SignIn.Component';
 import SignUp from './components/SignUp/SignUp.Component';
 import NGORegistration from './components/NGORegistration/NGORegistration.Component'
 import AllCourses from './pages/AllCourses.Page'
-import Dashboard from './pages/Dashboard.Page'
+import Profile from './pages/Profile.Page'
+import InProgressCourses from './pages/InProgressCourses.Page';
+import CompletedCourses from './pages/CompletedCourses.Page'
+import UploadedCourses from './pages/UploadedCourses.Page'
 import SingleCourse from './pages/SingleCourse.Page';
-import CoursePlayPage from './pages/CoursePlay.Page';
+import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
 // import axios from 'axios';
 
@@ -33,11 +36,38 @@ function App() {
         <Route path='/register' exact element={<SignUp />} />
         <Route path='/ngoregistration' exact element={<NGORegistration />} />
         <Route
-          path='/dashboard'
+          path='/profile'
           exact
           element={
             <DefaultLayout>
-              <Dashboard />
+              <Profile />
+            </DefaultLayout>
+          }
+        />
+        <Route
+          path='/inprogresscourses'
+          exact
+          element={
+            <DefaultLayout>
+              <InProgressCourses />
+            </DefaultLayout>
+          }
+        />
+        <Route
+          path='/completedcourses'
+          exact
+          element={
+            <DefaultLayout>
+              <CompletedCourses />
+            </DefaultLayout>
+          }
+        />
+        <Route
+          path='/uploadedcourses'
+          exact
+          element={
+            <DefaultLayout>
+              <UploadedCourses />
             </DefaultLayout>
           }
         />
@@ -64,7 +94,7 @@ function App() {
           exact
           element={
             <DefaultLayout>
-              <CoursePlayPage />
+              <CoursePlay />
             </DefaultLayout>
           }
         />

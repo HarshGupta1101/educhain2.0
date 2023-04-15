@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
-import Poster from '../Poster/Poster.Component';
+import Poster from '../Poster/BuyPoster.Component';
 
 const AllCourses = (props) => {
   const settings = {

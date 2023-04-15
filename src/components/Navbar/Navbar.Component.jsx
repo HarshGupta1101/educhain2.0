@@ -101,7 +101,7 @@ function NavLg() {
             Sign In
           </Link>
           <Link
-            to='/dashboard'
+            to='/profile'
             className='text-white hover:text-gray-200'
           >
           <AccountCircleIcon fontSize='large'/>

@@ -1,8 +1,8 @@
 import React from 'react';
 import Slider from 'react-slick';
-import Poster from '../Poster/BuyPoster.Component';
+import Poster from '../Poster/UploadedPoster.Component';
 
-const TrendingCourse = (props) => {
+const UploadedCourses = (props) => {
   const settings = {
     infinite: false,
     speed: 500,
@@ -44,9 +44,15 @@ const TrendingCourse = (props) => {
     <>
       <div className='flex flex-col items-start sm:ml-3 ml-0 mb-6'>
         <h3 className='text-3xl font-bold text-black'>{title}</h3>
-        <p className='text-sm text-gray-500'>{subtitle}</p>
+        <p className='text-md text-gray-800'>{subtitle}</p>
       </div>
       <Slider {...settings}>
+        {posters.map((each) => (
+          <Poster {...each} />
+        ))}
+        {console.log(posters)}
+      </Slider>
+      <Slider {...settings} className='mt-5'>
         {posters.map((each) => (
           <Poster {...each} />
         ))}
@@ -56,4 +62,4 @@ const TrendingCourse = (props) => {
   );
 };
 
-export default TrendingCourse;
+export default UploadedCourses;
