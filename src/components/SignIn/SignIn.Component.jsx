@@ -77,14 +77,16 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            <Link to='/'>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 1, mb: 2 }}
             >
-              Back
+              Back To Home
             </Button>
+            </Link>
             <Grid container>
               <Grid item xs>
                 <Link to="/" variant="body2" className='underline text-blue-600 hover:text-blue-500'>

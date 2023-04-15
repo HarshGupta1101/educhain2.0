@@ -6,7 +6,7 @@ import HeroSlider from "react-slick";
 import { NextArrow, PrevArrow } from "./Arrows.Component";
 
 const HeroCarousel = () => {
-    const [images, setImages] = useState(['https://res.cloudinary.com/diczskxkx/image/upload/v1681378842/MicrosoftTeams-image_2_nqm4gf.png','https://res.cloudinary.com/diczskxkx/image/upload/v1681379408/MicrosoftTeams-image_3_wnp1bl.png','https://res.cloudinary.com/diczskxkx/image/upload/v1676156102/jjmhk8bkgrkezbbskieh.webp']);
+    const [images, setImages] = useState(['https://res.cloudinary.com/diczskxkx/image/upload/v1681403478/ds_do2sy2.jpg','https://res.cloudinary.com/diczskxkx/image/upload/v1681379408/MicrosoftTeams-image_3_wnp1bl.png','https://res.cloudinary.com/diczskxkx/image/upload/v1681403479/bc_shvsah.png']);
 
 
     const settingsLG = {
@@ -36,7 +36,7 @@ const HeroCarousel = () => {
             <div className="lg:hidden">
                 <HeroSlider {...settings}>
                     {images.map((image) => (
-                        <div className="w-full h-58 md:h-80 py-3">
+                        <div className="w-full h-58 md:h-80 pt-3">
                             <img
                                 src={image}
                                 alt="Hero Banner"
@@ -49,7 +49,7 @@ const HeroCarousel = () => {
             <div className="hidden lg:block">
                 <HeroSlider {...settingsLG}>
                     {images.map((image) => (
-                        <div className="w-full h-96 px-2 py-3">
+                        <div className="w-full h-96 px-2 pt-3">
                             <img
                                 src={image}
                                 alt="Hero Banner"

@@ -3,8 +3,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 // import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -13,11 +13,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function NGORegistration() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -26,18 +26,6 @@ export default function SignUp() {
       password: data.get('password'),
     });
   };
-
-  const [credentials, setCredentials] = useState({
-    check: false,
-    })
-
-  const inputChanged = () => {
-    if(!credentials.check){
-      setCredentials({...credentials, check: true});
-    }else{
-      setCredentials({...credentials, check: false});
-    }
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -55,7 +43,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign Up
+            NGO Sign Up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -84,6 +72,16 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
+                  id="phoneNumber"
+                  label="Phone Number"
+                  name="phoneNumber"
+                  autoComplete="phoneNumber"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   name="password"
                   label="Password"
                   type="password"
@@ -91,24 +89,22 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="Do You Belong To An NGO ?" name="check" value={credentials.check} onChange={inputChanged}
-                />
+              <Grid item xs={12} sm={3} className='text-center' style={{ marginTop: "7px" }}>
+                Upload ID
               </Grid>
-              { credentials.check && (
-                <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="accessCode"
-                  label="Access Code"
-                  name="accessCode"
-                  autoComplete="family-name"
-                />
-              </Grid>)
-              }
+              <Grid item xs={12} sm={9}>
+              <label class="block">
+                <span class="sr-only">Choose profile photo</span>
+                <input type="file" class="block w-full text-sm text-slate-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-full file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-blue-50 file:text-blue-700
+                  hover:file:bg-blue-100 
+                  border-2 rounded-md border-gray-300 hover:border-gray-400
+                "/>
+              </label>
+              </Grid>
             </Grid>
             <Button
               type="submit"
