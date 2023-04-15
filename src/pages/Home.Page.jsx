@@ -74,9 +74,6 @@ function HomePage() {
       <div className='container mx-auto px-4 md:px-12 my-8'>
         <NGOReg />
       </div>
-      <div className='bg-premier-800 py-6'>
-        <Footer/>
-      </div>
     </>
   );
 }
