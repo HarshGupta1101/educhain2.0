@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import HeroCarousel from '../components/HeroCarousel/HeroCarousel.Component';
 import CategoriesSlider from '../components/Categories/Categories.Component';
 import TrendingCourse from '../components/TrendingCourse/TrendingCourse.Component';
-import Footer from '../components/Footer/Footer.Component'
 import About from '../components/About/About.Component';
 import NGOReg from '../components/NGORegistration/NGORegBanner.Component';
 
