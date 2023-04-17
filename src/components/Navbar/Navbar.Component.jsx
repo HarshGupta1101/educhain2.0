@@ -3,6 +3,7 @@ import { BiSearch } from 'react-icons/bi';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import { Badge } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useCartContext } from '../../context/cart.context';
 
 function NavSm() {
@@ -59,6 +60,7 @@ function NavMd() {
         >
           Sign In
         </Link>
+          <AccountCircleIcon />
         <Link to='/cart' className='w-8 h-8 text-white mt-1'>
           <Badge badgeContent={total_items} color='primary'>
             <ShoppingCartIcon />
@@ -116,6 +118,12 @@ function NavLg() {
             className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
           >
             Sign In
+          </Link>
+          <Link
+            to='/profile'
+            className='text-white hover:text-gray-200'
+          >
+          <AccountCircleIcon fontSize='large'/>
           </Link>
           <Link to='/cart' className='w-8 h-8 text-white mt-1'>
             <Badge badgeContent={total_items} color='primary'>

@@ -11,7 +11,7 @@ function SingleCoursePage() {
       <div className='my-12 container px-4 lg:ml-20 lg:w-2/3'>
         <div className='flex flex-col item-start gap-3'>
           <h1 className='text-gray-800 font-bold text-2xl'>About the course</h1>
-          <p>
+          <p className='text-justify'>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type
