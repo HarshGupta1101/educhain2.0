@@ -6,7 +6,7 @@ const AllCourses = (props) => {
   const settings = {
     infinite: false,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 5,
     InitialSlide: 0,
     responsive: [
