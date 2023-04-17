@@ -28,7 +28,7 @@ const CourseHeroComponent = () => {
             </div>
             <div className='flex items-center gap-3 md:px-4 md:w-screen text-xl px-4'>
               <button className='bg-red-500 w-full py-3 text-white font-semibold rounded-lg'>
-                Buy ₹149
+                Add To Cart
               </button>
             </div>
           </div>

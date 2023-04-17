@@ -4,7 +4,10 @@ import Slider from 'react-slick';
 const Categories = (props) => {
   return (
     <>
-      <div className='p-8 rounded-lg text-center bg-sky-100' style={{marginRight: '20px'}}>
+      <div
+        className='p-8 rounded-lg text-center bg-sky-100'
+        style={{ marginRight: '20px' }}
+      >
         <img className='w-full h-full mb-3' src={props.src} alt='categories' />
         <p>Web Development</p>
       </div>
@@ -58,8 +61,8 @@ const CategoriesSlider = () => {
   return (
     <>
       <Slider {...settings}>
-        {EntertainmentImage.map((image) => (
-          <Categories src={image} />
+        {EntertainmentImage.map((image, index) => (
+          <Categories src={image} key={index} />
         ))}
       </Slider>
     </>

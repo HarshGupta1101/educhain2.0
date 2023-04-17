@@ -36,7 +36,7 @@ export default function NGOReg() {
             </h2>
             </Typography>
             <Link to='/ngoregistration'>
-            <button class="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">Register Now</button>
+            <button className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">Register Now</button>
             </Link>
           </Container>
         </Box>

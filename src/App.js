@@ -4,7 +4,7 @@ import HomePage from './pages/Home.Page';
 import DefaultLayout from './layouts/Default.Layout';
 import SignIn from './components/SignIn/SignIn.Component';
 import SignUp from './components/SignUp/SignUp.Component';
-import NGORegistration from './components/NGORegistration/NGORegistration.Component'
+import NGORegistration from './components/NGORegistration/NGORegistration.Component';
 import SingleCourse from './pages/SingleCourse.Pages';
 import CoursePlayPage from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
@@ -14,6 +14,8 @@ import CartPage from './pages/Cart.Page';
 // Import css files
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import AddCourseDetailsPage from './pages/AddCourseDetails.Page';
+import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
 
 // axios.defaults.baseURL = "https://api.themoviedb.org/3";
 // axios.defaults.params = {};
@@ -62,6 +64,8 @@ function App() {
             </DefaultLayout>
           }
         />
+        <Route path='/addcourse/details' exact element={<AddCourseDetailsPage />} />
+        <Route path='/course/upload/draft' exact element={<UploadCourseDraftPage />} />
       </Routes>
     </BrowserRouter>
   );

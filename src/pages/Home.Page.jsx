@@ -1,56 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import HeroCarousel from '../components/HeroCarousel/HeroCarousel.Component';
 import CategoriesSlider from '../components/Categories/Categories.Component';
 import TrendingCourse from '../components/TrendingCourse/TrendingCourse.Component';
-import Footer from '../components/Footer/Footer.Component'
 import About from '../components/About/About.Component';
 import NGOReg from '../components/NGORegistration/NGORegBanner.Component';
+import courses from '../utils/data';
 
 function HomePage() {
-  const [topCourses, setTopCourses] = useState([
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1676155679/azn1ngpqwcn5ounqm9ef.jpg',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1676152970/ileldz1zu8nka3xdjpgo.jpg',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1676155679/azn1ngpqwcn5ounqm9ef.jpg',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1674463149/samples/animals/kitten-playing.gif',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1676152970/ileldz1zu8nka3xdjpgo.jpg',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1676155633/oqu9tyknlcytgjvrlrid.jpg',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-  ]);
 
   return (
     <>
@@ -65,7 +21,7 @@ function HomePage() {
         <TrendingCourse
           title='Trending Courses'
           subtitle='List Of Recommended Courses'
-          posters={topCourses}
+          posters={courses}
         />
       </div>
       <div className='container mx-auto px-4 md:px-12 my-8'>

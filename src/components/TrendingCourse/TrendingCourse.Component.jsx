@@ -48,7 +48,7 @@ const TrendingCourse = (props) => {
       </div>
       <Slider {...settings}>
         {posters.map((each) => (
-          <Poster {...each} />
+          <Poster {...each} key={each.courseId} />
         ))}
         {console.log(posters)}
       </Slider>

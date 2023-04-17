@@ -4,6 +4,7 @@ import Instructor from '../components/Instructor/Instructor.Component';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 
 function SingleCoursePage() {
+
   return (
     <>
       <CourseHeroComponent />
@@ -16,7 +17,8 @@ function SingleCoursePage() {
             ever since the 1500s, when an unknown printer took a galley of type
             and scrambled it to make a type specimen book. It has survived not
             only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.{' '}
+            remaining essentially unchanged.{' '} 
+            {/* course.details */}
           </p>
         </div>
 
@@ -44,13 +46,13 @@ function SingleCoursePage() {
             <div className='flex item-start w-2/3 gap-2 p-3 border-dashed border-2 rounded-md'>
               <p className='text-xl'>1.</p>
               <h3 className='text-gray-700 text-xl font-bold'>
-                Introduction to Python <CheckCircleIcon/>
+                Introduction to Python <CheckCircleIcon />
               </h3>
             </div>
             <div className='flex item-start w-2/3 gap-2 p-3 border-dashed border-2 rounded-md'>
               <p className='text-xl'>2.</p>
               <h3 className='text-gray-700 text-xl font-bold'>
-                Introduction to Python <CheckCircleIcon/>
+                Introduction to Python <CheckCircleIcon />
               </h3>
             </div>
           </div>
