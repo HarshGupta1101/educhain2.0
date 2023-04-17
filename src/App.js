@@ -8,11 +8,14 @@ import NGORegistration from './components/NGORegistration/NGORegistration.Compon
 import AllCourses from './pages/AllCourses.Page';
 import Profile from './pages/Profile.Page';
 import InProgressCourses from './pages/InProgressCourses.Page';
-import CompletedCourses from './pages/CompletedCourses.Page';
-import UploadedCourses from './pages/UploadedCourses.Page';
+import CompletedCourses from './pages/CompletedCourses.Page'
+import UploadedCourses from './pages/UploadedCourses.Page'
+import Students from './pages/Students.Page';
 import SingleCourse from './pages/SingleCourse.Page';
 import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
+import Modal from './components/Modal/Modal.Component';
+
 // import axios from 'axios';
 
 // Import css files
@@ -78,6 +81,15 @@ function App() {
           }
         />
         <Route
+          path='/students'
+          exact
+          element={
+            <DefaultLayout>
+              <Students />
+            </DefaultLayout>
+          }
+        />
+        <Route
           path='/courses'
           exact
           element={
@@ -110,6 +122,15 @@ function App() {
           element={
             <DefaultLayout>
               <CartPage />
+            </DefaultLayout>
+          }
+        />
+        <Route
+          path='/modal'
+          exact
+          element={
+            <DefaultLayout>
+              <Modal />
             </DefaultLayout>
           }
         />

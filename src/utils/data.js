@@ -4,9 +4,9 @@ const courses = [
     courseId: '1',
     courseTitle: 'Introduction To Social Media Marketing',
     courseBrief: 'This couse contain a beginners guide to SMM',
-    courseFee: 50000,
+    courseFee: 5,
     language: 'English',
-    instructor:'Ritik Jain',            //need to inform Devendra
+    instructor:'Ritik Jain',
     timeRequired: ' 6 hr ',
     tags: ['Social', 'Media', 'Marketing'],
     rating: 4,
@@ -16,7 +16,7 @@ const courses = [
       {
         _id: '31',
         moduleId: '31',
-        moduleTitle: 'Intro to Digital Marketing',
+        moduleTitle: 'Intro To Digital Marketing',
         chapterIds: [
           {
             courseChapterId: 'some data',
@@ -34,7 +34,7 @@ const courses = [
       {
         _id: '32',
         moduleId: '32',
-        moduleTitle: 'Intro to Social Media Marketing',
+        moduleTitle: 'Intro To Social Media Marketing',
         chapterIds: [],
         moduleAssessmentIds: [],
         createdAt: '2023-04-11T10:57:06.083Z',
@@ -52,7 +52,7 @@ const courses = [
     courseId: '2',
     courseTitle: 'Introduction To Python Programming',
     courseBrief: 'This couse contain a beginners guide to Python',
-    courseFee: 400,
+    courseFee: 4,
     language: 'English',
     timeRequired: ' 8 hr ',
     instructor:'Kunal Jain', 
@@ -98,9 +98,9 @@ const courses = [
   {
     _id: '3',
     courseId: '3',
-    courseTitle: 'Web Development Simplified',
+    courseTitle: 'Web Development: Basics To Advanced',
     courseBrief: 'This course contain a beginners guide to WebDev',
-    courseFee: 4000,
+    courseFee: 3,
     language: 'English',
     timeRequired: ' 15 hr ',
     tags: ['WebDev', 'HTML', 'CSS', 'JS'],
@@ -146,9 +146,9 @@ const courses = [
   {
     _id: '4',
     courseId: '4',
-    courseTitle: 'DataScience from Scratch along with projects',
+    courseTitle: 'Data Science From Scratch Along With Projects',
     courseBrief: 'This couse contains a beginners guide to DS',
-    courseFee: 5000,
+    courseFee: 6,
     language: 'English',
     timeRequired: ' 16 hr ',
     instructor:'Tanuj Jain', 
@@ -194,9 +194,9 @@ const courses = [
   {
     _id: '5',
     courseId: '5',
-    courseTitle: 'Blockchain Technology by Industry Experts',
+    courseTitle: 'Blockchain Technology By Industry Experts',
     courseBrief: 'This couse contains a beginners guide to Blockchain',
-    courseFee: 50000,
+    courseFee: 10,
     language: 'English',
     timeRequired: ' 30 hr ',
     instructor:'Tanish Jain', 

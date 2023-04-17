@@ -49,12 +49,12 @@ function NavMd() {
         >
           Home
         </Link>
-        <Link
+        {/* <Link
           to='/'
           className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
         >
           About
-        </Link>
+        </Link> */}
         <Link
           to='/courses'
           className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
@@ -119,12 +119,12 @@ function NavLg() {
           >
             Home
           </Link>
-          <Link
+          {/* <Link
             to='/'
             className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
           >
             About
-          </Link>
+          </Link> */}
           <Link
             to='/courses'
             className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
