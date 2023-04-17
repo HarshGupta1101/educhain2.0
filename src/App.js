@@ -5,11 +5,11 @@ import DefaultLayout from './layouts/Default.Layout';
 import SignIn from './components/SignIn/SignIn.Component';
 import SignUp from './components/SignUp/SignUp.Component';
 import NGORegistration from './components/NGORegistration/NGORegistration.Component';
-import AllCourses from './pages/AllCourses.Page'
-import Profile from './pages/Profile.Page'
+import AllCourses from './pages/AllCourses.Page';
+import Profile from './pages/Profile.Page';
 import InProgressCourses from './pages/InProgressCourses.Page';
-import CompletedCourses from './pages/CompletedCourses.Page'
-import UploadedCourses from './pages/UploadedCourses.Page'
+import CompletedCourses from './pages/CompletedCourses.Page';
+import UploadedCourses from './pages/UploadedCourses.Page';
 import SingleCourse from './pages/SingleCourse.Page';
 import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
@@ -113,8 +113,20 @@ function App() {
             </DefaultLayout>
           }
         />
-        <Route path='/addcourse/details' exact element={<AddCourseDetailsPage />} />
-        <Route path='/course/upload/draft' exact element={<UploadCourseDraftPage />} />
+        <Route
+          path='/addcourse/details'
+          exact
+          element={<AddCourseDetailsPage />}
+        />
+        <Route
+          path='/course/upload/draft'
+          exact
+          element={
+            <DefaultLayout>
+              <UploadCourseDraftPage />
+            </DefaultLayout>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

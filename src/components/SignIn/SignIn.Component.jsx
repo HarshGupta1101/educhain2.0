@@ -17,13 +17,39 @@ import { Link } from 'react-router-dom';
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const [signInData, setSignInData] = React.useState({
+    password: '',
+    email: '',
+  });
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    console.log(signInData);
+    await fetch('http://127.0.0.1:5000/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(signInData),
+    })
+      .then((response) => {
+        // handle successful response
+        if (!response.ok) { 
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        localStorage.setItem('token', data.token);
+        alert('User logged In successfully!!');
+        window.history.pushState(null, null, 'http://localhost:3000/');
+        window.dispatchEvent(new Event('popstate'));
+      })
+      .catch((error) => {
+        // handle error response
+        // console.log(error);
+        alert('Error occured while creating a new User');
+      });
   };
 
   return (
@@ -59,6 +85,10 @@ export default function SignIn() {
               name='email'
               autoComplete='email'
               autoFocus
+              value={signInData.email}
+              onChange={(e) =>
+                setSignInData({ ...signInData, email: e.target.value })
+              }
             />
             <TextField
               margin='normal'
@@ -69,6 +99,10 @@ export default function SignIn() {
               type='password'
               id='password'
               autoComplete='current-password'
+              value={signInData.password}
+              onChange={(e) =>
+                setSignInData({ ...signInData, password: e.target.value })
+              }
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

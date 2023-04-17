@@ -18,30 +18,51 @@ import { useState } from 'react';
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  const [signUpdData, setSignUpdData] = useState({
+    email: '',
+    password: '',
+  });
 
   const [credentials, setCredentials] = useState({
     check: false,
-    })
+  });
 
   const inputChanged = () => {
-    if(!credentials.check){
-      setCredentials({...credentials, check: true});
-    }else{
-      setCredentials({...credentials, check: false});
+    if (!credentials.check) {
+      setCredentials({ ...credentials, check: true });
+    } else {
+      setCredentials({ ...credentials, check: false });
     }
-  }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(signUpdData);
+    await fetch('http://127.0.0.1:5000/user/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(signUpdData),
+    })
+      .then((response) => {
+        // handle successful response
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
+        alert('User created successfully');
+        window.history.pushState(null, null, 'http://localhost:3000/login');
+        window.dispatchEvent(new Event('popstate'));
+      })
+      .catch((error) => {
+        // handle error response
+        alert('Error occured while creating a new User');
+      });
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
           sx={{
@@ -54,84 +75,96 @@ export default function SignUp() {
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             Sign Up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component='form'
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  autoComplete="given-name"
-                  name="userName"
                   required
                   fullWidth
-                  id="userName"
-                  label="User Name"
-                  autoFocus
+                  id='email'
+                  label='Email Address'
+                  name='email'
+                  autoComplete='email'
+                  value={signUpdData.email}
+                  onChange={(e) =>
+                    setSignUpdData({ ...signUpdData, email: e.target.value })
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  name='password'
+                  label='Password'
+                  type='password'
+                  id='password'
+                  autoComplete='new-password'
+                  value={signUpdData.password}
+                  onChange={(e) =>
+                    setSignUpdData({ ...signUpdData, password: e.target.value })
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="Do You Belong To An NGO ?" name="check" value={credentials.check} onChange={inputChanged}
+                  control={
+                    <Checkbox value='allowExtraEmails' color='primary' />
+                  }
+                  label='Do You Belong To An NGO ?'
+                  name='check'
+                  value={credentials.check}
+                  onChange={inputChanged}
                 />
               </Grid>
-              { credentials.check && (
+              {credentials.check && (
                 <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="accessCode"
-                  label="Access Code"
-                  name="accessCode"
-                  autoComplete="family-name"
-                />
-              </Grid>)
-              }
+                  <TextField
+                    required
+                    fullWidth
+                    id='accessCode'
+                    label='Access Code'
+                    name='accessCode'
+                    autoComplete='family-name'
+                  />
+                </Grid>
+              )}
             </Grid>
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, mb: 2 }}
+              onClick={(event) => handleSubmit(event)}
             >
               Sign Up
             </Button>
             <Link to='/'>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 1, mb: 2 }}
-            >
-              Back To Home
-            </Button>
+              <Button
+                type='submit'
+                fullWidth
+                variant='contained'
+                sx={{ mt: 1, mb: 2 }}
+              >
+                Back To Home
+              </Button>
             </Link>
-            <Grid container justifyContent="flex-end">
+            <Grid container justifyContent='flex-end'>
               <Grid item>
-                <Link to='/login' variant="body2" className='underline text-blue-600 hover:text-blue-500'>
-                  {"Already Have An Account? Sign In"}
+                <Link
+                  to='/login'
+                  variant='body2'
+                  className='underline text-blue-600 hover:text-blue-500'
+                >
+                  {'Already Have An Account? Sign In'}
                 </Link>
               </Grid>
             </Grid>

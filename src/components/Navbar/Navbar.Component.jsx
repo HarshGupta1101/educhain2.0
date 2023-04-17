@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import { Badge } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useCartContext } from '../../context/cart.context';
+
+function RemoveToken() {
+  localStorage.removeItem('token');
+  window.history.pushState(null, null, 'http://localhost:3000/login');
+  window.dispatchEvent(new Event('popstate'));
+}
 
 function NavSm() {
   return (
@@ -23,6 +29,7 @@ function NavSm() {
 }
 
 function NavMd() {
+  const [isloggedIn, setIsLoggedIn] = useState(localStorage.getItem('token'));
   const { total_items } = useCartContext();
   return (
     <>
@@ -54,13 +61,23 @@ function NavMd() {
         >
           Courses
         </Link>
-        <Link
-          to='/login'
-          className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
-        >
-          Sign In
-        </Link>
-          <AccountCircleIcon />
+        {isloggedIn ? (
+          <button
+            className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
+            onClick={RemoveToken}
+          >
+            Logout
+          </button>
+        ) : (
+          <Link
+            to='/login'
+            className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
+          >
+            Sign In
+          </Link>
+        )}
+        {isloggedIn && <AccountCircleIcon />}
+
         <Link to='/cart' className='w-8 h-8 text-white mt-1'>
           <Badge badgeContent={total_items} color='primary'>
             <ShoppingCartIcon />
@@ -72,6 +89,7 @@ function NavMd() {
 }
 
 function NavLg() {
+  const [isloggedIn, setIsLoggedIn] = useState(localStorage.getItem('token'));
   const { total_items } = useCartContext();
   return (
     <>
@@ -113,18 +131,27 @@ function NavLg() {
           >
             Courses
           </Link>
-          <Link
-            to='/login'
-            className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
-          >
-            Sign In
-          </Link>
-          <Link
-            to='/profile'
-            className='text-white hover:text-gray-200'
-          >
-          <AccountCircleIcon fontSize='large'/>
-          </Link>
+          {isloggedIn ? (
+            <button
+              className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
+              onClick={RemoveToken}
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to='/login'
+              className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
+            >
+              Sign In
+            </Link>
+          )}
+          {isloggedIn && (
+            <Link to='/profile' className='text-white hover:text-gray-200'>
+              <AccountCircleIcon fontSize='large' />
+            </Link>
+          )}
+
           <Link to='/cart' className='w-8 h-8 text-white mt-1'>
             <Badge badgeContent={total_items} color='primary'>
               <ShoppingCartIcon />
