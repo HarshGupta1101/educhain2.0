@@ -1,64 +1,11 @@
 import React, { useState } from 'react';
-import Dashboard from '../components/Sidebar/Sidebar.Component';
+import Sidebar from '../components/Sidebar/Sidebar.Component';
 import { Link } from 'react-router-dom';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Input from '@mui/material/Input';
-import TextField from '@mui/material/TextField';
 import UploadedCourses from '../components/UploadedCourses/UploadedCourses.Component';
 import AddIcon from '@mui/icons-material/Add';
+import courses from '../utils/data';
 
 const UploadedCoursesPage = () => {
-
-  const [allCourses, setallCourses] = useState([
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1676155679/azn1ngpqwcn5ounqm9ef.jpg',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1676152970/ileldz1zu8nka3xdjpgo.jpg',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1676155679/azn1ngpqwcn5ounqm9ef.jpg',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1674463149/samples/animals/kitten-playing.gif',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1676152970/ileldz1zu8nka3xdjpgo.jpg',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-    {
-      image:
-        'https://res.cloudinary.com/diczskxkx/image/upload/v1676155633/oqu9tyknlcytgjvrlrid.jpg',
-      title: 'Learn Python: The Complete Python Programming Course',
-      instructor: 'Ritik Jain',
-      coursePrice: '10',
-    },
-  ]);
 
   return (
     <>
@@ -70,13 +17,13 @@ const UploadedCoursesPage = () => {
             <button class="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white"><AddIcon /> Upload Course</button>
             </Link>
             <UploadedCourses  
-            posters={allCourses}
+            posters={courses}
           />
           </div>
 
           <div className='lg:w-1/5 p-4 bg-white rounded'>
             <div>
-              <Dashboard />
+              <Sidebar />
             </div>
           </div>
         </div>

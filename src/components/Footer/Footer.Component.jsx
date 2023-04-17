@@ -6,7 +6,7 @@ function Footer() {
   return (
     <div
       className={
-        window.location.pathname === '/cart' && total_items<2
+        (window.location.pathname === '/cart' && total_items<=2 )
           ? 'bg-premier-800 py-6 fixed bottom-0 w-full'
           : 'bg-premier-800 py-6'
       }

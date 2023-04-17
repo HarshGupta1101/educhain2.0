@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useCartContext } from '../../context/cart.context';
 
-const Poster = (props) => {
+const BuyPoster = (props) => {
   const {addToCart}  = useCartContext();
 
   return (
@@ -49,4 +49,4 @@ const Poster = (props) => {
     </div>
   );
 };
-export default Poster;
+export default BuyPoster;

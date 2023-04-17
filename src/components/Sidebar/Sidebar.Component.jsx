@@ -10,9 +10,10 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import PendingIcon from '@mui/icons-material/Pending';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { Link } from 'react-router-dom';
 
-export default function BasicList() {
+export default function Sidebar() {
   return (
     <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
       <nav aria-label="main mailbox folders">
@@ -58,6 +59,17 @@ export default function BasicList() {
                 <DriveFolderUploadIcon />
               </ListItemIcon>
               <ListItemText primary="Uploaded Courses" />
+            </ListItemButton>
+          </ListItem>
+          </Link>
+          <Divider />
+          <Link to="/students">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <FormatListBulletedIcon />
+              </ListItemIcon>
+              <ListItemText primary="NGO / NPO Students" />
             </ListItemButton>
           </ListItem>
           </Link>

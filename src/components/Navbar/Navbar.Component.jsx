@@ -42,12 +42,12 @@ function NavMd() {
         >
           Home
         </Link>
-        <Link
+        {/* <Link
           to='/'
           className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
         >
           About
-        </Link>
+        </Link> */}
         <Link
           to='/courses'
           className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
@@ -60,12 +60,17 @@ function NavMd() {
         >
           Sign In
         </Link>
-          <AccountCircleIcon />
-        <Link to='/cart' className='w-8 h-8 text-white mt-1'>
-          <Badge badgeContent={total_items} color='primary'>
-            <ShoppingCartIcon />
-          </Badge>
-        </Link>
+        <Link
+            to='/profile'
+            className='text-white hover:text-gray-200'
+          >
+          <AccountCircleIcon fontSize='large'/>
+          </Link>
+          <Link to='/cart' className='w-8 h-8 text-white mt-1'>
+            <Badge badgeContent={total_items} color='primary'>
+              <ShoppingCartIcon />
+            </Badge>
+          </Link>
       </div>
     </>
   );
@@ -101,12 +106,12 @@ function NavLg() {
           >
             Home
           </Link>
-          <Link
+          {/* <Link
             to='/'
             className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
           >
             About
-          </Link>
+          </Link> */}
           <Link
             to='/courses'
             className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
