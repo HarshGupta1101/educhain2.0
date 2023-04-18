@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar/Sidebar.Component';
 import Students from '../components/Students/Students.Component';
-import { Link } from 'react-router-dom';
 
 const StudentsPage = () => {
 

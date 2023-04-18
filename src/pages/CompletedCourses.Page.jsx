@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Sidebar from '../components/Sidebar/Sidebar.Component';
-import { Link } from 'react-router-dom';
 import CompletedCourses from '../components/CompletedCourses/CompletedCourses.Component';
 import courses from '../utils/data';
 

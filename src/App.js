@@ -15,14 +15,14 @@ import SingleCourse from './pages/SingleCourse.Page';
 import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
 import Modal from './components/Modal/Modal.Component';
+import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
+import Assignment from './components/Assignment/Assignment.Component';
 
 // import axios from 'axios';
 
 // Import css files
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import AddCourseDetailsPage from './pages/AddCourseDetails.Page';
-import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
 
 // axios.defaults.baseURL = "https://api.themoviedb.org/3";
 // axios.defaults.params = {};
@@ -135,9 +135,9 @@ function App() {
           }
         />
         <Route
-          path='/addcourse/details'
+          path='/assignment'
           exact
-          element={<AddCourseDetailsPage />}
+          element={<Assignment />}
         />
         <Route
           path='/course/upload/draft'

@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar/Sidebar.Component';
 import Profile from '../components/Profile/Profile.Component';
-import { Link } from 'react-router-dom';
 
 const ProfilePage = () => {
 
