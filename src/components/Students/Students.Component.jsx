@@ -11,7 +11,10 @@ const Students = () => {
   return (
     <>
       <div>
-        <button class="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">Access Code</button>
+        <div className='flex gap-2'>
+            <h1 className='text-2xl font-bold my-1 mr-4'>NGO / NPO Students</h1>
+            <button class="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">Your Access Code</button>
+        </div>
         <TableContainer className='mt-8 border-2' sx={{ maxWidth: 850 }}>
             <Table>
             <TableHead className='bg-gray-300'>

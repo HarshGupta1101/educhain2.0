@@ -19,11 +19,14 @@ const Profile = () => {
   return (
     <>
       <div>
+      <div className='flex gap-2'>
+        <h1 className='text-2xl font-bold my-1 mr-4'>Profile</h1>
         <Link to='/profile'>
           <button className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white" onClick={handleEditClick}>
             {editable ? 'Save Profile' : 'Edit Profile'}
           </button>
         </Link>
+        </div>
         <TableContainer className='mt-8 border-2' sx={{ maxWidth: 850 }}>
           <Table>
             <TableHead>

@@ -1,5 +1,4 @@
 import getConfig from '../config.js';
-
 import { connect, Contract, WalletConnection } from 'near-api-js';
 
 const nearConfig = getConfig(process.env.NODE_ENV || 'testnet');
@@ -46,7 +45,7 @@ async function fetchMetadata() {
   console.log(response);
 }
 
-async function paymentGateway(courseId, moduleIds) {
+async function paymentGateway(courseId, moduleIds, total_amount) {
 
   const args = {
     'courses': {
@@ -57,10 +56,8 @@ async function paymentGateway(courseId, moduleIds) {
   await window.contract.buy_course(
     args,
     '300000000000000', // attached GAS (optional)
-    '5000000000000000000000000' // attached deposit in yoctoNEAR (optional)
+    `${total_amount}`+'000000000000000000000000' // attached deposit in yoctoNEAR (optional)
   );
-  // window.localStorage.setItem("transactionobj","devendra")
-  // console.log("devendra")
 }
 
 async function fetchTotalSupply() {
