@@ -7,6 +7,7 @@ import ModuleInfoComponent from '../components/UploadCourse/ModuleInfo.Component
 import { Disclosure } from '@headlessui/react';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 import ChapterInfoComponent from '../components/UploadCourse/ChapterInfo.Component';
+import AssignmentInfoComponent from '../components/UploadCourse/AssignmentInfo.Component';
 
 const UploadCourseDraftPage = () => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ const UploadCourseDraftPage = () => {
     image: '',
     noOfModules: 0,
     courseModules: [],
+    courseAssessmentIds: []
   });
 
   const handleModules = () => {
@@ -191,6 +193,13 @@ const UploadCourseDraftPage = () => {
                 setCourseDetails={setCourseDetails}
                 moduleNumber={parseInt(openTab.split(' ')[0])}
                 chapterNumber={parseInt(openTab.split(' ')[2])}
+                CourseId={id}
+              />
+            )}
+            {openTab === 'Assignment' && (
+              <AssignmentInfoComponent
+                courseDetails={courseDetails}
+                setCourseDetails={setCourseDetails}
                 CourseId={id}
               />
             )}
