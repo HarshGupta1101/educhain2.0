@@ -8,15 +8,14 @@ import NGORegistration from './components/NGORegistration/NGORegistration.Compon
 import AllCourses from './pages/AllCourses.Page';
 import Profile from './pages/Profile.Page';
 import InProgressCourses from './pages/InProgressCourses.Page';
-import CompletedCourses from './pages/CompletedCourses.Page'
-import UploadedCourses from './pages/UploadedCourses.Page'
+import CompletedCourses from './pages/CompletedCourses.Page';
+import UploadedCourses from './pages/UploadedCourses.Page';
 import Students from './pages/Students.Page';
 import SingleCourse from './pages/SingleCourse.Page';
 import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
 import Modal from './components/Modal/Modal.Component';
 import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
-import Assignment from './components/Assignment/Assignment.Component';
 
 // import axios from 'axios';
 
