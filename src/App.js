@@ -17,7 +17,6 @@ import SingleCourse from './pages/SingleCourse.Page';
 import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
 import Modal from './components/Modal/Modal.Component';
-import Assignment from './components/Assignment/Assignment.Component';
 import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
 
 // import axios from 'axios';
@@ -46,7 +45,6 @@ function App() {
         <Route path='/login' exact element={<SignIn />} />
         <Route path='/register' exact element={<SignUp />} />
         <Route path='/ngoregistration' exact element={<NGORegistration />} />
-        <Route path='/assignment' exact element={<Assignment />} />
         <Route
           path='/ngolist'
           exact
