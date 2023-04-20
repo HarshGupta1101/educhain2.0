@@ -13,7 +13,6 @@ export default function NGOReg() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-        {/* Hero unit */}
         <Box 
           sx={{
             bgcolor: 'background.paper',

@@ -16,6 +16,7 @@ import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
 import Modal from './components/Modal/Modal.Component';
 import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
+import Assignment from './components/Assignment/Assignment.Component';
 
 // import axios from 'axios';
 

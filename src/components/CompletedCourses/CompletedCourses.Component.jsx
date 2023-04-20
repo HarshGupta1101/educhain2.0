@@ -1,8 +1,7 @@
 import React from 'react';
-import Slider from 'react-slick';
 import Poster from '../Poster/CompletedPoster.Component';
 
-const ComletedCourses = (props) => {
+const CompletedCourses = (props) => {
 
   const { posters, title, subtitle } = props;
 
@@ -21,4 +20,4 @@ const ComletedCourses = (props) => {
   );
 };
 
-export default ComletedCourses;
+export default CompletedCourses;

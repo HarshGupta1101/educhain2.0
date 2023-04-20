@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AllCourses from '../components/AllCourses/AllCourses.Component';
 import courses from '../utils/data';
 

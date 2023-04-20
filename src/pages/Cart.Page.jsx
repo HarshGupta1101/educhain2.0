@@ -2,6 +2,7 @@ import React from 'react';
 import CartCardComponent from '../components/Cart/CartCard.Component';
 import { RxCross2 } from 'react-icons/rx';
 import { useCartContext } from '../context/cart.context';
+import { paymentGateway } from '../utils/utils';
 
 function CartPage() {
   const {
@@ -17,6 +18,17 @@ function CartPage() {
         No Items Found In The Cart.
       </div>
     );
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const transactionHashes = urlParams.get('transactionHashes');
+  if (transactionHashes) {
+    fetch(
+      `http://127.0.0.1:5000/course/approval?transactionId=87hPRQoQRsZiKQXtFVFEhV117G9kL58Jg5QcX6G3Kerk`
+    )
+      .then((transdata) => transdata.json())
+      .then((data) => alert("Course Enrolled Successfully"))
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -49,7 +61,13 @@ function CartPage() {
             <div>
               <h2 className='text-xl font-bold mb-2'>Total</h2>
               <h2 className='text-2xl font-bold mb-4'>Ⓝ {total_amount}</h2>
-              <button className='px-4 py-2 bg-orange-400 rounded hover:bg-orange-500 text-white font-bold'>
+              <button className='px-4 py-2 bg-orange-400 rounded hover:bg-orange-500 text-white font-bold' onClick={() =>
+                  paymentGateway(
+                    cartItems[0].courseId,
+                    cartItems[0].courseModules,
+                    total_amount
+                  )
+                }>
                 Checkout
               </button>
             </div>

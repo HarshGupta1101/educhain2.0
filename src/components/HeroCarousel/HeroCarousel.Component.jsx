@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import HeroSlider from 'react-slick';
-// import axios from "axios";
-
-//Arrow components
 import { NextArrow, PrevArrow } from './Arrows.Component';
 
 const HeroCarousel = () => {
-  // eslint-disable-next-line no-unused-vars
   const [images, setImages] = useState([
     'https://res.cloudinary.com/diczskxkx/image/upload/v1681403478/ds_do2sy2.jpg',
     'https://res.cloudinary.com/diczskxkx/image/upload/v1681379408/MicrosoftTeams-image_3_wnp1bl.png',

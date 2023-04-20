@@ -1,5 +1,4 @@
 import React from 'react';
-import Slider from 'react-slick';
 import Poster from '../Poster/InProgressPoster.Component';
 
 const InProgressCourses = (props) => {
