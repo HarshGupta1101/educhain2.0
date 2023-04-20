@@ -18,14 +18,6 @@ import { Link } from 'react-router-dom';
 const theme = createTheme();
 
 export default function NGORegistration() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -45,7 +37,7 @@ export default function NGORegistration() {
           <Typography component="h1" variant="h5">
             NGO Sign Up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField

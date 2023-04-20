@@ -24,7 +24,6 @@ export default function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(signInData);
     await fetch('http://127.0.0.1:5000/user/login', {
       method: 'POST',
       headers: {
@@ -41,14 +40,12 @@ export default function SignIn() {
       })
       .then((data) => {
         localStorage.setItem('token', data.token);
-        alert('User logged In successfully!!');
         window.history.pushState(null, null, 'http://localhost:3000/');
         window.dispatchEvent(new Event('popstate'));
       })
       .catch((error) => {
         // handle error response
-        // console.log(error);
-        alert('Error occured while creating a new User');
+        console.log(error);
       });
   };
 

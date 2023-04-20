@@ -37,7 +37,6 @@ export default function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(signUpdData);
     await fetch('http://127.0.0.1:5000/user/register', {
       method: 'POST',
       headers: {
@@ -50,13 +49,12 @@ export default function SignUp() {
         if (!response.ok) {
           throw new Error(response.status);
         }
-        alert('User created successfully');
         window.history.pushState(null, null, 'http://localhost:3000/login');
         window.dispatchEvent(new Event('popstate'));
       })
       .catch((error) => {
         // handle error response
-        alert('Error occured while creating a new User');
+        console.log(error);
       });
   };
 
