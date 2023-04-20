@@ -35,9 +35,19 @@ export default function NGORegistration() {
           </Typography>
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
+            <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="ngoname"
+                  label="NGO Name"
+                  id="ngoname"
+                  autoComplete="ngoname"
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
-                  autoComplete="given-name"
+                  autoComplete="userName"
                   name="userName"
                   required
                   fullWidth
@@ -70,11 +80,21 @@ export default function NGORegistration() {
                 <TextField
                   required
                   fullWidth
+                  name="location"
+                  label="Location"
+                  id="location"
+                  autoComplete="location"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   name="password"
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
+                  autoComplete="password"
                 />
               </Grid>
               <Grid item xs={12} sm={3} className='text-center' style={{ marginTop: "7px" }}>
@@ -112,13 +132,13 @@ export default function NGORegistration() {
               Back To Home
             </Button>
             </Link>
-            <Grid container justifyContent="flex-end">
+            {/* <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to='/login' variant="body2" className='underline text-blue-600 hover:text-blue-500'>
                   {"Already Have An Account? Sign In"}
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
         </Box>
       </Container>

@@ -69,7 +69,18 @@ export default function Sidebar() {
               <ListItemIcon>
                 <FormatListBulletedIcon />
               </ListItemIcon>
-              <ListItemText primary="NGO / NPO Students" />
+              <ListItemText primary="NGO Students" />
+            </ListItemButton>
+          </ListItem>
+          </Link>
+          <Divider />
+          <Link to="/ngolist">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <FormatListBulletedIcon />
+              </ListItemIcon>
+              <ListItemText primary="List Of NGOs" />
             </ListItemButton>
           </ListItem>
           </Link>

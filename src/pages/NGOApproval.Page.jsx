@@ -1,9 +1,8 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar/Sidebar.Component';
-import CompletedCourses from '../components/CompletedCourses/CompletedCourses.Component';
-import courses from '../utils/data';
+import NGOApproval from '../components/NGOApproval/NGOApproval.Component';
 
-const CompletedCoursesPage = () => {
+const NGOApprovalPage = () => {
 
   return (
     <>
@@ -15,10 +14,7 @@ const CompletedCoursesPage = () => {
             </div>
           </div>
           <div className='lg:w-4/5 p-4 bg-white rounded'>
-            <h1 className='text-2xl font-bold my-3'>Completed Courses</h1>
-            <CompletedCourses 
-            posters={courses}
-          />
+            <NGOApproval />
           </div>
         </div>
       </div>
@@ -26,4 +22,4 @@ const CompletedCoursesPage = () => {
   );
 };
 
-export default CompletedCoursesPage;
+export default NGOApprovalPage;

@@ -19,7 +19,7 @@ const Profile = () => {
   return (
     <>
       <div>
-      <div className='flex gap-2'>
+      <div className='flex gap-2 mt-3'>
         <h1 className='text-2xl font-bold my-1 mr-4'>Profile</h1>
         <Link to='/profile'>
           <button className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white" onClick={handleEditClick}>
@@ -27,7 +27,7 @@ const Profile = () => {
           </button>
         </Link>
         </div>
-        <TableContainer className='mt-8 border-2' sx={{ maxWidth: 850 }}>
+        <TableContainer className='mt-8 border-2' sx={{ maxWidth: 1000 }}>
           <Table>
             <TableHead>
               <TableRow>
@@ -55,7 +55,7 @@ const Profile = () => {
                 <TableCell>
                   <TextField placeholder={'Enter Organization Name'} color={'warning'} disabled={!editable} />
                 </TableCell>
-                <TableCell>NGO / NPO Name</TableCell>
+                <TableCell>NGO Name</TableCell>
                 <TableCell>
                   <TextField placeholder={'Enter NGO / NPO Name'} color={'warning'} disabled={!editable} />
                 </TableCell>
@@ -69,14 +69,29 @@ const Profile = () => {
                       JSON.parse(
                         window.localStorage.getItem('undefined_wallet_auth_key')
                       ).accountId
-                    ) : (
+                    ) : ( <>
                   <Link to='/profile' >
-                    <button onClick={login} className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white"  >Link Near ID</button>
+                    <button onClick={login} className="rounded text-black p-2 mr-3 border-2 border-black hover:bg-black hover:text-white">Link Near ID</button>
                   </Link>
+                  <Link to='https://wallet.testnet.near.org/create' target='_blank'>
+                    <button className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white"  >Create Near ID</button>
+                  </Link></>
                   )}
-                  {window.localStorage.getItem('undefined_wallet_auth_key') && (
-                    <button onClick={logout} className="rounded text-black p-2 mx-4 border-2 border-black hover:bg-black hover:text-white" >Unlink Near ID</button>
-                  )}
+                </TableCell>
+                {window.localStorage.getItem('undefined_wallet_auth_key') && (
+                <>
+                <TableCell><Link to='https://wallet.testnet.near.org/' target='_blank'><button className="rounded text-black p-2 mr-4 border-2 border-black hover:bg-black hover:text-white" >Open Near Wallet</button></Link></TableCell>
+                <TableCell><button onClick={logout} className="rounded text-black p-2 mr-4 border-2 border-black hover:bg-black hover:text-white" >Unlink Near ID</button></TableCell>
+                </>
+                )}
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                <Link to='/logout'>
+                  <button className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">
+                    Log Out
+                  </button>
+                </Link>
                 </TableCell>
               </TableRow>
             </TableHead>
