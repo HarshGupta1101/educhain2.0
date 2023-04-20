@@ -33,50 +33,65 @@ function NavMd() {
   const { total_items } = useCartContext();
   return (
     <>
-      <div className='flex items-center w-1/2 gap-3'>
-        <h1 className='text-white font-bold text-3xl'>
-          {' '}
-          <Link to='/'>
-            <span className='text-orange-400 hover:text-orange-500'>E</span>du
-            <span className='text-orange-400 hover:text-orange-500'>C</span>hain
-          </Link>
-        </h1>
-      </div>
-      <div className='flex items-center gap-5'>
-        <Link
-          to='/'
-          className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
-        >
-          Home
-        </Link>
-        <Link
-          to='/courses'
-          className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
-        >
-          Courses
-        </Link>
-        {isloggedIn ? (
-          <button
-            className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
-            onClick={RemoveToken}
-          >
-            Logout
-          </button>
-        ) : (
+      <div className='container flex mx-auto px-4 py-2 items-center justify-between'>
+        <div className='flex items-center w-1/2 gap-3'>
+          <h1 className='text-white font-bold text-3xl'>
+            {' '}
+            <Link to='/'>
+              <span className='text-orange-400 hover:text-orange-500'>E</span>du
+              <span className='text-orange-400 hover:text-orange-500'>C</span>
+              hain
+            </Link>
+          </h1>
+          <div className='w-full flex items-center gap-3 bg-white ml-4 px-3 py-1 rounded-md'>
+            <BiSearch />
+            <input
+              type='search'
+              className='w-full bg-transparent border-none focus:outline-none'
+              placeholder='Search Courses'
+            />
+          </div>
+        </div>
+        <div className='flex items-center gap-5'>
           <Link
-            to='/login'
-            className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
+            to='/'
+            className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
           >
-            Sign In
+            Home
           </Link>
-        )}
-        {isloggedIn && <AccountCircleIcon />}
+          <Link
+            to='/courses'
+            className='text-gray-200 text-lg text-base flex items-center cursor-pointer hover:text-white'
+          >
+            Courses
+          </Link>
+          {isloggedIn ? (
+            <button
+              className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
+              onClick={RemoveToken}
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to='/login'
+              className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
+            >
+              Sign In
+            </Link>
+          )}
+          {isloggedIn && (
+            <Link to='/profile' className='text-white hover:text-gray-200'>
+              <AccountCircleIcon fontSize='large' />
+            </Link>
+          )}
 
-        <Link to='/cart' className='w-8 h-8 text-white mt-1'>
-          <Badge badgeContent={total_items} color='primary'>
-            <ShoppingCartIcon />
-          </Badge>
-        </Link>
+          <Link to='/cart' className='w-8 h-8 text-white mt-1'>
+            <Badge badgeContent={total_items} color='primary'>
+              <ShoppingCartIcon />
+            </Badge>
+          </Link>
+        </div>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
@@ -9,66 +9,121 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { Divider } from '@mui/material';
 
 function Assignment() {
+  const [questions, setQuestions] = useState([
+    {
+      question: '',
+      options: ['', '', '', ''],
+      answer: '',
+    },
+  ]);
 
-  const [addQuestions,setAddQuestions] = useState(1);
+  const handleQuestionChange = (event, index) => {
+    const { value } = event.target;
+    setQuestions((prevState) => {
+      const updatedQuestions = [...prevState];
+      updatedQuestions[index].question = value;
+      return updatedQuestions;
+    });
+  };
+
+  const handleOptionChange = (event, questionIndex, optionIndex) => {
+    const { value } = event.target;
+    setQuestions((prevState) => {
+      const updatedQuestions = [...prevState];
+      updatedQuestions[questionIndex].options[optionIndex] = value;
+      return updatedQuestions;
+    });
+  };
+
+  const handleAnswerChange = (event, index) => {
+    const { value } = event.target;
+    setQuestions((prevState) => {
+      const updatedQuestions = [...prevState];
+      updatedQuestions[index].answer = value;
+      return updatedQuestions;
+    });
+  };
+
+  const addQuestion = () => {
+    setQuestions((prevState) => [
+      ...prevState,
+      {
+        question: '',
+        options: ['', '', '', ''],
+        answer: '',
+      },
+    ]);
+  };
+
+  const handleSubmit = () => {
+    console.log(questions);
+  };
 
   return (
     <>
       <Box
-        component='form'
+        component="form"
         sx={{
           '& .MuiTextField-root': { m: 2, width: '50vw' },
         }}
         noValidate
-        autoComplete='off'
-      > 
-      {[...Array(addQuestions)].map((e, index)=>(
-        <div key={index}>
-          <TextField
-            id='outlined-multiline-flexible'
-            label={`Enter Question ${index+1}`}
-            multiline
-            maxRows={3}
-            fullWidth
-          />
-        <RadioGroup
-            aria-labelledby={`options-${index}-label`}
-            name={`options-${index}`}
-            className='mx-4'
-        >
-            <FormControlLabel value="1" control={<Radio />} 
-            label={<TextField
-            id={`option-${index}-1`}
-            label='Enter Option 1'
-            multiline
-            />} />
-            <FormControlLabel value="2" control={<Radio />} 
-            label={<TextField
-                id={`option-${index}-2`}
-            label='Enter Option 2'
-            multiline
-            />} />
-            <FormControlLabel value="3" control={<Radio />} 
-            label={<TextField
-            id={`option-${index}-3`}
-            label='Enter Option 3'
-            multiline
-            />} />
-            <FormControlLabel value="4" control={<Radio />} 
-            label={<TextField
-            id={`option-${index}-4`}
-            label='Enter Option 4'
-            multiline
-            />} />
-        </RadioGroup> 
-        <Divider />
-        </div>
+        autoComplete="off"
+      >
+        {questions.map((question, index) => (
+          <div key={index}>
+            <TextField
+              id={`question-${index}`}
+              label={`Enter Question ${index + 1}`}
+              multiline
+              maxRows={3}
+              fullWidth
+              value={question.question}
+              onChange={(event) => handleQuestionChange(event, index)}
+            />
+            <RadioGroup
+              aria-labelledby={`options-${index}-label`}
+              name={`options-${index}`}
+              className="mx-4"
+              value={question.answer}
+              onChange={(event) => handleAnswerChange(event, index)}
+            >
+              {question.options.map((option, optionIndex) => (
+                <FormControlLabel
+                  key={optionIndex}
+                  value={`${optionIndex}`}
+                  control={<Radio />}
+                  label={
+                    <TextField
+                      id={`option-${index}-${optionIndex}`}
+                      label={`Enter Option ${optionIndex + 1}`}
+                      multiline
+                      value={option}
+                      onChange={(event) =>
+                        handleOptionChange(event, index, optionIndex)
+                      }
+                    />
+                  }
+                />
+              ))}
+            </RadioGroup>
+            <Divider />
+          </div>
         ))}
-        <div className='m-4'>
-        <Button variant='outlined' color='warning' onClick={()=> setAddQuestions(addQuestions+1)} style={{marginRight:'20px'}} >
-          <AddCircleOutlineIcon className='mx-2'/> Add More Questions
+        <div className="m-4">
+          <Button
+            variant="outlined"
+            color="warning"
+            onClick={addQuestion}
+            style={{ marginRight: '20px' }}
+          >
+            <AddCircleOutlineIcon className="mx-2" /> Add More Questions
           </Button>
-        <Button variant='outlined' color='warning' style={{marginRight:'20px'}} >
+          <Button
+            variant="outlined"
+            color="warning"
+            onClick={handleSubmit}
+            style={{ marginRight: '20px' }}
+          >
             Submit
           </Button>
         </div>

@@ -7,14 +7,14 @@ const ProfilePage = () => {
   return (
     <>
       <div className='container mx-auto px-4 my-10'>
-        <div className='w-full lg:flex lg:flex-row-reverse gap-4'>
-          <div className='lg:w-4/5 p-4 bg-white rounded'>
-            <Profile />
-          </div>
+        <div className='w-full lg:flex lg:flex-row gap-4'>
           <div className='lg:w-1/5 p-4 bg-white rounded'>
             <div>
               <Sidebar />
             </div>
+          </div>
+          <div className='lg:w-4/5 p-4 bg-white rounded'>
+            <Profile />
           </div>
         </div>
       </div>
