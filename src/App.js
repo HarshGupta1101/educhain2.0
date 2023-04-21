@@ -18,6 +18,7 @@ import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
 import Modal from './components/Modal/Modal.Component';
 import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
+import CategoryCoursesPage from './pages/CategoryCourses.Page';
 
 // import axios from 'axios';
 
@@ -132,6 +133,15 @@ function App() {
           element={
             <DefaultLayout>
               <CoursePlay />
+            </DefaultLayout>
+          }
+        />
+        <Route
+          path='/courses/category'
+          exact
+          element={
+            <DefaultLayout>
+              <CategoryCoursesPage />
             </DefaultLayout>
           }
         />
