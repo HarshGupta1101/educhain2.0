@@ -70,7 +70,7 @@ function NavMd() {
               className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
               onClick={RemoveToken}
             >
-              Logout
+              Sign Out
             </button>
           ) : (
             <Link
@@ -139,7 +139,7 @@ function NavLg() {
               className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
               onClick={RemoveToken}
             >
-              Logout
+              Sign Out
             </button>
           ) : (
             <Link
