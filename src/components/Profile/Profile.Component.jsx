@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import { login, logout } from '../../utils/utils.js';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 
 const Profile = () => {
   
@@ -14,6 +15,23 @@ const Profile = () => {
 
   const handleEditClick = () => {
     setEditable(!editable);
+  }
+
+  function RemoveToken() {
+    localStorage.removeItem('token');
+    window.history.pushState(null, null, 'http://localhost:3000/login');
+    window.dispatchEvent(new Event('popstate'));
+    toast.success('Successfully Signed Out !', {
+      position: "top-center",
+      autoClose: 4000,
+      transition: Slide,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
   }
 
   return (
@@ -85,18 +103,19 @@ const Profile = () => {
                 </>
                 )}
               </TableRow>
-              <TableRow>
-                <TableCell>
-                <Link to='/logout'>
-                  <button className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">
-                    Log Out
-                  </button>
-                </Link>
-                </TableCell>
-              </TableRow>
             </TableHead>
           </Table>
         </TableContainer>
+        <div className='flex gap-2 mt-3'>
+          <button className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white"  onClick={RemoveToken}>
+            Sign Out
+          </button>
+          <Link to='/changepassword'>
+            <button className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">
+              Change Password
+            </button>
+          </Link>
+        </div>
       </div>
     </>
   );

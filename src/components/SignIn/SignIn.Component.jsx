@@ -131,7 +131,7 @@ export default function SignIn() {
             <Grid container>
               <Grid item xs>
                 <Link
-                  to='/'
+                  to='/forgotpassword'
                   variant='body2'
                   className='underline text-blue-600 hover:text-blue-500'
                 >
