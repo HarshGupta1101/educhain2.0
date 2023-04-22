@@ -21,7 +21,7 @@ export default function NGORegistration() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -43,6 +43,7 @@ export default function NGORegistration() {
                   label="NGO Name"
                   id="ngoname"
                   autoComplete="ngoname"
+                  autoFocus
                 />
               </Grid>
               <Grid item xs={12}>
@@ -53,7 +54,6 @@ export default function NGORegistration() {
                   fullWidth
                   id="userName"
                   label="User Name"
-                  autoFocus
                 />
               </Grid>
               <Grid item xs={12}>
@@ -97,12 +97,8 @@ export default function NGORegistration() {
                   autoComplete="password"
                 />
               </Grid>
-              <Grid item xs={12} sm={3} className='text-center' style={{ marginTop: "7px" }}>
-                Upload ID
-              </Grid>
-              <Grid item xs={12} sm={9}>
+              <Grid item xs={12} sm={8}>
               <label className="block">
-                <span className="sr-only">Choose profile photo</span>
                 <input type="file" className="block w-full text-sm text-slate-500
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-full file:border-0
@@ -112,6 +108,14 @@ export default function NGORegistration() {
                   border-2 rounded-md border-gray-300 hover:border-gray-400
                 "/>
               </label>
+              </Grid>
+              <Grid item xs={12} sm={4} className='text-center'>
+                <Button
+                fullWidth
+                variant="contained"
+              >
+                Upload ID
+              </Button>
               </Grid>
             </Grid>
             <Button

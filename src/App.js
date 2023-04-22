@@ -16,7 +16,6 @@ import Students from './pages/Students.Page';
 import SingleCourse from './pages/SingleCourse.Page';
 import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
-import Modal from './components/Modal/Modal.Component';
 import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
 import CategoryCoursesPage from './pages/CategoryCourses.Page';
 import { ToastContainer, toast } from 'react-toastify';
@@ -154,15 +153,6 @@ function App() {
           element={
             <DefaultLayout>
               <CartPage />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/modal'
-          exact
-          element={
-            <DefaultLayout>
-              <Modal />
             </DefaultLayout>
           }
         />
