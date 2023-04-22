@@ -96,11 +96,11 @@ const courses = [
     __v: 0,
   },
   {
-    _id: '3',
-    courseId: '3',
+    _id: '64412ac4f2bcaf8f626b4c1b',
+    courseId: '64412ac4f2bcaf8f626b4c1b',
     courseTitle: 'Web Development: Basics To Advanced',
     courseBrief: 'This course contain a beginners guide to WebDev',
-    courseFee: 3,
+    courseFee: 0,
     language: 'English',
     timeRequired: ' 15 hr ',
     tags: ['WebDev', 'HTML', 'CSS', 'JS'],
@@ -110,8 +110,8 @@ const courses = [
       'https://res.cloudinary.com/diczskxkx/image/upload/v1681379408/MicrosoftTeams-image_3_wnp1bl.png',
     courseModules: [
       {
-        _id: '51',
-        moduleId: '51',
+        _id: '1',
+        moduleId: '1',
         moduleTitle: 'Intro to WebDev',
         chapterIds: [
           {
@@ -128,8 +128,8 @@ const courses = [
         __v: 0,
       },
       {
-        _id: '52',
-        moduleId: '52',
+        _id: '2',
+        moduleId: '2',
         moduleTitle: 'WebDev Basics - HTML, CSS, JS',
         chapterIds: [],
         moduleAssessmentIds: [],

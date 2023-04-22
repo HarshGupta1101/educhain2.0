@@ -5,11 +5,23 @@ import { Link } from 'react-router-dom';
 import { Badge } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useCartContext } from '../../context/cart.context';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 
 function RemoveToken() {
   localStorage.removeItem('token');
   window.history.pushState(null, null, 'http://localhost:3000/login');
   window.dispatchEvent(new Event('popstate'));
+  toast.success('Successfully Logged Out !', {
+    position: "top-center",
+    autoClose: 4000,
+    transition: Slide,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
 }
 
 function NavSm() {
@@ -70,7 +82,7 @@ function NavMd() {
               className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
               onClick={RemoveToken}
             >
-              Logout
+              Sign Out
             </button>
           ) : (
             <Link
@@ -139,7 +151,7 @@ function NavLg() {
               className='bg-orange-400 text-white text-lg px-2 py-1 text-sm rounded hover:bg-orange-500'
               onClick={RemoveToken}
             >
-              Logout
+              Sign Out
             </button>
           ) : (
             <Link

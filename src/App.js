@@ -18,6 +18,9 @@ import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
 import Modal from './components/Modal/Modal.Component';
 import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
+import CategoryCoursesPage from './pages/CategoryCourses.Page';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // import axios from 'axios';
 
@@ -31,6 +34,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
   return (
+    <>
     <BrowserRouter>
       <Routes>
         <Route
@@ -136,6 +140,15 @@ function App() {
           }
         />
         <Route
+          path='/courses/category'
+          exact
+          element={
+            <DefaultLayout>
+              <CategoryCoursesPage />
+            </DefaultLayout>
+          }
+        />
+        <Route
           path='/cart'
           exact
           element={
@@ -173,6 +186,8 @@ function App() {
         />
       </Routes>
     </BrowserRouter>
+    <ToastContainer />
+    </>
   );
 }
 
