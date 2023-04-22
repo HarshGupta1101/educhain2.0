@@ -18,7 +18,6 @@ function CartPage() {
     const urlParams = new URLSearchParams(window.location.search);
     const transactionHashes = urlParams.get('transactionHashes');
     const errorCode = urlParams.get('errorCode');
-    console.log(transactionHashes)
     if (transactionHashes) {
       clearCart();
       fetch(`http://127.0.0.1:5000/course/approval?transactionId=${transactionHashes}`, {
@@ -31,7 +30,9 @@ function CartPage() {
       })
         .then((response) => response.json())
         .then(() => {
-          toast.success('Transaction Successful !', {
+          window.history.pushState(null, null, 'http://localhost:3000/inprogresscourses');
+          window.dispatchEvent(new Event('popstate'));
+          toast.success('Transaction Successful! Course Enrolled Successfully.', {
             position: "top-center",
             autoClose: 4000,
             transition: Slide,
@@ -48,7 +49,7 @@ function CartPage() {
         }); 
     }
     else if (errorCode) {
-      toast.error('Transaction Failed !', {
+      toast.error('Transaction Failed! Kindly Try Again.', {
         position: "top-center",
         autoClose: 4000,
         transition: Slide,
@@ -65,7 +66,7 @@ function CartPage() {
 
   if (cartItems.length < 1) {
     return (
-      <div className='container p-12 text-2xl'>
+      <div className='container p-8 text-2xl font-bold border m-6 w-1/2 border border-gray-300 rounded-lg'>
         No Items Found In The Cart.
       </div>
     );
