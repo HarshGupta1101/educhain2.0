@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { Divider } from '@mui/material';
 
-function Assignment() {
+function Assignment({ courseDetails, setCourseDetails, CourseId }) {
   const [questions, setQuestions] = useState([
     {
       questionNumber: 1,
@@ -58,12 +58,106 @@ function Assignment() {
     ]);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     questions.map((question) => {
       question.answer = question.options[parseInt(question.answer)];
     });
-    console.log(questions);
+
+    const arrayOfQuestions = [];
+    questions.map((q) => {
+      arrayOfQuestions.push({
+        question: q.question,
+        questionNumber: q.questionNumber,
+        optionA: q.options[0],
+        optionB: q.options[1],
+        optionC: q.options[2],
+        optionD: q.options[3],
+        correctOption: q.answer,
+      });
+    });
+
+    let data = {};
+    data['courseId'] = CourseId;
+    data['assessmentList'] = arrayOfQuestions;
+
+    await fetch('http://127.0.0.1:5000/course/add-assessment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: String(localStorage.getItem('token')),
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // handle successful response
+        if (!data.status) {
+          throw new Error(data.message);
+        }
+        alert('Assignment added successfully');
+        setCourseDetails({
+          ...courseDetails,
+          courseAssessmentIds: data.addAssessment,
+        });
+      })
+      .catch((error) => {
+        // handle error response
+        console.log(error);
+      });
   };
+
+  useEffect(() => {
+    if (CourseId) {
+      const getData = async () => {
+        await fetch(`http://127.0.0.1:5000/course/${CourseId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: String(localStorage.getItem('token')),
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // handle successful response
+            if (!data.status) {
+              throw new Error(data.message);
+            }
+            setCourseDetails(data.course);
+            let ques = [];
+            data.course.courseAssessmentIds.map((assessment, index) => {
+              ques.push({
+                questionNumber: index,
+                question: assessment.question,
+                answer: [
+                  assessment.optionA,
+                  assessment.optionB,
+                  assessment.optionC,
+                  assessment.optionD,
+                ].map((option, index) => {
+                  if (option === assessment.correctOption) {
+                    return index.toString();
+                  }
+                })[0],
+                options: [
+                  assessment.optionA,
+                  assessment.optionB,
+                  assessment.optionC,
+                  assessment.optionD,
+                ],
+              });
+            });
+            console.log(ques);
+            setQuestions(ques);
+          })
+          .catch((error) => {
+            // handle error response
+            console.log(error);
+          });
+      };
+      getData();
+    }
+  }, [CourseId]);
 
   return (
     <>
@@ -131,7 +225,7 @@ function Assignment() {
           <Button
             variant='outlined'
             color='warning'
-            onClick={handleSubmit}
+            onClick={(e) => handleSubmit(e)}
             style={{ marginRight: '20px' }}
           >
             Submit

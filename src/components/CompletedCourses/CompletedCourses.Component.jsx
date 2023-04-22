@@ -12,8 +12,8 @@ const CompletedCourses = (props) => {
         <p className='text-md text-gray-800'>{subtitle}</p>
       </div>
       <div className="grid gap-4 grid-cols-3">
-      {posters.map((each) => (
-          <Poster {...each} />
+      {posters.map((each,index) => (
+          <Poster {...each} key={index}/>
         ))}
       </div>
     </>
