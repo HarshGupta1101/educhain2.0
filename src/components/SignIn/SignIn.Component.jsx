@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 
 const theme = createTheme();
 
@@ -39,6 +40,17 @@ export default function SignIn() {
         localStorage.setItem('token', data.token);
         window.history.pushState(null, null, 'http://localhost:3000/');
         window.dispatchEvent(new Event('popstate'));
+        toast.success('Successfully Logged In !', {
+          position: "top-center",
+          autoClose: 4000,
+          transition: Slide,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       })
       .catch((error) => {
         // handle error response

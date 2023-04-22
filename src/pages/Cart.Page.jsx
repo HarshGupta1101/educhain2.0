@@ -3,6 +3,8 @@ import CartCardComponent from '../components/Cart/CartCard.Component';
 import { RxCross2 } from 'react-icons/rx';
 import { useCartContext } from '../context/cart.context';
 import { paymentGateway } from '../utils/utils';
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CartPage() {
   const {
@@ -19,25 +21,47 @@ function CartPage() {
     console.log(transactionHashes)
     if (transactionHashes) {
       clearCart();
-      fetch(`http://localhost:5000/course/approval?transactionID=${transactionHashes}`, {
+      fetch(`http://127.0.0.1:5000/course/approval?transactionId=${transactionHashes}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': String(localStorage.getItem('token')),
         },
         body: JSON.stringify({ transactionHashes }),
       })
         .then((response) => response.json())
-        .then((data) => {
-          alert('Transaction Successful!');
+        .then(() => {
+          toast.success('Transaction Successful !', {
+            position: "top-center",
+            autoClose: 4000,
+            transition: Slide,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
         })
         .catch((error) => {
           console.error('Error :', error);
         }); 
     }
     else if (errorCode) {
-          alert('Transaction Failed!');
+      toast.error('Transaction Failed !', {
+        position: "top-center",
+        autoClose: 4000,
+        transition: Slide,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   }, []);
+
 
   if (cartItems.length < 1) {
     return (

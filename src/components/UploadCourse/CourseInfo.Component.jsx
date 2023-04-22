@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { MuiFileInput } from 'mui-file-input';
 import ipfs from '../../utils/ipfs';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 
 function CourseInfoComponent({ courseDetails, setCourseDetails }) {
   const [imageUpload, setImageUpload] = useState(false);
@@ -24,7 +25,17 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
     try {
       const response = await ipfs.add(file);
       const ImgHash = `https://ipfs.io/ipfs/${response.path}`;
-      alert('Uploaded Successfully');
+      toast.success('Uploaded Successfully !', {
+            position: "top-center",
+            autoClose: 4000,
+            transition: Slide,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
       console.log(ImgHash);
       setCourseDetails({
         ...courseDetails,
@@ -32,7 +43,17 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
       });
       setImageUpload(true);
     } catch (error) {
-      alert('Uploaded Failed');
+      toast.error('Upload Failed !', {
+            position: "top-center",
+            autoClose: 4000,
+            transition: Slide,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
     }
   };
 

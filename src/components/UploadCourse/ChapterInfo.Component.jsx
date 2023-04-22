@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { MuiFileInput } from 'mui-file-input';
 import ipfs from '../../utils/ipfs';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 
 function ChapterInfoComponent({
   courseDetails,
@@ -30,7 +31,17 @@ function ChapterInfoComponent({
     try {
       const response = await ipfs.add(file);
       const videoHash = `https://ipfs.io/ipfs/${response.path}`;
-      alert('Uploaded Successfully');
+      toast.success('Uploaded Successfully !', {
+        position: "top-center",
+        autoClose: 4000,
+        transition: Slide,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       console.log(videoHash);
       setChapterDetails({
         ...chapterDetails,
@@ -38,7 +49,17 @@ function ChapterInfoComponent({
       });
       setVideoUpload(true);
     } catch (error) {
-      alert('Uploaded Failed');
+      toast.error('Upload Failed !', {
+        position: "top-center",
+        autoClose: 4000,
+        transition: Slide,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   };
 
@@ -63,7 +84,17 @@ function ChapterInfoComponent({
         if (!data.status) {
           throw new Error(data.message);
         }
-        alert('Module added successfully');
+        toast.success('Module Added Successfully !', {
+          position: "top-center",
+          autoClose: 4000,
+          transition: Slide,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       })
       .catch((error) => {
         // handle error response
