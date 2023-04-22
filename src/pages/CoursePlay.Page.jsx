@@ -1,46 +1,87 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CoursePlayComponent from '../components/CoursePlay/CoursePlay.Component';
-
-//Headless UI
-import { AspectRatio } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
+import CourseChapterComponent from '../components/CoursePlay/CourseChapter.Component';
+import CourseAssignmentComponent from '../components/CoursePlay/CourseAssignment.Component';
 
 const CoursePlayPage = () => {
+  const { id } = useParams();
+  const [courseDetails, setCourseDetails] = useState(null);
+  const [chapterClicked, setChapterClicked] = useState(null);
+  const [assignmentClicked, setAssignmentClicked] = useState(null);
+  useEffect(() => {
+    if (id) {
+      const getData = async () => {
+        await fetch(`http://127.0.0.1:5000/course/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: String(localStorage.getItem('token')),
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // handle successful response
+            if (!data.status) {
+              throw new Error(data.message);
+            }
+            console.log(data.course);
+            setCourseDetails(data.course);
+          })
+          .catch((error) => {
+            // handle error response
+            console.log(error);
+          });
+      };
+      getData();
+    }
+  }, []);
+
   return (
     <>
       <div className='container mx-auto px-4 my-10'>
         <div className='w-full lg:flex lg:flex-row-reverse gap-4'>
           <div className='lg:w-3/4 p-4 bg-white rounded'>
-            <AspectRatio maxW='full' ratio={2}>
-              <iframe
-                title='naruto'
-                src='https://www.youtube.com/embed/QhBnZ6NPOY0'
-                allowFullScreen
+            {chapterClicked && (
+              <CourseChapterComponent
+                chapterVideoUrl={chapterClicked.chapterVideoUrl}
+                chapterBrief={chapterClicked.chapterBrief}
               />
-            </AspectRatio>
-            <h1 className='text-2xl font-bold my-4'>About Module</h1>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged.{' '}
-            </p>
-          </div>
+            )}
 
+            {assignmentClicked && (
+              <CourseAssignmentComponent
+                courseAssessmentIds={courseDetails.courseAssessmentIds}
+              />
+            )}
+          </div>
           <div className='lg:w-1/4 p-4 bg-white rounded'>
-            <h2 className='text-2xl font-bold mb-4'>Course Name</h2>
-            <div>
-              <CoursePlayComponent
-                title='Module 1'
-                tags={['Intro', 'Python Setup', 'Hello World']}
-              />
-            </div>
-            <div>
-              <CoursePlayComponent
-                title='Module 2'
-                tags={['List', 'Tuple', 'Strings']}
-              />
+            <h2 className='text-2xl font-bold mb-6'>
+              {courseDetails?.courseTitle}
+            </h2>
+            <div className='flex flex-col gap-6'>
+              {courseDetails &&
+                courseDetails.courseModules.map((detail, index) => {
+                  return (
+                    <CoursePlayComponent
+                      title={detail.moduleTitle}
+                      chapters={detail.chapterIds}
+                      key={index}
+                      moduleNumber={detail.moduleNumber}
+                      setChapterClicked={setChapterClicked}
+                      setAssignmentClicked={setAssignmentClicked}
+                    />
+                  );
+                })}
+              <div
+                className='w-full text-lg px-4 py-2 border-dashed border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
+                onClick={() => {
+                  setChapterClicked(null);
+                  setAssignmentClicked(courseDetails.courseAssessmentIds);
+                }}
+              >
+                Assignment
+              </div>
             </div>
           </div>
         </div>

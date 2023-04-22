@@ -23,7 +23,7 @@ const UploadCourseDraftPage = () => {
     image: '',
     noOfModules: 0,
     courseModules: [],
-    courseAssessmentIds: []
+    courseAssessmentIds: [],
   });
 
   const handleModules = () => {
@@ -103,6 +103,42 @@ const UploadCourseDraftPage = () => {
     return modules;
   };
 
+  const handleCourseSubmit = async (e) => {
+    e.preventDefault();
+    if (id) {
+      await fetch('http://127.0.0.1:5000/course/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: String(localStorage.getItem('token')),
+        },
+        body: JSON.stringify({
+          courseId: id,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // handle successful response
+          if (!data.status) {
+            throw new Error(data.message);
+          }
+          alert('Course submitted successfully');
+          window.history.pushState(
+            null,
+            null,
+            'http://localhost:3000/uploadedcourses'
+          );
+          window.dispatchEvent(new Event('popstate'));
+        })
+        .catch((error) => {
+          // handle error response
+          console.log(error);
+        });
+    } else {
+      alert('Please Add Course Details');
+    }
+  };
+
   useEffect(() => {
     if (id) {
       const getData = async () => {
@@ -128,7 +164,7 @@ const UploadCourseDraftPage = () => {
       };
       getData();
     }
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -167,7 +203,10 @@ const UploadCourseDraftPage = () => {
             >
               Assignment
             </div>
-            <button className='px-4 py-2 border-dashed border-2 rounded hover:bg-gray-200 hover:rounded mb-4 disabled'>
+            <button
+              className='px-4 py-2 border-dashed border-2 rounded hover:bg-gray-200 hover:rounded mb-4 disabled'
+              onClick={(e) => handleCourseSubmit(e)}
+            >
               Submit Course
             </button>
           </div>
