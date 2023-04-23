@@ -40,7 +40,7 @@ export default function SignIn() {
         localStorage.setItem('token', data.token);
         window.history.pushState(null, null, 'http://localhost:3000/');
         window.dispatchEvent(new Event('popstate'));
-        toast.success('Successfully Logged In !', {
+        toast.success('Successfully Signed In !', {
           position: "top-center",
           autoClose: 4000,
           transition: Slide,
@@ -131,7 +131,7 @@ export default function SignIn() {
             <Grid container>
               <Grid item xs>
                 <Link
-                  to='/'
+                  to='/forgotpassword'
                   variant='body2'
                   className='underline text-blue-600 hover:text-blue-500'
                 >

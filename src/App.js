@@ -5,6 +5,8 @@ import DefaultLayout from './layouts/Default.Layout';
 import SignIn from './components/SignIn/SignIn.Component';
 import SignUp from './components/SignUp/SignUp.Component';
 import NGORegistration from './components/NGORegistration/NGORegistration.Component';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword.Component';
+import ChangePassword from './components/ForgotPassword/ChangePassword.Component';
 import NGOList from './pages/NGOList.Page';
 import NGOApproval from './pages/NGOApproval.Page';
 import AllCourses from './pages/AllCourses.Page';
@@ -16,7 +18,6 @@ import Students from './pages/Students.Page';
 import SingleCourse from './pages/SingleCourse.Page';
 import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
-import Modal from './components/Modal/Modal.Component';
 import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
 import CategoryCoursesPage from './pages/CategoryCourses.Page';
 import { ToastContainer, toast } from 'react-toastify';
@@ -49,6 +50,8 @@ function App() {
         <Route path='/login' exact element={<SignIn />} />
         <Route path='/register' exact element={<SignUp />} />
         <Route path='/ngoregistration' exact element={<NGORegistration />} />
+        <Route path='/forgotpassword' exact element={<ForgotPassword />} />
+        <Route path='/changepassword' exact element={<ChangePassword />} />
         <Route
           path='/ngolist'
           exact
@@ -154,15 +157,6 @@ function App() {
           element={
             <DefaultLayout>
               <CartPage />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/modal'
-          exact
-          element={
-            <DefaultLayout>
-              <Modal />
             </DefaultLayout>
           }
         />

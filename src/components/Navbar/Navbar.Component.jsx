@@ -11,7 +11,7 @@ function RemoveToken() {
   localStorage.removeItem('token');
   window.history.pushState(null, null, 'http://localhost:3000/login');
   window.dispatchEvent(new Event('popstate'));
-  toast.success('Successfully Logged Out !', {
+  toast.success('Successfully Signed Out !', {
     position: "top-center",
     autoClose: 4000,
     transition: Slide,

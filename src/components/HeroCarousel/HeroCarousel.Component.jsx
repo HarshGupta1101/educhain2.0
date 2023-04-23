@@ -36,7 +36,7 @@ const HeroCarousel = () => {
       <div className='lg:hidden'>
         <HeroSlider {...settings}>
           {images.map((image, index) => (
-            <div className='w-full h-58 md:h-80 pt-3' key={index}>
+            <div className='w-full h-58 md:h-80 pt-3 sm:px-2 md:px-2' key={index}>
               <img
                 src={image}
                 alt='Hero Banner'
@@ -49,7 +49,7 @@ const HeroCarousel = () => {
       <div className='hidden lg:block'>
         <HeroSlider {...settingsLG}>
           {images.map((image, index) => (
-            <div className='w-full h-96 px-2 pt-3' key={index}>
+            <div className='w-full h-96 px-2 pt-3 sm:px-2 md:px-2' key={index}>
               <img
                 src={image}
                 alt='Hero Banner'

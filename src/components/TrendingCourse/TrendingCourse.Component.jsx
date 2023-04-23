@@ -21,16 +21,15 @@ const TrendingCourse = (props) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          InitialSlide: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
         },
