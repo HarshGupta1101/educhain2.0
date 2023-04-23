@@ -15,7 +15,7 @@ function ChapterInfoComponent({
   const [videoUpload, setVideoUpload] = useState(false);
   const [file, setFile] = React.useState(null);
   // console.log(CourseId, moduleNumber, chapterNumber);
-  
+
   const [chapterDetails, setChapterDetails] = useState({
     chapterName: '',
     chapterBrief: '',
@@ -32,7 +32,7 @@ function ChapterInfoComponent({
       const response = await ipfs.add(file);
       const videoHash = `https://ipfs.io/ipfs/${response.path}`;
       toast.success('Uploaded Successfully !', {
-        position: "top-center",
+        position: 'top-center',
         autoClose: 4000,
         transition: Slide,
         hideProgressBar: false,
@@ -40,8 +40,8 @@ function ChapterInfoComponent({
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
-        });
+        theme: 'light',
+      });
       console.log(videoHash);
       setChapterDetails({
         ...chapterDetails,
@@ -50,7 +50,7 @@ function ChapterInfoComponent({
       setVideoUpload(true);
     } catch (error) {
       toast.error('Upload Failed !', {
-        position: "top-center",
+        position: 'top-center',
         autoClose: 4000,
         transition: Slide,
         hideProgressBar: false,
@@ -58,8 +58,8 @@ function ChapterInfoComponent({
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
-        });
+        theme: 'light',
+      });
     }
   };
 
@@ -85,7 +85,7 @@ function ChapterInfoComponent({
           throw new Error(data.message);
         }
         toast.success('Module Added Successfully !', {
-          position: "top-center",
+          position: 'top-center',
           autoClose: 4000,
           transition: Slide,
           hideProgressBar: false,
@@ -93,8 +93,8 @@ function ChapterInfoComponent({
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
-          });
+          theme: 'light',
+        });
       })
       .catch((error) => {
         // handle error response
@@ -131,6 +131,8 @@ function ChapterInfoComponent({
             chapterBrief: '',
             chapterVideoUrl: '',
           });
+          setVideoUpload(false);
+          setFile(null);
           console.log(error);
         });
     };
@@ -178,6 +180,7 @@ function ChapterInfoComponent({
               })
             }
           />
+
           <div className='flex items-center gap-4 w-4/5'>
             <MuiFileInput
               value={file}

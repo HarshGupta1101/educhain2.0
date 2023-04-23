@@ -2,24 +2,77 @@ import React from 'react';
 import CourseHeroComponent from '../components/CourseHero/CourseHero.Component';
 import Instructor from '../components/Instructor/Instructor.Component';
 import { CheckCircleIcon } from '@chakra-ui/icons';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Slide, toast } from 'react-toastify';
 
 function SingleCoursePage() {
+  const { id } = useParams();
+  const [courseData, setCourseData] = useState({
+    courseFee: 0,
+    courseTitle: '',
+    courseBrief: '',
+    tags: [],
+    timeRequired: '',
+    language: '',
+    image: '',
+    noOfModules: 0,
+    courseModules: [],
+    courseAssessmentIds: [],
+  });
+
+  const getModules = () => {
+    const data = [];
+    courseData.courseModules.map((module, index) => {
+      data.push(
+        <div
+          className='flex item-start w-2/3 gap-2 p-3 border-dashed border-2 rounded-md'
+          key={index}
+        >
+          <p className='text-xl'>{index+1}.</p>
+          <h3 className='text-gray-700 text-xl font-bold'>
+            {module.moduleTitle} <CheckCircleIcon />
+          </h3>
+        </div>
+      );
+    });
+    return data;
+  };
+
+  useEffect(() => {
+    if (id) {
+      const getData = async () => {
+        await fetch(`http://127.0.0.1:5000/course/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // handle successful response
+            if (!data.status) {
+              throw new Error(data.message);
+            }
+            console.log(data.course);
+            setCourseData(data.course);
+          })
+          .catch((error) => {
+            // handle error response
+            console.log(error);
+          });
+      };
+      getData();
+    }
+  }, [id]);
 
   return (
     <>
-      <CourseHeroComponent />
+      <CourseHeroComponent courseData={courseData} />
       <div className='my-12 container px-4 lg:ml-20 lg:w-2/3'>
         <div className='flex flex-col item-start gap-3'>
           <h1 className='text-gray-800 font-bold text-2xl'>About the course</h1>
-          <p className='text-justify'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.{' '} 
-            {/* course.details */}
-          </p>
+          <p className='text-justify'>{courseData.courseBrief}</p>
         </div>
 
         <div className='mt-4'>
@@ -29,8 +82,7 @@ function SingleCoursePage() {
         <div className='my-8'>
           <h2 className='text-gray-800 font-bold text-2xl mb-4'>Instructors</h2>
           <div className='flex gap-8'>
-            <Instructor />
-            <Instructor />
+            <Instructor courseInstructor={courseData.instructorId} />
           </div>
         </div>
 
@@ -43,18 +95,7 @@ function SingleCoursePage() {
             Course Modules
           </h2>
           <div className='flex flex-col gap-3 lg:flex-col'>
-            <div className='flex item-start w-2/3 gap-2 p-3 border-dashed border-2 rounded-md'>
-              <p className='text-xl'>1.</p>
-              <h3 className='text-gray-700 text-xl font-bold'>
-                Introduction to Python <CheckCircleIcon />
-              </h3>
-            </div>
-            <div className='flex item-start w-2/3 gap-2 p-3 border-dashed border-2 rounded-md'>
-              <p className='text-xl'>2.</p>
-              <h3 className='text-gray-700 text-xl font-bold'>
-                Introduction to Python <CheckCircleIcon />
-              </h3>
-            </div>
+            {courseData.courseModules && getModules()}
           </div>
         </div>
       </div>

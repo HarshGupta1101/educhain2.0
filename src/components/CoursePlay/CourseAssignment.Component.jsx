@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
@@ -9,7 +8,7 @@ import Button from '@mui/material/Button';
 import { Divider } from '@mui/material';
 
 function CourseAssignmentComponent(props) {
-  const [questions, setQuestions] = useState(props.courseAssessmentIds);
+  const questions = props.courseAssessmentIds;
   const userAnswerArray = [];
 
   const handleAnswerChange = (event, index) => {
@@ -26,15 +25,23 @@ function CourseAssignmentComponent(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(userAnswerArray);
-    const intitalScore = questions.length;
-    let yourScore = 0;
-    userAnswerArray.map((answer, index) => {
-      if (questions[index].correctOption === answer) {
-        yourScore += 1;
-      }
+    let data = [];
+    questions.map((ques, index) => {
+      data.push({
+        question: ques,
+        answer: userAnswerArray[index],
+      });
     });
-    console.log(`You Scored ${yourScore} out of ${intitalScore}`);
+    console.log(data);
+
+    // const intitalScore = questions.length;
+    // let yourScore = 0;
+    // userAnswerArray.map((answer, index) => {
+    //   if (questions[index].correctOption === answer) {
+    //     yourScore += 1;
+    //   }
+    // });
+    // console.log(`You Scored ${yourScore} out of ${intitalScore}`);
   };
 
   return (

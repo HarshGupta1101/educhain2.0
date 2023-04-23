@@ -20,11 +20,11 @@ const BuyPoster = (props) => {
       </div>
       <div className='px-4 pb-2'>
         <h3 className='text-lg font-bold text-gray-700'>{props.courseTitle}</h3>
-        <p className='text-xs text-gray-500 mb-2'>By {props.instructor}</p>
+        <p className='text-xs text-gray-500 mb-2'>By {props.instructorId}</p>
         <h3 className='mb-3 font-bold'>Ⓝ {props.courseFee}</h3>
         <div className='flex gap-2'>
           <Link
-            to={`/course/${props.courseId}`}
+            to={`/course/${props._id}`}
             className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white'
           >
             Details

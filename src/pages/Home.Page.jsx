@@ -4,9 +4,40 @@ import CategoriesSlider from '../components/Categories/Categories.Component';
 import TrendingCourse from '../components/TrendingCourse/TrendingCourse.Component';
 import About from '../components/About/About.Component';
 import NGOReg from '../components/NGORegistration/NGORegBanner.Component';
-import courses from '../utils/data';
+import { useState, useEffect } from 'react';
+// import courses from '../utils/data';
 
 function HomePage() {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      await fetch(`http://127.0.0.1:5000/course`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // handle successful response
+          if (!data.status) {
+            throw new Error(data.message);
+          }
+          console.log(data);
+          let courseData = [];
+          for (let i = 0; i < 10; i++) {
+            courseData.push(data.courses[i]);
+          }
+          setCourses(courseData);
+        })
+        .catch((error) => {
+          // handle error response
+          console.log(error);
+        });
+    };
+    getData();
+  }, []);
 
   return (
     <>

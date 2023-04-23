@@ -1,7 +1,11 @@
 import React from 'react';
 import CourseInfo from './CourseInfo.Component';
+import { useCartContext } from '../../context/cart.context';
+import { Link } from 'react-router-dom';
 
-const CourseHeroComponent = () => {
+const CourseHeroComponent = ({ courseData }) => {
+  const { addToCart } = useCartContext();
+
   return (
     <>
       <div>
@@ -9,7 +13,7 @@ const CourseHeroComponent = () => {
         <div className='lg:hidden w-full'>
           <div className='w-full'>
             <img
-              src='https://res.cloudinary.com/diczskxkx/image/upload/v1681381223/MicrosoftTeams-image_4_vdw9pu.png'
+              src={courseData.image}
               alt='cover poster'
               className='m-4 rounded'
               style={{
@@ -20,16 +24,29 @@ const CourseHeroComponent = () => {
           <div className='flex flex-col gap-3 lg:hidden'>
             <div className='flex flex-col-reverse gap-3 px-4 my-3'>
               <div className='text-black flex flex-col gap-2 md:px-4'>
-                <h1 className='text-2xl font-bold'>Python For Everbody</h1>
-                <h4>Tags - Python, DataScience, Machine Learning</h4>
-                <h4>Language - English</h4>
-                <h4>Duration - 1 hour 30 mins 45 sec</h4>
+                <h1 className='text-2xl font-bold'>{courseData.courseTitle}</h1>
+                <h4>Tags - {courseData.tags.join(',')}</h4>
+                <h4>Language - {courseData.language}</h4>
+                <h4>Duration - {courseData.timeRequired}</h4>
               </div>
             </div>
             <div className='flex items-center gap-3 md:px-4 md:w-screen text-xl px-4'>
-              <button className='bg-red-500 w-full py-3 text-white font-semibold rounded-lg'>
+              <Link
+                to='/cart'
+                className='bg-red-500 w-full py-3 text-white font-semibold rounded-lg'
+                onClick={() =>
+                  addToCart(
+                    courseData._id,
+                    courseData.image,
+                    courseData.courseTitle,
+                    courseData.courseFee,
+                    courseData.instructorId,
+                    courseData.courseModules
+                  )
+                }
+              >
                 Add To Cart
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -50,13 +67,13 @@ const CourseHeroComponent = () => {
           <div className='absolute z-30 left-24 top-10 flex items-center gap-10'>
             <div className='w-66 h-96'>
               <img
-                src='https://res.cloudinary.com/diczskxkx/image/upload/v1681381223/MicrosoftTeams-image_4_vdw9pu.png'
-                alt='Movie Poster'
+                src={courseData.image}
+                alt='Course Poster'
                 className='w-full h-full rounded-xl'
               />
             </div>
             <div>
-              <CourseInfo />
+              <CourseInfo courseData={courseData} />
             </div>
           </div>
           <img

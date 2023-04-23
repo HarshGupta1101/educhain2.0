@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Instructor = () => {
+const Instructor = ({courseInstructor}) => {
   return (
     <div className='flex flex-col'>
       <div className='w-32 h-32'>
@@ -11,8 +11,7 @@ const Instructor = () => {
         />
       </div>
       <div className='flex flex-col items-center'>
-        <h1 className='text-xl text-gray-800'>Ritik Jain</h1>
-        <h5 className='text-sm text-gray-500'>as Developer</h5>
+        <h1 className='text-xl text-gray-800'>{courseInstructor}</h1>
       </div>
     </div>
   );
