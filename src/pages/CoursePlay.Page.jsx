@@ -73,15 +73,17 @@ const CoursePlayPage = () => {
                     />
                   );
                 })}
-              <div
-                className='w-full text-lg px-4 py-2 border-dashed border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
-                onClick={() => {
-                  setChapterClicked(null);
-                  setAssignmentClicked(courseDetails.courseAssessmentIds);
-                }}
-              >
-                Assignment
-              </div>
+              {courseDetails && (
+                <div
+                  className='w-full text-lg px-4 py-2 border-dashed border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
+                  onClick={() => {
+                    setChapterClicked(null);
+                    setAssignmentClicked(courseDetails.courseAssessmentIds);
+                  }}
+                >
+                  Assignment
+                </div>
+              )}
             </div>
           </div>
         </div>
