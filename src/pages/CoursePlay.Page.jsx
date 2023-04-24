@@ -75,13 +75,18 @@ const CoursePlayPage = () => {
                 })}
               {courseDetails && (
                 <div
-                  className='w-full text-lg px-4 py-2 border-dashed border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
+                  className='w-full text-md px-4 py-2 border border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
                   onClick={() => {
                     setChapterClicked(null);
                     setAssignmentClicked(courseDetails.courseAssessmentIds);
                   }}
                 >
-                  Assignment
+                  <input
+                  type='checkbox'
+                  className='mr-2'
+                  disabled
+                />
+                <b>Assignment</b>
                 </div>
               )}
             </div>
