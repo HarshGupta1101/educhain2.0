@@ -132,10 +132,9 @@ function CartPage() {
                 className='px-4 py-2 bg-orange-400 rounded hover:bg-orange-500 text-white font-bold'
                 onClick={() =>
                   paymentGateway(
-                    cartItems[0]._id,
+                    cartItems[0].courseId,
                     cartItems[0].courseModules,
-                    total_amount,
-                    cartItems
+                    total_amount
                   )
                 }
               >

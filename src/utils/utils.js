@@ -45,8 +45,7 @@ async function fetchMetadata() {
   console.log(response);
 }
 
-async function paymentGateway(courseId, moduleIds, total_amount, cartItems) {
-  console.log(cartItems)
+async function paymentGateway(courseId, moduleIds, total_amount) {
   const args = {
     'courses': {
       [courseId] : moduleIds
