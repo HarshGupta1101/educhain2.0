@@ -50,29 +50,55 @@ const CoursePlayComponent = (props) => {
     }
   };
 
-  const handleClick = async (event) => {
-    event.preventDefault();
-    await fetch(`http://127.0.0.1:5000/course/status/module/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(),
-    })
-      .then((response) => {
-        // handle successful response
-        if (!response.ok) { 
-          throw new Error(response.status);
-        }
-        return response.json();
-      })
-      .then((data) => {
-      })
-      .catch((error) => {
-        // handle error response
-        console.log(error);
-      });
-  };
+  // const handleClick = async (event) => {
+  //   event.preventDefault();
+  //   await fetch(`http://127.0.0.1:5000/course/status/module/${props.moduleNumber}`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: String(localStorage.getItem('token')),
+  //     },
+  //     body: JSON.stringify('Completed'),
+  //   })
+  //     .then((response) => {
+  //       // handle successful response
+  //       if (!response.ok) { 
+  //         throw new Error(response.status);
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //     })
+  //     .catch((error) => {
+  //       // handle error response
+  //       console.log(error);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //     const getData = async () => {
+  //       await fetch(`http://127.0.0.1:5000/course/status/module/${props.moduleNumber}`, {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           Authorization: String(localStorage.getItem('token')),
+  //         },
+  //       })
+  //         .then((response) => response.json())
+  //         .then((data) => {
+  //           // handle successful response
+  //           if (!data.status) {
+  //             throw new Error(data.message);
+  //           }
+  //           setCourseDetails(data.course);
+  //         })
+  //         .catch((error) => {
+  //           // handle error response
+  //           console.log(error);
+  //         });
+  //     };
+  //     getData();
+  //   }, []);
 
 
   return (
@@ -105,7 +131,7 @@ const CoursePlayComponent = (props) => {
                     onChange={() => handleChapterCheck(chapter.chapterSequence)}
                     className='mr-2'
                     disabled={chapterDisabled || allChaptersChecked}
-                    onClick={handleClick}
+                    // onClick={handleClick}
                   />
                   <div
                     className='flex-1'
