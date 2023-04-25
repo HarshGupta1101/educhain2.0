@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 function CartPage() {
   const [transaction, setTransaction] = useState('');
+  const [errorCode, setErrorCode] = useState('');
   const {
     cart: cartItems,
     total_items,
@@ -19,7 +20,9 @@ function CartPage() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const transactionHashes = urlParams.get('transactionHashes');
+    const errorCode = urlParams.get('errorCode');
     setTransaction(transactionHashes);
+    setErrorCode(errorCode);
   }, []);
 
   useEffect(() => {
@@ -62,6 +65,28 @@ function CartPage() {
         .catch((error) => {
           console.error('Error :', error);
         });
+    }
+    else if (errorCode){
+      window.history.pushState(
+        null,
+        null,
+        'http://localhost:3000/cart'
+      );
+      window.dispatchEvent(new Event('popstate'));
+      toast.error(
+        'Transaction Failed! Kindly Try Again.',
+        {
+          position: 'top-center',
+          autoClose: 4000,
+          transition: Slide,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        }
+      );
     }
   }, [transaction]);
 
