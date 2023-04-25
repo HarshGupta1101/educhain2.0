@@ -96,6 +96,7 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
         autoComplete='off'
       >
         <div>
+        <h1 className='text-2xl font-bold mx-3 mt-1 mb-3 mr-4'>Enter Basic Course Details</h1>
           <TextField
             id='outlined-multiline-flexible'
             label='Course Title'
@@ -178,7 +179,7 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
               disabled={imageUpload}
             />
             <button
-              className='bg-orange-400 text-white text-lg px-4 py-2 rounded hover:bg-orange-500'
+              className='px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
               onClick={(e) => handleUpload(e)}
             >
               Upload
@@ -187,7 +188,7 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
 
           <TextField
             id='outlined-multiline-flexible'
-            label='Number of Modules'
+            label='Number Of Modules'
             multiline
             maxRows={3}
             value={courseDetails.noOfModules}
@@ -200,7 +201,7 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
           />
         </div>
         <button
-          className='mx-4 bg-orange-400 text-white text-lg px-4 py-2 text-sm rounded hover:bg-orange-500 mt-4'
+          className='mx-4 my-4 px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
           onClick={(e) => handleCourseSubmit(e)}
         >
           Submit Details

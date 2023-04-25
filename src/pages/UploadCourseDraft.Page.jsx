@@ -41,7 +41,7 @@ const UploadCourseDraftPage = () => {
           //   Chapter {i + 1}
           // </div>
           <div
-            className='ml-4 text-lg px-4 py-2 border-dashed border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
+            className='ml-4 text-lg px-4 py-2 border border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
             key={`Module ${moduleNumber} Chapter ${i + 1}`}
             onClick={() => setOpenTab(`${moduleNumber} Chapter ${i + 1}`)}
           >
@@ -72,11 +72,11 @@ const UploadCourseDraftPage = () => {
             {({ open }) => (
               <>
                 <Disclosure.Button
-                  className='flex items-center gap-3 w-full text-lg px-4 py-2 border-dashed border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
+                  className='flex items-center gap-3 w-full text-md px-4 py-2 border border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
                   onClick={() => setOpenTab(`Module ${i + 1}`)}
                 >
                   {open ? <BiChevronUp /> : <BiChevronDown />}
-                  <span className={open ? 'text-red-600' : 'text-grey-700'}>
+                  <span className={open ? 'text-gray-600' : 'text-black'}>
                     Module {i + 1}
                   </span>
                 </Disclosure.Button>
@@ -171,9 +171,9 @@ const UploadCourseDraftPage = () => {
       <div className='container mx-auto px-12 my-14'>
         <div className='w-full lg:flex lg:flex-row gap-4'>
           <div className='lg:w-1/4 p-4 bg-white rounded'>
-            <h2 className='text-2xl font-bold mb-6'>Create your course</h2>
+            <h2 className='text-2xl font-bold mb-6'>Create Course</h2>
             <div
-              className='w-full text-lg px-4 py-2 border-dashed border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
+              className='w-full text-md px-4 py-2 border border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
               onClick={() => setOpenTab('Basic Details')}
             >
               Basic Details
@@ -185,26 +185,26 @@ const UploadCourseDraftPage = () => {
             <Disclosure>
               {({ open }) => (
                 <>
-                  <Disclosure.Button className='flex items-center gap-3 w-full text-lg px-4 py-2 border-dashed border-2 rounded hover:bg-gray-200 hover:rounded mb-4'>
+                  <Disclosure.Button className='flex items-center gap-3 w-full text-md px-4 py-2 border border-2 rounded hover:bg-gray-200 hover:rounded mb-4'>
                     {open ? <BiChevronUp /> : <BiChevronDown />}
-                    <span className={open ? 'text-red-600' : 'text-grey-700'}>
-                      Module
+                    <span className={open ? 'text-gray-600' : 'text-black'}>
+                      Modules
                     </span>
                   </Disclosure.Button>
-                  <Disclosure.Panel className='text-gray-500'>
+                  <Disclosure.Panel className='text-gray-600'>
                     {courseDetails.noOfModules !== 0 && handleModules()}
                   </Disclosure.Panel>
                 </>
               )}
             </Disclosure>
             <div
-              className='w-full text-lg border-dashed border-2 rounded px-4 py-2 hover:bg-gray-200 hover:rounded mb-4'
+              className='w-full text-md border border-2 rounded px-4 py-2 hover:bg-gray-200 hover:rounded mb-4'
               onClick={() => setOpenTab('Assignment')}
             >
               Assignment
             </div>
             <button
-              className='px-4 py-2 border-dashed border-2 rounded hover:bg-gray-200 hover:rounded mb-4 disabled'
+              className='px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100 mb-4 disabled'
               onClick={(e) => handleCourseSubmit(e)}
             >
               Submit Course

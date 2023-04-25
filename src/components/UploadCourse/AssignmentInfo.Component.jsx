@@ -168,7 +168,8 @@ function Assignment({ courseDetails, setCourseDetails, CourseId }) {
         }}
         noValidate
         autoComplete='off'
-      >
+      > 
+        <h1 className='text-2xl font-bold mx-3 mt-1 mb-2 mr-4'>Enter Assignment Details</h1>
         {questions.map((question, index) => (
           <div key={index}>
             <TextField
@@ -217,18 +218,18 @@ function Assignment({ courseDetails, setCourseDetails, CourseId }) {
             variant='outlined'
             color='warning'
             onClick={addQuestion}
-            style={{ marginRight: '20px' }}
+            style={{ marginRight: '20px', marginTop: '15px'}}
           >
-            <AddCircleOutlineIcon className='mx-2' /> Add More Questions
+            <AddCircleOutlineIcon className='mx-2' /><p className='text-black mt-1'>Add More Questions</p>
           </Button>
 
           <Button
             variant='outlined'
             color='warning'
             onClick={(e) => handleSubmit(e)}
-            style={{ marginRight: '20px' }}
+            style={{ marginRight: '20px', marginTop: '15px'}}
           >
-            Submit
+            <p className='text-black mt-1'>Submit</p>
           </Button>
         </div>
       </Box>

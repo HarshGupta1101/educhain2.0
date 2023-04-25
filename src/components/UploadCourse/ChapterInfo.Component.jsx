@@ -150,12 +150,10 @@ function ChapterInfoComponent({
         autoComplete='off'
       >
         <div>
-          <h1>
-            Module {moduleNumber} ---{`>`} Chapter {chapterNumber}
-          </h1>
+          <h1 className='text-2xl font-bold mx-3 mt-1 mb-3 mr-4'>Enter Details Of Chapter {chapterNumber}</h1>
           <TextField
             id='outlined-multiline-flexible'
-            label='Module Title'
+            label='Chapter Title'
             multiline
             maxRows={3}
             value={chapterDetails.chapterName}
@@ -169,7 +167,7 @@ function ChapterInfoComponent({
 
           <TextField
             id='outlined-multiline-flexible'
-            label='Module Description'
+            label='Chapter Description'
             multiline
             maxRows={3}
             value={chapterDetails.chapterBrief}
@@ -189,7 +187,7 @@ function ChapterInfoComponent({
               disabled={videoUpload}
             />
             <button
-              className='bg-orange-400 text-white text-lg px-4 py-2 rounded hover:bg-orange-500'
+              className='mx-4 my-4 px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
               onClick={(e) => handleUpload(e)}
             >
               Upload
@@ -197,7 +195,7 @@ function ChapterInfoComponent({
           </div>
         </div>
         <button
-          className='mx-4 bg-orange-400 text-white text-lg px-4 py-2 text-sm rounded hover:bg-orange-500 mt-4'
+          className='mx-4 my-4 px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
           onClick={(e) => handleChapterSubmit(e)}
         >
           Submit Details

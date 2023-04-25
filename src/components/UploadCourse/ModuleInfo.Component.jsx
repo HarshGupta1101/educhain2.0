@@ -104,7 +104,7 @@ function ModuleInfoComponent({
         autoComplete='off'
       >
         <div>
-          <h1>Module {parseInt(moduleNumber.split(' ')[1])}</h1>
+        <h1 className='text-2xl font-bold mx-3 mt-1 mb-3 mr-4'>Enter Details Of Module {parseInt(moduleNumber.split(' ')[1])}</h1>
           <TextField
             id='outlined-multiline-flexible'
             label='Module Title'
@@ -147,7 +147,7 @@ function ModuleInfoComponent({
           />
           <TextField
             id='outlined-multiline-flexible'
-            label='No of chapters'
+            label='Number Of Chapters'
             multiline
             maxRows={3}
             value={moduleDetails.noOfChapters}
@@ -160,7 +160,7 @@ function ModuleInfoComponent({
           />
         </div>
         <button
-          className='mx-4 bg-orange-400 text-white text-lg px-4 py-2 text-sm rounded hover:bg-orange-500 mt-4'
+          className='mx-4 my-4 px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
           onClick={(e) => handleModuleSubmit(e)}
         >
           Submit Details
