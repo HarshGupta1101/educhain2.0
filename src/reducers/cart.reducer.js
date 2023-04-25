@@ -11,7 +11,7 @@ const cart_reducer = (state, action) => {
       (item) => item.courseId === action.payload.courseId
     );
     const modulelist = action.payload.courseModules.map(
-      (module) => module.moduleId
+      (module) => module
     );
     action.payload['courseModules'] = modulelist;
     if (tempArr.length < 1) {

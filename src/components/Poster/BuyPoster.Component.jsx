@@ -33,12 +33,12 @@ const BuyPoster = (props) => {
             className='rounded bg-black text-white p-2 hover:text-black hover:bg-white hover:border-2 hover:border-black'
             onClick={() =>
               addToCart(
-                props.courseId,
+                props._id,
                 props.image,
                 props.courseTitle,
                 props.courseFee,
-                props.instructor,
-                props.courseModules
+                props.instructorId,
+                props.courseModules.map((module,index) => `${index+1}`)
               )
             }
           >

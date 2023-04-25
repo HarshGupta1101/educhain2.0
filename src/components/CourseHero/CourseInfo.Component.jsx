@@ -26,7 +26,7 @@ const CourseInfo = ({ courseData }) => {
                 courseData.courseTitle,
                 courseData.courseFee,
                 courseData.instructorId,
-                courseData.courseModules
+                courseData.courseModules.map((module, index) => `${index+1}`)
               )
             }
           >

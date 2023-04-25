@@ -5,64 +5,65 @@ import { useCartContext } from '../context/cart.context';
 import { paymentGateway } from '../utils/utils';
 import { Slide, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
 
 function CartPage() {
+  const [transaction, setTransaction] = useState('');
   const {
     cart: cartItems,
     total_items,
     total_amount,
-    clearCart, 
+    clearCart,
   } = useCartContext();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const transactionHashes = urlParams.get('transactionHashes');
-    const errorCode = urlParams.get('errorCode');
-    if (transactionHashes) {
+    setTransaction(transactionHashes);
+  }, []);
+
+  useEffect(() => {
+    if (transaction) {
       clearCart();
-      fetch(`http://127.0.0.1:5000/course/approval?transactionId=${transactionHashes}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': String(localStorage.getItem('token')),
-        },
-        body: JSON.stringify({ transactionHashes }),
-      })
+      fetch(
+        `http://127.0.0.1:5000/course/approval?transactionId=${transaction}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: String(localStorage.getItem('token')),
+          },
+          body: JSON.stringify({ transaction }),
+        }
+      )
         .then((response) => response.json())
         .then(() => {
-          window.history.pushState(null, null, 'http://localhost:3000/inprogresscourses');
+          window.history.pushState(
+            null,
+            null,
+            'http://localhost:3000/inprogresscourses'
+          );
           window.dispatchEvent(new Event('popstate'));
-          toast.success('Transaction Successful! Course Enrolled Successfully.', {
-            position: "top-center",
-            autoClose: 4000,
-            transition: Slide,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+          toast.success(
+            'Transaction Successful! Course Enrolled Successfully.',
+            {
+              position: 'top-center',
+              autoClose: 4000,
+              transition: Slide,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'light',
+            }
+          );
         })
         .catch((error) => {
           console.error('Error :', error);
-        }); 
-    }
-    else if (errorCode) {
-      toast.error('Transaction Failed! Kindly Try Again.', {
-        position: "top-center",
-        autoClose: 4000,
-        transition: Slide,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
         });
     }
-  }, []);
-
+  }, [transaction]);
 
   if (cartItems.length < 1) {
     return (
@@ -102,14 +103,17 @@ function CartPage() {
             <div>
               <h2 className='text-xl font-bold mb-2'>Total</h2>
               <h2 className='text-2xl font-bold mb-4'>Ⓝ {total_amount}</h2>
-              <button className='px-4 py-2 bg-orange-400 rounded hover:bg-orange-500 text-white font-bold' onClick={() =>
+              <button
+                className='px-4 py-2 bg-orange-400 rounded hover:bg-orange-500 text-white font-bold'
+                onClick={() =>
                   paymentGateway(
                     cartItems[0]._id,
                     cartItems[0].courseModules,
                     total_amount,
                     cartItems
                   )
-                }>
+                }
+              >
                 Checkout
               </button>
             </div>
