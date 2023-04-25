@@ -20,7 +20,7 @@ import CoursePlay from './pages/CoursePlay.Page';
 import CartPage from './pages/Cart.Page';
 import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
 import CategoryCoursesPage from './pages/CategoryCourses.Page';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // import axios from 'axios';

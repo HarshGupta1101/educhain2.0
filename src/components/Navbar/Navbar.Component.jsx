@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Badge } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useCartContext } from '../../context/cart.context';
-import { Slide, ToastContainer, toast } from 'react-toastify';
+import { Slide, toast } from 'react-toastify';
 
 function RemoveToken() {
   localStorage.removeItem('token');

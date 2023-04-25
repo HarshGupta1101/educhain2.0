@@ -50,6 +50,31 @@ const CoursePlayComponent = (props) => {
     }
   };
 
+  const handleClick = async (event) => {
+    event.preventDefault();
+    await fetch(`http://127.0.0.1:5000/course/status/module/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(),
+    })
+      .then((response) => {
+        // handle successful response
+        if (!response.ok) { 
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
+      })
+      .catch((error) => {
+        // handle error response
+        console.log(error);
+      });
+  };
+
+
   return (
     <Disclosure>
       {({ open }) => (
@@ -80,6 +105,7 @@ const CoursePlayComponent = (props) => {
                     onChange={() => handleChapterCheck(chapter.chapterSequence)}
                     className='mr-2'
                     disabled={chapterDisabled || allChaptersChecked}
+                    onClick={handleClick}
                   />
                   <div
                     className='flex-1'

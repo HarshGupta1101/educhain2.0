@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { MuiFileInput } from 'mui-file-input';
 import ipfs from '../../utils/ipfs';
-import { Slide, ToastContainer, toast } from 'react-toastify';
+import { Slide, toast } from 'react-toastify';
 
 function ChapterInfoComponent({
   courseDetails,

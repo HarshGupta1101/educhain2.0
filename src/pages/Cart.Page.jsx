@@ -3,7 +3,7 @@ import CartCardComponent from '../components/Cart/CartCard.Component';
 import { RxCross2 } from 'react-icons/rx';
 import { useCartContext } from '../context/cart.context';
 import { paymentGateway } from '../utils/utils';
-import { Slide, ToastContainer, toast } from 'react-toastify';
+import { Slide, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function CartPage() {
