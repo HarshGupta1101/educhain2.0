@@ -3,104 +3,7 @@ import { Disclosure } from '@headlessui/react';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 
 const CoursePlayComponent = (props) => {
-  const [chaptersChecked, setChaptersChecked] = useState([]);
-  const [allChaptersChecked, setAllChaptersChecked] = useState(false);
-  const [moduleChecked, setModuleChecked] = useState(false);
-  const [moduleDisabled, setModuleDisabled] = useState(true);
-  const [chapterDisabled, setChapterDisabled] = useState(false);
-
-  useEffect(() => {
-    const allChecked = props.chapters.every(chapter => chaptersChecked.includes(chapter.chapterSequence));
-    setAllChaptersChecked(allChecked);
-  }, [chaptersChecked, props.chapters]);
-
-  useEffect(() => {
-    const allChaptersChecked = props.chapters.every(chapter => chaptersChecked.includes(chapter.chapterSequence));
-    setModuleChecked(allChaptersChecked);
-  }, [chaptersChecked, props.chapters]);
-
-  const handleChapterCheck = (chapterSequence) => {
-    if (chaptersChecked.includes(chapterSequence)) {
-      const newChecked = chaptersChecked.filter(chapter => chapter !== chapterSequence);
-      setChaptersChecked(newChecked);
-      setAllChaptersChecked(false);
-      setModuleChecked(false);
-    } else {
-      const newChecked = [...chaptersChecked, chapterSequence];
-      setChaptersChecked(newChecked);
-      if (newChecked.length === props.chapters.length) {
-        setAllChaptersChecked(true);
-        setModuleChecked(true);
-        setModuleDisabled(true);
-        setChapterDisabled(true);
-      }
-    }
-  };
   
-  const handleModuleCheck = () => {
-    if (moduleChecked) {
-      setChaptersChecked([]);
-      setAllChaptersChecked(false);
-      setModuleChecked(false);
-    } else {
-      const allChapterSequences = props.chapters.map(chapter => chapter.chapterSequence);
-      setChaptersChecked(allChapterSequences);
-      setAllChaptersChecked(true);
-      setModuleChecked(true);
-    }
-  };
-
-  // const handleClick = async (event) => {
-  //   event.preventDefault();
-  //   await fetch(`http://127.0.0.1:5000/course/status/module/${props.moduleNumber}`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: String(localStorage.getItem('token')),
-  //     },
-  //     body: JSON.stringify('Completed'),
-  //   })
-  //     .then((response) => {
-  //       // handle successful response
-  //       if (!response.ok) { 
-  //         throw new Error(response.status);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //     })
-  //     .catch((error) => {
-  //       // handle error response
-  //       console.log(error);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //     const getData = async () => {
-  //       await fetch(`http://127.0.0.1:5000/course/status/module/${props.moduleNumber}`, {
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           Authorization: String(localStorage.getItem('token')),
-  //         },
-  //       })
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           // handle successful response
-  //           if (!data.status) {
-  //             throw new Error(data.message);
-  //           }
-  //           setCourseDetails(data.course);
-  //         })
-  //         .catch((error) => {
-  //           // handle error response
-  //           console.log(error);
-  //         });
-  //     };
-  //     getData();
-  //   }, []);
-
-
   return (
     <Disclosure>
       {({ open }) => (
@@ -110,10 +13,7 @@ const CoursePlayComponent = (props) => {
             <span className={open ? 'text-gray-600' : 'text-black'}>
               <input
                 type='checkbox'
-                checked={moduleChecked}
-                onChange={handleModuleCheck}
                 className='mr-2'
-                disabled={moduleDisabled}
               />
               <b>Module {props.moduleNumber}: </b> {props.title}
             </span>
@@ -127,11 +27,7 @@ const CoursePlayComponent = (props) => {
                 >
                   <input
                     type='checkbox'
-                    checked={chaptersChecked.includes(chapter.chapterSequence)}
-                    onChange={() => handleChapterCheck(chapter.chapterSequence)}
                     className='mr-2'
-                    disabled={chapterDisabled || allChaptersChecked}
-                    // onClick={handleClick}
                   />
                   <div
                     className='flex-1'

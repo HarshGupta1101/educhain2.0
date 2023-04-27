@@ -12,7 +12,7 @@ const CoursePlayPage = () => {
   useEffect(() => {
     if (id) {
       const getData = async () => {
-        await fetch(`http://127.0.0.1:5000/course/${id}`, {
+        await fetch(`http://127.0.0.1:5000/course/status/${id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -61,11 +61,11 @@ const CoursePlayPage = () => {
             </h2>
             <div className='flex flex-col gap-6'>
               {courseDetails &&
-                courseDetails.courseModules.map((detail, index) => {
+                courseDetails.courseModulesStatus.map((detail, index) => {
                   return (
-                    <CoursePlayComponent
-                      title={detail.moduleTitle}
-                      chapters={detail.chapterIds}
+                    <CoursePlayComponent 
+                      title={detail.moduleId.moduleTitle}
+                      chapters={detail.moduleId.chapterIds}
                       key={index}
                       moduleNumber={detail.moduleNumber}
                       setChapterClicked={setChapterClicked}
