@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import Sidebar from '../components/Sidebar/Sidebar.Component';
 import { Link } from 'react-router-dom';
 import UploadedCourses from '../components/UploadedCourses/UploadedCourses.Component';
@@ -7,6 +7,33 @@ import courses from '../utils/data';
 
 const UploadedCoursesPage = () => {
 
+  const [courseDetails, setCourseDetails] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      await fetch('http://127.0.0.1:5000/course/course-uploaded', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: String(localStorage.getItem('token')),
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // handle successful response
+          if (!data.status) {
+            throw new Error(data.message);
+          }
+          console.log(data.courses)
+          setCourseDetails(data.courses);
+        })
+        .catch((error) => {
+          // handle error response
+          console.log(error);
+        });
+    };
+    getData();
+  }, []);
   return (
     <>
       <div className='container mx-auto px-4 my-10'>
@@ -24,7 +51,7 @@ const UploadedCoursesPage = () => {
             </Link>
             </div>
             <UploadedCourses  
-            posters={courses}
+            posters={courseDetails}
           />
           </div>
         </div>

@@ -6,6 +6,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import { Divider } from '@mui/material';
+import { Slide, toast } from 'react-toastify';
 
 function CourseAssignmentComponent(props) {
   const questions = props.courseAssessmentIds;
@@ -28,20 +29,43 @@ function CourseAssignmentComponent(props) {
     let data = [];
     questions.map((ques, index) => {
       data.push({
-        question: ques,
-        answer: userAnswerArray[index],
+        question: ques.question,
+        correctOption: userAnswerArray[index],
       });
     });
     console.log(data);
-
-    // const intitalScore = questions.length;
-    // let yourScore = 0;
-    // userAnswerArray.map((answer, index) => {
-    //   if (questions[index].correctOption === answer) {
-    //     yourScore += 1;
-    //   }
-    // });
-    // console.log(`You Scored ${yourScore} out of ${intitalScore}`);
+    await fetch(`http://127.0.0.1:5000/course/assessment/${props.courseId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: String(localStorage.getItem('token')),
+      },
+      body: JSON.stringify({
+        assessmentList: data,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.status) {
+          throw new Error(data.message);
+        }
+        console.log(data);
+        toast.success(`Congratulations you have scored ${data.assessmentScore} out of ${questions.length}!`, {
+          position: "top-center",
+          autoClose: 4000,
+          transition: Slide,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      })
+      .catch((error) => {
+        // handle error response
+        console.log(error);
+      });
   };
 
   return (

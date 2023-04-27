@@ -9,7 +9,7 @@ const BuyPoster = (props) => {
   return (
     <div
       className='flex flex-col items-start border shadow rounded-lg gap-2 pb-2'
-      style={{ marginRight: '20px' }}
+      style={{ marginRight: '20px', minHeight: '21.5rem'}}
     >
       <div className='h-30 md:h-40 w-full'>
         <img
@@ -20,7 +20,7 @@ const BuyPoster = (props) => {
       </div>
       <div className='px-4 pb-2'>
         <h3 className='text-lg font-bold text-gray-700'>{props.courseTitle}</h3>
-        <p className='text-xs text-gray-500 mb-2'>By {props.instructorId}</p>
+        <p className='text-xs text-gray-500 mb-2'>By {props.instructorName}</p>
         <h3 className='mb-3 font-bold'>Ⓝ {props.courseFee}</h3>
         <div className='flex gap-2'>
           <Link
@@ -37,7 +37,7 @@ const BuyPoster = (props) => {
                 props.image,
                 props.courseTitle,
                 props.courseFee,
-                props.instructorId,
+                props.instructorName,
                 props.courseModules.map((module,index) => `${index+1}`)
               )
             }

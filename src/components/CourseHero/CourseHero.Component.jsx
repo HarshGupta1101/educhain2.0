@@ -40,7 +40,7 @@ const CourseHeroComponent = ({ courseData }) => {
                     courseData.image,
                     courseData.courseTitle,
                     courseData.courseFee,
-                    courseData.instructorId,
+                    courseData.instructorName,
                     courseData.courseModules.map((module,index) => `${index+1}`)
                   )
                 }

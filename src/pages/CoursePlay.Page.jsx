@@ -12,7 +12,7 @@ const CoursePlayPage = () => {
   useEffect(() => {
     if (id) {
       const getData = async () => {
-        await fetch(`http://127.0.0.1:5000/course/${id}`, {
+        await fetch(`http://127.0.0.1:5000/course/status/${id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -49,11 +49,15 @@ const CoursePlayPage = () => {
               />
             )}
 
-            {assignmentClicked && (
-              <CourseAssignmentComponent
-                courseAssessmentIds={courseDetails.courseAssessmentIds}
-              />
-            )}
+            {assignmentClicked &&
+              (courseDetails.modules.every((module) => module.moduleStatus) ? (
+                <CourseAssignmentComponent
+                  courseAssessmentIds={courseDetails.assessmentList}
+                  courseId={courseDetails.courseId}
+                />
+              ) : (
+                <p>Please complete the course and then come to assignment !!</p>
+              ))}
           </div>
           <div className='lg:w-1/4 p-4 bg-white rounded'>
             <h2 className='text-2xl font-bold mb-6'>
@@ -61,15 +65,19 @@ const CoursePlayPage = () => {
             </h2>
             <div className='flex flex-col gap-6'>
               {courseDetails &&
-                courseDetails.courseModules.map((detail, index) => {
+                courseDetails.modules.map((module, index) => {
                   return (
                     <CoursePlayComponent
-                      title={detail.moduleTitle}
-                      chapters={detail.chapterIds}
+                      title={module.moduleTitle}
+                      chapters={module.chapters}
                       key={index}
-                      moduleNumber={detail.moduleNumber}
+                      courseId={courseDetails.courseId}
+                      moduleNumber={module.moduleNumber}
                       setChapterClicked={setChapterClicked}
                       setAssignmentClicked={setAssignmentClicked}
+                      moduleStatus={module.moduleStatus}
+                      courseDetails = {courseDetails}
+                      setCourseDetails = {setCourseDetails}
                     />
                   );
                 })}
@@ -78,15 +86,10 @@ const CoursePlayPage = () => {
                   className='w-full text-md px-4 py-2 border border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
                   onClick={() => {
                     setChapterClicked(null);
-                    setAssignmentClicked(courseDetails.courseAssessmentIds);
+                    setAssignmentClicked(courseDetails.assessmentList);
                   }}
                 >
-                  <input
-                  type='checkbox'
-                  className='mr-2'
-                  disabled
-                />
-                <b>Assignment</b>
+                  <b>Assignment</b>
                 </div>
               )}
             </div>

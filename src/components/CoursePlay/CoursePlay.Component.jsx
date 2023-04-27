@@ -1,79 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 
 const CoursePlayComponent = (props) => {
-  const [chaptersChecked, setChaptersChecked] = useState([]);
-  const [allChaptersChecked, setAllChaptersChecked] = useState(false);
-  const [moduleChecked, setModuleChecked] = useState(false);
-  const [moduleDisabled, setModuleDisabled] = useState(true);
-  const [chapterDisabled, setChapterDisabled] = useState(false);
+  const [moduleStatus, setModuleStatus] = useState(props.moduleStatus);
+  const [chapters, setChapters] = useState(props.chapters);
 
-  useEffect(() => {
-    const allChecked = props.chapters.every(chapter => chaptersChecked.includes(chapter.chapterSequence));
-    setAllChaptersChecked(allChecked);
-  }, [chaptersChecked, props.chapters]);
-
-  useEffect(() => {
-    const allChaptersChecked = props.chapters.every(chapter => chaptersChecked.includes(chapter.chapterSequence));
-    setModuleChecked(allChaptersChecked);
-  }, [chaptersChecked, props.chapters]);
-
-  const handleChapterCheck = (chapterSequence) => {
-    if (chaptersChecked.includes(chapterSequence)) {
-      const newChecked = chaptersChecked.filter(chapter => chapter !== chapterSequence);
-      setChaptersChecked(newChecked);
-      setAllChaptersChecked(false);
-      setModuleChecked(false);
-    } else {
-      const newChecked = [...chaptersChecked, chapterSequence];
-      setChaptersChecked(newChecked);
-      if (newChecked.length === props.chapters.length) {
-        setAllChaptersChecked(true);
-        setModuleChecked(true);
-        setModuleDisabled(true);
-        setChapterDisabled(true);
-      }
-    }
-  };
-  
-  const handleModuleCheck = () => {
-    if (moduleChecked) {
-      setChaptersChecked([]);
-      setAllChaptersChecked(false);
-      setModuleChecked(false);
-    } else {
-      const allChapterSequences = props.chapters.map(chapter => chapter.chapterSequence);
-      setChaptersChecked(allChapterSequences);
-      setAllChaptersChecked(true);
-      setModuleChecked(true);
-    }
-  };
-
-  const handleClick = async (event) => {
+  const handleClick = async (event, chapterNumber) => {
     event.preventDefault();
-    await fetch(`http://127.0.0.1:5000/course/status/module/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(),
-    })
-      .then((response) => {
-        // handle successful response
-        if (!response.ok) { 
-          throw new Error(response.status);
-        }
-        return response.json();
-      })
+    await fetch(
+      `http://127.0.0.1:5000/course/update/${props.courseId}/module/${props.moduleNumber}/chapter/${chapterNumber}`,
+      {
+        method: 'POST',
+             headers: {
+          'Content-Type': 'application/json',
+          Authorization: String(localStorage.getItem('token')),
+        },
+        body: JSON.stringify(),
+      }
+    )
+      .then((response) => response.json())
       .then((data) => {
+        if (!data.status) {
+          throw new Error(data.message);
+        }
+        const updatedData = chapters.map((chapter) => {
+          if (chapter.chapterSequence === chapterNumber) {
+            return { ...chapter, chapterStatus: true };
+          }
+          return chapter;
+        });
+        setChapters(updatedData);
+        if (data.moduleStatus) {
+          setModuleStatus(data.moduleStatus);
+          const updatedCourseDetails = props.courseDetails.modules.map(
+            (module) => {
+              if (props.moduleNumber === module.moduleNumber) {
+                return {
+                  ...module,
+                  moduleStatus: true,
+                };
+              }
+              return module;
+            }
+          );
+          props.setCourseDetails({
+            ...props.courseDetails,
+            modules: updatedCourseDetails,
+          });
+        }
       })
       .catch((error) => {
         // handle error response
         console.log(error);
       });
   };
-
 
   return (
     <Disclosure>
@@ -84,28 +65,26 @@ const CoursePlayComponent = (props) => {
             <span className={open ? 'text-gray-600' : 'text-black'}>
               <input
                 type='checkbox'
-                checked={moduleChecked}
-                onChange={handleModuleCheck}
+                checked={moduleStatus}
+                disabled={moduleStatus}
                 className='mr-2'
-                disabled={moduleDisabled}
               />
               <b>Module {props.moduleNumber}: </b> {props.title}
             </span>
           </Disclosure.Button>
           <Disclosure.Panel className='text-gray-600'>
             <div className='flex items-center gap-3 flex-wrap'>
-              {props.chapters.map((chapter, index) => (
+              {chapters.map((chapter, index) => (
                 <div
                   className='border-2 border-gray-200 ml-8 px-3 py-1 rounded hover:cursor-pointer w-full flex items-center'
                   key={index}
                 >
                   <input
                     type='checkbox'
-                    checked={chaptersChecked.includes(chapter.chapterSequence)}
-                    onChange={() => handleChapterCheck(chapter.chapterSequence)}
+                    checked={chapter.chapterStatus}
                     className='mr-2'
-                    disabled={chapterDisabled || allChaptersChecked}
-                    onClick={handleClick}
+                    disabled={chapter.chapterStatus}
+                    onChange={(e) => handleClick(e, chapter.chapterSequence)}
                   />
                   <div
                     className='flex-1'
@@ -114,7 +93,10 @@ const CoursePlayComponent = (props) => {
                       props.setChapterClicked(chapter);
                     }}
                   >
-                  <b><i>Chapter {chapter.chapterSequence}: </i></b> {chapter.chapterName}
+                    <b>
+                      <i>Chapter {chapter.chapterSequence}: </i>
+                    </b>{' '}
+                    {chapter.chapterName}
                   </div>
                 </div>
               ))}

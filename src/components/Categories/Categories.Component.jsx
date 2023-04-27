@@ -1,28 +1,57 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
 
-const Categories = (props) => {
+const Categories = ({ category }) => {
   return (
-    <>
+    <Link to={`/courses/${category.category.split(" ").join('')}`}>
       <div
-        className='p-8 rounded-lg text-center bg-sky-100'
+        className='p-8 rounded-lg text-center bg-sky-100 max-h-64'
         style={{ marginRight: '20px' }}
       >
-        <img className='w-full h-full mb-3' src={props.src} alt='categories' />
-        <p>Web Development</p>
+        <img
+          className='w-full h-full mb-3'
+          src={category.image}
+          alt='categories'
+        />
+        <p>{category.category}</p>
       </div>
-    </>
+    </Link>
   );
 };
 
 const CategoriesSlider = () => {
-  const EntertainmentImage = [
-    'https://res.cloudinary.com/diczskxkx/image/upload/v1676156532/sxakrrgpsrusrm3byqcl.png',
-    'https://res.cloudinary.com/diczskxkx/image/upload/v1676155812/f2f6aeuqdozg2tmt4nhn.png',
-    'https://res.cloudinary.com/diczskxkx/image/upload/v1676155278/v2b85fvgnwtvrffqd51l.png',
-    'https://res.cloudinary.com/diczskxkx/image/upload/v1676149531/vswei49nchiccunlapgq.png',
-    'https://res.cloudinary.com/diczskxkx/image/upload/v1681381223/MicrosoftTeams-image_4_vdw9pu.png',
-    'https://res.cloudinary.com/diczskxkx/image/upload/v1681381223/MicrosoftTeams-image_5_iw3nk4.png',
+  const CourseCategories = [
+    {
+      image:
+        'https://res.cloudinary.com/diczskxkx/image/upload/v1676156532/sxakrrgpsrusrm3byqcl.png',
+      category: 'Social Media Marketing',
+    },
+    {
+      image:
+        'https://res.cloudinary.com/diczskxkx/image/upload/v1676155812/f2f6aeuqdozg2tmt4nhn.png',
+      category: 'UI/UX Development',
+    },
+    {
+      image:
+        'https://res.cloudinary.com/diczskxkx/image/upload/v1676155278/v2b85fvgnwtvrffqd51l.png',
+      category: 'Data Analytics',
+    },
+    {
+      image:
+        'https://res.cloudinary.com/diczskxkx/image/upload/v1676149531/vswei49nchiccunlapgq.png',
+      category: 'DBMS',
+    },
+    {
+      image:
+        'https://res.cloudinary.com/diczskxkx/image/upload/v1681381223/MicrosoftTeams-image_4_vdw9pu.png',
+      category: 'Web Development',
+    },
+    {
+      image:
+        'https://res.cloudinary.com/diczskxkx/image/upload/v1681381223/MicrosoftTeams-image_5_iw3nk4.png',
+      category: 'Python',
+    },
   ];
 
   const settings = {
@@ -61,8 +90,8 @@ const CategoriesSlider = () => {
   return (
     <>
       <Slider {...settings}>
-        {EntertainmentImage.map((image, index) => (
-          <Categories src={image} key={index} />
+        {CourseCategories.map((category, index) => (
+          <Categories category={category} key={index} />
         ))}
       </Slider>
     </>

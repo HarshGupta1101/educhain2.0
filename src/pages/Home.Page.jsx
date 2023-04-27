@@ -26,7 +26,7 @@ function HomePage() {
           }
           console.log(data);
           let courseData = [];
-          for (let i = 0; i < 10; i++) {
+          for (let i = 0; i < 5; i++) {
             courseData.push(data.courses[i]);
           }
           setCourses(courseData);
