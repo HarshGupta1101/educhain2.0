@@ -40,29 +40,28 @@ export default function NGORegistration() {
     try {
       const response = await ipfs.add(file);
       const ImgHash = `https://ipfs.io/ipfs/${response.path}`;
-      toast.success('Uploaded Successfully !', {
+      toast.success('Document Uploaded Successfully !', {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2000,
             transition: Slide,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
             theme: "light",
             });
-      console.log(ImgHash);
       setSignUpData({
         ...signUpData,
         documentUrl: ImgHash,
       });
       setImageUpload(true);
     } catch (error) {
-      toast.error('Upload Failed !', {
+      toast.error('Document Upload Failed !', {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2000,
             transition: Slide,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
@@ -91,7 +90,6 @@ export default function NGORegistration() {
       })
       .catch((error) => {
         // handle error response
-        console.log(error);
       });
   };
 

@@ -1,10 +1,8 @@
 import React from 'react';
 import CourseHeroComponent from '../components/CourseHero/CourseHero.Component';
 import Instructor from '../components/Instructor/Instructor.Component';
-// import { CheckCircleIcon } from '@chakra-ui/icons';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-// import { Slide, toast } from 'react-toastify';
 
 function SingleCoursePage() {
   const { id } = useParams();
@@ -31,7 +29,6 @@ function SingleCoursePage() {
         >
           <p className='text-xl'>{index+1}.</p>
           <h3 className='text-gray-700 text-xl font-bold'>
-            {/*  <CheckCircleIcon /> */}
             {module.moduleTitle}
           </h3>
         </div>
@@ -55,12 +52,10 @@ function SingleCoursePage() {
             if (!data.status) {
               throw new Error(data.message);
             }
-            console.log(data.course);
             setCourseData(data.course);
           })
           .catch((error) => {
             // handle error response
-            console.log(error);
           });
       };
       getData();

@@ -20,9 +20,9 @@ const Profile = () => {
     window.dispatchEvent(new Event('popstate'));
     toast.success('Successfully Signed Out !', {
       position: 'top-center',
-      autoClose: 4000,
+      autoClose: 2000,
       transition: Slide,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
@@ -51,11 +51,11 @@ const Profile = () => {
         if (!data.status) {
           throw new Error(data.message);
         }
-        toast.success('Profile Saved Successfully!', {
+        toast.success('Profile Saved Successfully !', {
           position: 'top-center',
-          autoClose: 4000,
+          autoClose: 2000,
           transition: Slide,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
@@ -65,12 +65,11 @@ const Profile = () => {
       })
       .catch((error) => {
         // handle error response
-        console.log(error);
-        toast.success(error, {
+        toast.error(error, {
           position: 'top-center',
-          autoClose: 4000,
+          autoClose: 2000,
           transition: Slide,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
@@ -95,12 +94,10 @@ const Profile = () => {
           if (!data.status) {
             throw new Error(data.message);
           }
-          console.log(data.user);
           setUserDetails(data.user);
         })
         .catch((error) => {
           // handle error response
-          console.log(error);
         });
     };
     getData();

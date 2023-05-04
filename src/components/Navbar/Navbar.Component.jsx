@@ -13,9 +13,9 @@ function RemoveToken() {
   window.dispatchEvent(new Event('popstate'));
   toast.success('Successfully Signed Out !', {
     position: "top-center",
-    autoClose: 4000,
+    autoClose: 2000,
     transition: Slide,
-    hideProgressBar: false,
+    hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,

@@ -42,9 +42,9 @@ export default function SignIn() {
         window.dispatchEvent(new Event('popstate'));
         toast.success('Successfully Signed In !', {
           position: "top-center",
-          autoClose: 4000,
+          autoClose: 2000,
           transition: Slide,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
@@ -54,7 +54,6 @@ export default function SignIn() {
       })
       .catch((error) => {
         // handle error response
-        console.log(error);
       });
   };
 

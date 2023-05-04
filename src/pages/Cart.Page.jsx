@@ -51,9 +51,9 @@ function CartPage() {
             'Transaction Successful! Course Enrolled Successfully.',
             {
               position: 'top-center',
-              autoClose: 4000,
+              autoClose: 2000,
               transition: Slide,
-              hideProgressBar: false,
+              hideProgressBar: true,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
@@ -63,7 +63,6 @@ function CartPage() {
           );
         })
         .catch((error) => {
-          console.error('Error :', error);
         });
     }
     else if (errorCode){
@@ -77,9 +76,9 @@ function CartPage() {
         'Transaction Failed! Kindly Try Again.',
         {
           position: 'top-center',
-          autoClose: 4000,
+          autoClose: 2000,
           transition: Slide,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,

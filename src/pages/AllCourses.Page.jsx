@@ -19,12 +19,10 @@ function AllCoursesPage() {
           if (!data.status) {
             throw new Error(data.message);
           }
-          console.log(data)
           setCourses(data.courses);
         })
         .catch((error) => {
           // handle error response
-          console.log(error);
         });
     };
     getData();

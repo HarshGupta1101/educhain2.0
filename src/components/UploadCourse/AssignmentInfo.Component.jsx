@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { toast, Slide } from 'react-toastify';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
@@ -95,7 +95,17 @@ function Assignment({ courseDetails, setCourseDetails, CourseId }) {
         if (!data.status) {
           throw new Error(data.message);
         }
-        alert('Assignment added successfully');
+        toast.success('Successfully Added Assignment !', {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         setCourseDetails({
           ...courseDetails,
           courseAssessmentIds: data.addAssessment,
@@ -103,7 +113,6 @@ function Assignment({ courseDetails, setCourseDetails, CourseId }) {
       })
       .catch((error) => {
         // handle error response
-        console.log(error);
       });
   };
 
@@ -147,12 +156,10 @@ function Assignment({ courseDetails, setCourseDetails, CourseId }) {
                 ],
               });
             });
-            console.log(ques);
             setQuestions(ques);
           })
           .catch((error) => {
             // handle error response
-            console.log(error);
           });
       };
       getData();

@@ -63,6 +63,17 @@ export default function Sidebar() {
           </ListItem>
           </Link>
           <Divider />
+          <Link to="/yourcourses">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <AssignmentTurnedInIcon />
+              </ListItemIcon>
+              <ListItemText primary="Your Courses" />
+            </ListItemButton>
+          </ListItem>
+          </Link>
+          <Divider />
           <Link to="/students">
           <ListItem disablePadding>
             <ListItemButton>

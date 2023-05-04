@@ -14,6 +14,7 @@ import Profile from './pages/Profile.Page';
 import InProgressCourses from './pages/InProgressCourses.Page';
 import CompletedCourses from './pages/CompletedCourses.Page';
 import UploadedCourses from './pages/UploadedCourses.Page';
+import YourCoursesPage from './pages/YourCourses.Page';
 import Students from './pages/Students.Page';
 import SingleCourse from './pages/SingleCourse.Page';
 import CoursePlay from './pages/CoursePlay.Page';
@@ -22,16 +23,8 @@ import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
 import CategoryCoursesPage from './pages/CategoryCourses.Page';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-// import axios from 'axios';
-
-// Import css files
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
-// axios.defaults.baseURL = "https://api.themoviedb.org/3";
-// axios.defaults.params = {};
-// axios.defaults.params["api_key"] = "7d6db67791d1fc8dd41512aa8b5be970";
 
 function App() {
   return (
@@ -103,6 +96,15 @@ function App() {
           element={
             <DefaultLayout>
               <UploadedCourses />
+            </DefaultLayout>
+          }
+        />
+         <Route
+          path='/yourcourses'
+          exact
+          element={
+            <DefaultLayout>
+              <YourCoursesPage />
             </DefaultLayout>
           }
         />

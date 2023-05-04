@@ -25,29 +25,28 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
     try {
       const response = await ipfs.add(file);
       const ImgHash = `https://ipfs.io/ipfs/${response.path}`;
-      toast.success('Uploaded Successfully !', {
+      toast.success('Course Image Uploaded Successfully !', {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2000,
             transition: Slide,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
             theme: "light",
             });
-      console.log(ImgHash);
       setCourseDetails({
         ...courseDetails,
         image: ImgHash,
       });
       setImageUpload(true);
     } catch (error) {
-      toast.error('Upload Failed !', {
+      toast.error('Course Image Upload Failed !', {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2000,
             transition: Slide,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
@@ -82,7 +81,6 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
       })
       .catch((error) => {
         // handle error response
-        console.log(error);
       });
   };
   return (

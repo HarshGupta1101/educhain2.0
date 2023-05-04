@@ -25,12 +25,10 @@ const CoursePlayPage = () => {
             if (!data.status) {
               throw new Error(data.message);
             }
-            console.log(data.course);
             setCourseDetails(data.course);
           })
           .catch((error) => {
             // handle error response
-            console.log(error);
           });
       };
       getData();

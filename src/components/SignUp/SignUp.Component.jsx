@@ -53,7 +53,6 @@ export default function SignUp() {
       })
       .catch((error) => {
         // handle error response
-        console.log(error);
       });
   };
 

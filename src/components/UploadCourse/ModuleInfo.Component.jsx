@@ -8,13 +8,11 @@ function ModuleInfoComponent({
   moduleNumber,
   CourseId,
 }) {
-  // console.log(moduleNumber.split(' ')[1], CourseId);
 
   const [moduleDetails, setModuleDetails] = useState({
     moduleTitle: '',
     moduleBrief: '',
-    moduleFee: 0,
-    noOfChapters: 0,
+    noOfChapters: '',
   });
 
   const handleModuleSubmit = async (e) => {
@@ -22,7 +20,6 @@ function ModuleInfoComponent({
     const data = moduleDetails;
     data['CourseId'] = CourseId;
     data['moduleNumber'] = parseInt(moduleNumber.split(' ')[1]);
-    console.log(data);
     await fetch('http://127.0.0.1:5000/course/addmodule', {
       method: 'POST',
       headers: {
@@ -51,7 +48,6 @@ function ModuleInfoComponent({
       })
       .catch((error) => {
         // handle error response
-        console.log(error);
       });
   };
 
@@ -84,10 +80,8 @@ function ModuleInfoComponent({
           setModuleDetails({
             moduleTitle: '',
             moduleBrief: '',
-            moduleFee: 0,
-            noOfChapters: 0,
+            noOfChapters: '',
           });
-          console.log(error);
         });
     };
     getData();
@@ -129,19 +123,6 @@ function ModuleInfoComponent({
               setModuleDetails({
                 ...moduleDetails,
                 moduleBrief: e.target.value,
-              })
-            }
-          />
-          <TextField
-            id='outlined-multiline-flexible'
-            label='Module Price'
-            multiline
-            maxRows={3}
-            value={moduleDetails.moduleFee}
-            onChange={(e) =>
-              setModuleDetails({
-                ...moduleDetails,
-                moduleFee: parseInt(e.target.value),
               })
             }
           />
