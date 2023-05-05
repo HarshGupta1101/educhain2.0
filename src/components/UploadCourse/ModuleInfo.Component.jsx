@@ -141,7 +141,7 @@ function ModuleInfoComponent({
           />
         </div>
         <button
-          className='mx-4 my-4 px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
+          className='mx-4 my-4 px-4 py-2 border border-2 rounded text-black border-orange-400 hover:bg-orange-400 hover:text-white'
           onClick={(e) => handleModuleSubmit(e)}
         >
           Submit Details

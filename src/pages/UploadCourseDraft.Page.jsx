@@ -218,8 +218,8 @@ const UploadCourseDraftPage = () => {
             >
               Assignment
             </div>
-            <button
-              className='px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100 mb-4 disabled'
+            <button   
+              className='px-4 py-2 border border-2 rounded text-black border-orange-400 hover:bg-orange-400 hover:text-white mb-4 disabled'
               onClick={(e) => handleCourseSubmit(e)}
             >
               Submit Course

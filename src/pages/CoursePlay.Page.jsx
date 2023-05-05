@@ -54,7 +54,7 @@ const CoursePlayPage = () => {
                   courseId={courseDetails.courseId}
                 />
               ) : (
-                <p>Please complete the course and then come to assignment !!</p>
+                <p>Please Complete The Course To Give The Assignment !</p>
               ))}
           </div>
           <div className='lg:w-1/4 p-4 bg-white rounded'>

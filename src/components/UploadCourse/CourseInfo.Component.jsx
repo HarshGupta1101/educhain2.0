@@ -176,8 +176,8 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
               onChange={handleChange}
               disabled={imageUpload}
             />
-            <button
-              className='px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
+            <button 
+              className='px-4 py-2 border border-2 rounded text-black border-orange-400 hover:bg-orange-400 hover:text-white'
               onClick={(e) => handleUpload(e)}
             >
               Upload
@@ -198,8 +198,8 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
             }
           />
         </div>
-        <button
-          className='mx-4 my-4 px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
+        <button 
+          className='mx-4 my-4 px-4 py-2 border border-2 rounded text-black border-orange-400 hover:bg-orange-400 hover:text-white'
           onClick={(e) => handleCourseSubmit(e)}
         >
           Submit Details
