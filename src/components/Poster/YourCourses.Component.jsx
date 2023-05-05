@@ -21,7 +21,7 @@ const YourCoursesPoster = (props) => {
         <div className='flex gap-2'>
           <Link
             to={`/course/${props.courseId._id}`}
-            className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white'
+            className='rounded text-black p-2 border-2 border-orange-400 hover:bg-orange-400 hover:text-white'
           >
             View Your Course
           </Link>

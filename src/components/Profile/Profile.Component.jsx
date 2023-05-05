@@ -110,7 +110,7 @@ const Profile = () => {
           <h1 className='text-2xl font-bold my-1 mr-4'>Profile</h1>
           {editable ? (
             <button
-              className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white'
+              className='rounded bg-orange-400 text-white p-2 hover:text-orange-400 hover:bg-white hover:border-2 hover:border-orange-400'
               onClick={(e) => {
                 setEditable(false);
                 handleSaveProfile(e);
@@ -120,14 +120,14 @@ const Profile = () => {
             </button>
           ) : (
             <button
-              className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white'
+              className='rounded bg-orange-400 text-white p-2 hover:text-orange-400 hover:bg-white hover:border-2 hover:border-orange-400'
               onClick={() => setEditable(true)}
             >
               Edit Profile
             </button>
           )}
         </div>
-        <TableContainer className='mt-8 border-2' sx={{ maxWidth: 1000 }}>
+        <TableContainer className='mt-8 mb-8 border-2' sx={{ maxWidth: 1000 }}>
           <Table>
             <TableHead>
               <TableRow>
@@ -232,7 +232,7 @@ const Profile = () => {
                       <Link to='/profile'>
                         <button
                           onClick={login}
-                          className='rounded text-black p-2 mr-3 border-2 border-black hover:bg-black hover:text-white'
+                          className='rounded text-black p-2 mr-3 border-2 border-orange-400 hover:bg-orange-400 hover:text-white'
                         >
                           Link Near ID
                         </button>
@@ -241,7 +241,7 @@ const Profile = () => {
                         to='https://wallet.testnet.near.org/create'
                         target='_blank'
                       >
-                        <button className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white'>
+                        <button className='rounded text-black p-2 mr-4 border-2 border-orange-400 hover:bg-orange-400 hover:text-white'>
                           Create Near ID
                         </button>
                       </Link>
@@ -255,7 +255,7 @@ const Profile = () => {
                         to='https://wallet.testnet.near.org/'
                         target='_blank'
                       >
-                        <button className='rounded text-black p-2 mr-4 border-2 border-black hover:bg-black hover:text-white'>
+                        <button className='rounded text-black p-2 mr-4 border-2 border-orange-400 hover:bg-orange-400 hover:text-white'>
                           Open Near Wallet
                         </button>
                       </Link>
@@ -263,7 +263,7 @@ const Profile = () => {
                     <TableCell>
                       <button
                         onClick={logout}
-                        className='rounded text-black p-2 mr-4 border-2 border-black hover:bg-black hover:text-white'
+                        className='rounded text-black p-2 border-2 border-orange-400 hover:bg-orange-400 hover:text-white'
                       >
                         Unlink Near ID
                       </button>
@@ -276,13 +276,13 @@ const Profile = () => {
         </TableContainer>
         <div className='flex gap-2 mt-3'>
           <button
-            className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white'
+            className='rounded bg-orange-400 text-white p-2 hover:text-orange-400 hover:bg-white hover:border-2 hover:border-orange-400'
             onClick={RemoveToken}
           >
             Sign Out
           </button>
           <Link to='/changepassword'>
-            <button className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white'>
+            <button className='rounded text-black p-2 border-2 border-orange-400 hover:bg-orange-400 hover:text-white'>
               Change Password
             </button>
           </Link>

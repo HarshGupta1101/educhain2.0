@@ -22,7 +22,7 @@ const CompletedPoster = (props) => {
         <div className='flex gap-2'>
           <Link
             to={props.certificateUrl}
-            className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white' target='_blank'
+            className='rounded text-black p-2 border-2 border-orange-400 hover:bg-orange-400 hover:text-white' target='_blank'
           >
             View Certificate
           </Link>

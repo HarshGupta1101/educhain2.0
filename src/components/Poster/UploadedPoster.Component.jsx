@@ -19,12 +19,17 @@ const UploadedPoster = (props) => {
         <h3 className='text-lg font-bold text-gray-700'>{props.courseId.courseTitle}</h3>
         <p className='text-xs text-gray-500 mb-2'>By {props.courseId.instructorName}</p>
         <h3 className='mb-3 font-bold'>Ⓝ {props.courseId.courseFee}</h3>
-        <div className='flex gap-2'>
+        <div className='flex gap-14'>
           <Link
             to={`/course/${props.courseId._id}`}
-            className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white'
+            className='rounded text-black p-2 border-2 border-orange-400 hover:bg-orange-400 hover:text-white'
           >
-            Edit Course
+            Submit Course
+          </Link>
+          <Link
+            className='rounded text-red-600 p-2 ml-1 border-2 border-red-600 hover:bg-red-600 hover:text-white'
+          >
+            Status : Pending
           </Link>
         </div>
       </div>
