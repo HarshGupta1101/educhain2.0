@@ -1,6 +1,8 @@
 import React from 'react';
 import { useCartContext } from '../../context/cart.context';
 import { Link } from 'react-router-dom';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 const CourseInfo = ({ courseData }) => {
   const { addToCart } = useCartContext();
@@ -10,15 +12,19 @@ const CourseInfo = ({ courseData }) => {
         <h1 className='text-white text-5xl font-bold'>
           {courseData.courseTitle}
         </h1>
-        <div className='flex flex-col gap-5 text-white'>
-          <h4>Tags - {courseData.tags.join(',')}</h4>
+        <div className='flex flex-col gap-6 text-white'>
+          <Stack direction="row" spacing={1}>
+            {courseData.tags.map((tag) => (
+            <Chip label={tag} color="warning"/>
+            ))}
+          </Stack>
           <h4>Language - {courseData.language}</h4>
           <h4>Duration - {courseData.timeRequired}</h4>
         </div>
         <div className='flex items-center w-full'>
           <Link
             to='/cart'
-            className='bg-orange-500 hover:bg-orange-600 p-3 text-white font-semibold rounded-lg'
+            className='bg-orange-500 hover:bg-orange-600 p-2 text-white font-semibold rounded-lg'
             onClick={() =>
               addToCart(
                 courseData._id,

@@ -49,7 +49,7 @@ const UploadedCoursesPage = () => {
             </Link>
             </div>
             <UploadedCourses  
-            posters={courseDetails}
+            posters={courses}
           />
           </div>
         </div>

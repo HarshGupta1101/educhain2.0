@@ -13,13 +13,15 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { toast, Slide } from 'react-toastify';
 
 const theme = createTheme();
 
 export default function SignUp() {
-  const [signUpdData, setSignUpdData] = useState({
+  const [signUpData, setsignUpData] = useState({
     email: '',
     password: '',
+    accesscode: '',
   });
 
   const [credentials, setCredentials] = useState({
@@ -36,12 +38,28 @@ export default function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const check = credentials;
+    const { email, password, accesscode } = signUpData;
+    if (!email || !password) {
+      toast.error('Kindly Fill All The Required Details.', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        return
+    }
     await fetch('http://127.0.0.1:5000/user/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(signUpdData),
+      body: JSON.stringify(signUpData),
     })
       .then((response) => {
         // handle successful response
@@ -50,9 +68,31 @@ export default function SignUp() {
         }
         window.history.pushState(null, null, 'http://localhost:3000/login');
         window.dispatchEvent(new Event('popstate'));
+        toast.success("Successfully Signed Up !", {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       })
       .catch((error) => {
         // handle error response
+        toast.error("Kindly Try Again !", {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       });
   };
 
@@ -89,9 +129,9 @@ export default function SignUp() {
                   label='Email Address'
                   name='email'
                   autoComplete='email'
-                  value={signUpdData.email}
+                  value={signUpData.email}
                   onChange={(e) =>
-                    setSignUpdData({ ...signUpdData, email: e.target.value })
+                    setsignUpData({ ...signUpData, email: e.target.value })
                   }
                 />
               </Grid>
@@ -104,9 +144,9 @@ export default function SignUp() {
                   type='password'
                   id='password'
                   autoComplete='new-password'
-                  value={signUpdData.password}
+                  value={signUpData.password}
                   onChange={(e) =>
-                    setSignUpdData({ ...signUpdData, password: e.target.value })
+                    setsignUpData({ ...signUpData, password: e.target.value })
                   }
                 />
               </Grid>
@@ -130,6 +170,10 @@ export default function SignUp() {
                     label='Access Code'
                     name='accessCode'
                     autoComplete='family-name'
+                    value={signUpData.accesscode}
+                    onChange={(e) =>
+                    setsignUpData({ ...signUpData, accesscode: e.target.value })
+                  }
                   />
                 </Grid>
               )}

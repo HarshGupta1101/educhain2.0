@@ -31,7 +31,7 @@ export default function NGOReg() {
               fontWeight={'400'}
             >
             <h2 className='text-3xl font-bold text-gray-800 sm:ml-3 ml-0 mb-6'>
-                Calling Out All The NGOs & NPOs To Join Us Today <CampaignIcon fontSize="large" />
+                Calling Out All The NGOs To Join Us Today <CampaignIcon fontSize="large" />
             </h2>
             </Typography>
             <Link to='/ngoregistration'>

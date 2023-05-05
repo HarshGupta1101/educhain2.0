@@ -22,6 +22,21 @@ export default function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const { email, password } = signInData;
+    if (!email || !password ) {
+      toast.error('Kindly Fill All The Required Details.', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        return
+    }
     await fetch('http://127.0.0.1:5000/user/login', {
       method: 'POST',
       headers: {
@@ -54,6 +69,17 @@ export default function SignIn() {
       })
       .catch((error) => {
         // handle error response
+        toast.error("Invalid Credentials! Kindly Try Again.", {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       });
   };
 
@@ -144,6 +170,20 @@ export default function SignIn() {
                   className='underline text-blue-600 hover:text-blue-500'
                 >
                   {"Don't Have An Account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+            <Grid container className='mt-2'>
+              <Grid item xs>
+            
+              </Grid>
+              <Grid item>
+                <Link
+                  to='/ngoregistration'
+                  variant='body2'
+                  className='underline text-blue-600 hover:text-blue-500'
+                >
+                  {"Want To Register As NGO?"}
                 </Link>
               </Grid>
             </Grid>
