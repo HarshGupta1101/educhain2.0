@@ -21,7 +21,7 @@ const CompletedPoster = (props) => {
         <h3 className='mb-3 font-bold'>Ⓝ {props.courseId.courseFee}</h3>
         <div className='flex gap-2'>
           <Link
-            to={props.certificateUrl}
+            to={props.NFTExplorerLink}
             className='rounded text-black p-2 border-2 border-orange-400 hover:bg-orange-400 hover:text-white' target='_blank'
           >
             View Certificate

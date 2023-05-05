@@ -128,7 +128,7 @@ function CartPage() {
               <h2 className='text-xl font-bold mb-2'>Total</h2>
               <h2 className='text-2xl font-bold mb-4'>Ⓝ {total_amount}</h2>
               <button
-                className='px-4 py-2 bg-orange-400 rounded hover:bg-orange-500 text-white font-bold'
+                className='px-4 py-2 rounded border bg-orange-400 text-white hover:border-orange-400 hover:bg-white hover:text-orange-400 font-bold'
                 onClick={() =>
                   paymentGateway(
                     cartItems[0].courseId,
