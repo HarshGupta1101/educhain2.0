@@ -28,10 +28,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // Import css files
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
-// axios.defaults.baseURL = "https://api.themoviedb.org/3";
-// axios.defaults.params = {};
-// axios.defaults.params["api_key"] = "7d6db67791d1fc8dd41512aa8b5be970";
+import CategoriesPage from './pages/CategoriesPage';
 
 function App() {
   return (
@@ -175,6 +172,15 @@ function App() {
           element={
             <DefaultLayout>
               <UploadCourseDraftPage />
+            </DefaultLayout>
+          }
+        />
+        <Route
+          path='/courses/:category'
+          exact
+          element={
+            <DefaultLayout>
+              <CategoriesPage />
             </DefaultLayout>
           }
         />

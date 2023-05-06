@@ -47,7 +47,7 @@ const UploadedCoursesPage = () => {
           <div className='flex gap-2 mt-3'>
             <h1 className='text-2xl font-bold my-1 mr-4'>Uploaded Courses</h1>
             <Link to='/uploadcourses'>
-            <button class="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white"><AddIcon /> Upload Course</button>
+            <button className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white"><AddIcon /> Upload Course</button>
             </Link>
             </div>
             <UploadedCourses  

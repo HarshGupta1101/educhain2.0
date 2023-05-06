@@ -6,6 +6,19 @@ import { Badge } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useCartContext } from '../../context/cart.context';
 import { Slide, toast } from 'react-toastify';
+import { GiHamburgerMenu } from 'react-icons/gi';
+
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 
 function RemoveToken() {
   localStorage.removeItem('token');
@@ -112,6 +125,52 @@ function NavMd() {
 function NavLg() {
   const [isloggedIn, setIsLoggedIn] = useState(localStorage.getItem('token'));
   const { total_items } = useCartContext();
+
+  const [state, setState] = React.useState({
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      sx={{ width: 250 }}
+      role='presentation'
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <h1 className='ml-4 text-2xl font-bold mt-4 mb-2'>Categories</h1>
+      <Divider />
+      <List>
+        {[
+          'Python',
+          'Web Development',
+          'Data Analytics',
+          'Social Media Marketing',
+          'UI/UX Development',
+          'Machine Learning',
+          'Cyber Security',
+        ].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <Link to={`/courses/${text}`}>
+                <ListItemText primary={text} sx={{ paddingLeft: '8px' }} />
+              </Link>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
   return (
     <>
       <div className='container flex mx-auto px-4 py-2 items-center justify-between'>
@@ -167,11 +226,26 @@ function NavLg() {
             </Link>
           )}
 
-          <Link to='/cart' className='w-8 h-8 text-white mt-1'>
+          <Link to='/cart' className='h-8 text-white mt-1'>
             <Badge badgeContent={total_items} color='primary'>
               <ShoppingCartIcon />
             </Badge>
           </Link>
+          <React.Fragment>
+            <div
+              className='w-6 h-6 text-white hover:cursor-pointer'
+              onClick={toggleDrawer('right', true)}
+            >
+              <GiHamburgerMenu className='w-full h-full' />
+            </div>
+            <Drawer
+              anchor='right'
+              open={state['right']}
+              onClose={toggleDrawer('right', false)}
+            >
+              {list('right')}
+            </Drawer>
+          </React.Fragment>
         </div>
       </div>
     </>

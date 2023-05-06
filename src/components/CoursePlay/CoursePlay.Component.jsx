@@ -60,7 +60,7 @@ const CoursePlayComponent = (props) => {
     <Disclosure>
       {({ open }) => (
         <>
-          <Disclosure.Button className='p-2 border-2 border flex items-center gap-4 w-full'>
+          <Disclosure.Button className='p-2 border-2 border rounded flex items-center gap-4 w-full'>
             {open ? <BiChevronUp /> : <BiChevronDown />}
             <span className={open ? 'text-gray-600' : 'text-black'}>
               <input
@@ -76,7 +76,7 @@ const CoursePlayComponent = (props) => {
             <div className='flex items-center gap-3 flex-wrap'>
               {chapters.map((chapter, index) => (
                 <div
-                  className='border-2 border-gray-200 ml-8 px-3 py-1 rounded hover:cursor-pointer w-full flex items-center'
+                  className='ml-8 px-3 py-1 hover:cursor-pointer w-full flex items-center'
                   key={index}
                 >
                   <input

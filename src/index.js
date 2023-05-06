@@ -13,9 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 initContract().then(() => {
 root.render(
   <CartProvider>
-    <React.StrictMode>
       <App />
-    </React.StrictMode>
   </CartProvider>
 );
 });

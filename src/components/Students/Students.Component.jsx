@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,72 +8,113 @@ import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Students = () => {
+  const [code, setCode] = useState('');
+  const [students, setStudents] = useState([]);
 
+  const generateCode = async (e) => {
+    e.preventDefault();
+    await fetch('http://127.0.0.1:5000/ngo/generate-token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: String(localStorage.getItem('token')),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // handle successful response
+        if (!data.status) {
+          throw new Error(data.message);
+        }
+        console.log(data);
+        setCode(data.code);
+      })
+      .catch((error) => {
+        // handle error response
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    const getData = async () => {
+      await fetch('http://127.0.0.1:5000/ngo/users', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: String(localStorage.getItem('token')),
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // handle successful response
+          if (!data.status) {
+            throw new Error(data.message);
+          }
+          console.log(data);
+          if (data.ngoUsers.secretCode) {
+            setCode(data.ngoUsers.secretCode);
+          }
+          setStudents(data.ngoUsers.ngoUsersId);
+        })
+        .catch((error) => {
+          // handle error response
+          console.log(error);
+        });
+    };
+    getData();
+  }, []);
   return (
     <>
       <div>
         <div className='flex gap-2 mt-3'>
-            <h1 className='text-2xl font-bold my-1 mr-4'>NGO Students</h1>
-            <button class="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">NGO Access Code</button>
+          <h1 className='text-2xl font-bold my-1 mr-4'>NGO Students</h1>
+          <button
+            className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white'
+            onClick={(e) => generateCode(e)}
+          >
+            NGO Access Code
+          </button>
+          <input
+            placeholder={'Access Code'}
+            color={'warning'}
+            disabled={true}
+            hidden={!code}
+            value={code}
+            className='py-2 p-4 border-2 rounded border-black'
+          />
         </div>
         <TableContainer className='mt-8 border-2' sx={{ maxWidth: 1000 }}>
-            <Table>
+          <Table>
             <TableHead className='bg-gray-300'>
-            <TableRow>
+              <TableRow>
                 <TableCell align='center'>Sr. No.</TableCell>
-                <TableCell align='center'>Username</TableCell>
+                {/* <TableCell align='center'>Username</TableCell> */}
                 <TableCell align='center'>Email ID</TableCell>
                 <TableCell align='center'>Full Name</TableCell>
                 <TableCell align='center'>Remove Student</TableCell>
-            </TableRow>
+              </TableRow>
             </TableHead>
             <TableBody>
-            <TableRow>
-                <TableCell align='center'>1</TableCell>
-                <TableCell align='center'>@username</TableCell>
-                <TableCell align='center'>abc@ngo.com</TableCell>
-                <TableCell align='center'>ABC XYZ</TableCell>
-                <TableCell align='center'> <button class="rounded text-red-600 py-2 px-6 border-2 border-red-600 hover:bg-red-600 hover:text-white"><DeleteIcon /></button> </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell align='center'>2</TableCell>
-                <TableCell align='center'>@username</TableCell>
-                <TableCell align='center'>abc@ngo.com</TableCell>
-                <TableCell align='center'>ABC XYZ</TableCell>
-                <TableCell align='center'> <button class="rounded text-red-600 py-2 px-6 border-2 border-red-600 hover:bg-red-600 hover:text-white"><DeleteIcon /></button> </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell align='center'>3</TableCell>
-                <TableCell align='center'>@username</TableCell>
-                <TableCell align='center'>abc@ngo.com</TableCell>
-                <TableCell align='center'>ABC XYZ</TableCell>
-                <TableCell align='center'> <button class="rounded text-red-600 py-2 px-6 border-2 border-red-600 hover:bg-red-600 hover:text-white"><DeleteIcon /></button> </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell align='center'>4</TableCell>
-                <TableCell align='center'>@username</TableCell>
-                <TableCell align='center'>abc@ngo.com</TableCell>
-                <TableCell align='center'>ABC XYZ</TableCell>
-                <TableCell align='center'> <button class="rounded text-red-600 py-2 px-6 border-2 border-red-600 hover:bg-red-600 hover:text-white"><DeleteIcon /></button> </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell align='center'>5</TableCell>
-                <TableCell align='center'>@username</TableCell>
-                <TableCell align='center'>abc@ngo.com</TableCell>
-                <TableCell align='center'>ABC XYZ</TableCell>
-                <TableCell align='center'> <button class="rounded text-red-600 py-2 px-6 border-2 border-red-600 hover:bg-red-600 hover:text-white"><DeleteIcon /></button> </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell align='center'>6</TableCell>
-                <TableCell align='center'>@username</TableCell>
-                <TableCell align='center'>abc@ngo.com</TableCell>
-                <TableCell align='center'>ABC XYZ</TableCell>
-                <TableCell align='center'> <button class="rounded text-red-600 py-2 px-6 border-2 border-red-600 hover:bg-red-600 hover:text-white"><DeleteIcon /></button> </TableCell>
-            </TableRow>
+              {students.map((student, index) => {
+                return (
+                  <TableRow>
+                    <TableCell align='center'>{index+1}</TableCell>
+                    {/* <TableCell align='center'>@username</TableCell> */}
+                    <TableCell align='center'>{student.email}</TableCell>
+                    <TableCell align='center'>{student.firstName} {student.lastName}</TableCell>
+                    <TableCell align='center'>
+                      {' '}
+                      <button className='rounded text-red-600 py-2 px-6 border-2 border-red-600 hover:bg-red-600 hover:text-white'>
+                        <DeleteIcon />
+                      </button>{' '}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
-        </Table>
+          </Table>
         </TableContainer>
-        </div>
+      </div>
     </>
   );
 };

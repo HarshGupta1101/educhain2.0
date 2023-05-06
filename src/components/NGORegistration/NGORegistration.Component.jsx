@@ -95,6 +95,24 @@ export default function NGORegistration() {
       });
   };
 
+  React.useEffect(() => {
+    if (localStorage.getItem('token')) {
+      window.history.pushState(null, null, 'http://localhost:3000/');
+      window.dispatchEvent(new Event('popstate'));
+      toast.error('You are Signed In !! Sign Out To Register', {
+        position: 'top-center',
+        autoClose: 4000,
+        transition: Slide,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">

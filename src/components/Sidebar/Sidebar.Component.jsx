@@ -15,78 +15,101 @@ import { Link } from 'react-router-dom';
 
 export default function Sidebar() {
   return (
-    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
-      <nav aria-label="main mailbox folders">
-      <Divider />
+    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <nav aria-label='main mailbox folders'>
         <List>
-          <Link to="/profile">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <AccountBoxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-          </ListItem>
+          <Link to='/profile'>
+            <ListItem
+              disablePadding
+              sx={{ border: '1px solid lightgray', marginBottom: '1rem' }}
+            >
+              <ListItemButton>
+                <ListItemIcon>
+                  <AccountBoxIcon />
+                </ListItemIcon>
+                <ListItemText primary='Profile' />
+              </ListItemButton>
+            </ListItem>
           </Link>
-          <Divider />
-          <Link to="/inprogresscourses">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <PendingIcon />
-              </ListItemIcon>
-              <ListItemText primary="In-Progress Courses" />
-            </ListItemButton>
-          </ListItem>
-          </Link>
-          <Divider />
-          <Link to="/completedcourses">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <AssignmentTurnedInIcon />
-              </ListItemIcon>
-              <ListItemText primary="Completed Courses" />
-            </ListItemButton>
-          </ListItem>
-          </Link>
-          <Divider />
-          <Link to="/uploadedcourses">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <DriveFolderUploadIcon />
-              </ListItemIcon>
-              <ListItemText primary="Uploaded Courses" />
-            </ListItemButton>
-          </ListItem>
-          </Link>
-          <Divider />
-          <Link to="/students">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <FormatListBulletedIcon />
-              </ListItemIcon>
-              <ListItemText primary="NGO Students" />
-            </ListItemButton>
-          </ListItem>
-          </Link>
-          <Divider />
-          <Link to="/ngolist">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <FormatListBulletedIcon />
-              </ListItemIcon>
-              <ListItemText primary="List Of NGOs" />
-            </ListItemButton>
-          </ListItem>
-          </Link>
+          {window.localStorage.getItem('userType') === 'user' && (
+            <Link to='/inprogresscourses'>
+              <ListItem
+                disablePadding
+                sx={{ border: '1px solid lightgray', marginBottom: '1rem' }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    <PendingIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='In-Progress Courses' />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          )}
+
+          {window.localStorage.getItem('userType') === 'user' && (
+            <Link to='/completedcourses'>
+              <ListItem
+                disablePadding
+                sx={{ border: '1px solid lightgray', marginBottom: '1rem' }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    <AssignmentTurnedInIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Completed Courses' />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          )}
+
+          {(window.localStorage.getItem('userType') === 'user' ||
+            window.localStorage.getItem('userType') === 'admin') && (
+              <Link to='/uploadedcourses'>
+                <ListItem
+                  disablePadding
+                  sx={{ border: '1px solid lightgray', marginBottom: '1rem' }}
+                >
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <DriveFolderUploadIcon />
+                    </ListItemIcon>
+                    <ListItemText primary='Uploaded Courses' />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            )}
+
+          {window.localStorage.getItem('userType') === 'ngoAdmin' && (
+            <Link to='/students'>
+              <ListItem
+                disablePadding
+                sx={{ border: '1px solid lightgray', marginBottom: '1rem' }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    <FormatListBulletedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='NGO Students' />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          )}
+
+          {window.localStorage.getItem('userType') === 'admin' && (
+            <Link to='/ngolist'>
+              <ListItem disablePadding sx={{ border: '1px solid lightgray' }}>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <FormatListBulletedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='List Of NGOs' />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          )}
         </List>
       </nav>
-      <Divider />
     </Box>
   );
 }

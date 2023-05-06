@@ -37,7 +37,7 @@ const Profile = () => {
     data['nearWallet'] = JSON.parse(
       window.localStorage.getItem('undefined_wallet_auth_key')
     ).accountId;
-    await fetch(`http://127.0.0.1:5000/user/update`, {
+    await fetch('http://127.0.0.1:5000/user/update', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ const Profile = () => {
 
   useEffect(() => {
     const getData = async () => {
-      await fetch(`http://127.0.0.1:5000/user/profile`, {
+      await fetch('http://127.0.0.1:5000/user/profile', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

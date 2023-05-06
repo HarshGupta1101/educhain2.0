@@ -25,7 +25,7 @@ const CategoriesSlider = () => {
     {
       image:
         'https://res.cloudinary.com/diczskxkx/image/upload/v1676156532/sxakrrgpsrusrm3byqcl.png',
-      category: 'Social Media Marketing',
+      category: 'Internet Marketing',
     },
     {
       image:

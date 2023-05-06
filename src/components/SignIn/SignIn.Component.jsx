@@ -38,6 +38,7 @@ export default function SignIn() {
       })
       .then((data) => {
         localStorage.setItem('token', data.token);
+        localStorage.setItem('userType', data.userType);
         window.history.pushState(null, null, 'http://localhost:3000/');
         window.dispatchEvent(new Event('popstate'));
         toast.success('Successfully Signed In !', {
@@ -57,6 +58,24 @@ export default function SignIn() {
         console.log(error);
       });
   };
+
+  React.useEffect(() => {
+    if (localStorage.getItem('token')) {
+      window.history.pushState(null, null, 'http://localhost:3000/');
+      window.dispatchEvent(new Event('popstate'));
+      toast.error('You Are Already Signed In', {
+        position: 'top-center',
+        autoClose: 4000,
+        transition: Slide,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

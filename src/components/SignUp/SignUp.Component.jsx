@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Slide, toast } from 'react-toastify';
 
 const theme = createTheme();
 
@@ -20,6 +21,7 @@ export default function SignUp() {
   const [signUpdData, setSignUpdData] = useState({
     email: '',
     password: '',
+    secretCode: '',
   });
 
   const [credentials, setCredentials] = useState({
@@ -36,26 +38,66 @@ export default function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await fetch('http://127.0.0.1:5000/user/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(signUpdData),
-    })
-      .then((response) => {
-        // handle successful response
-        if (!response.ok) {
-          throw new Error(response.status);
-        }
-        window.history.pushState(null, null, 'http://localhost:3000/login');
-        window.dispatchEvent(new Event('popstate'));
+    if (signUpdData.secretCode !== '') {
+      await fetch('http://127.0.0.1:5000/ngo/register-user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(signUpdData),
       })
-      .catch((error) => {
-        // handle error response
-        console.log(error);
-      });
+        .then((response) => {
+          // handle successful response
+          if (!response.ok) {
+            throw new Error(response.status);
+          }
+          window.history.pushState(null, null, 'http://localhost:3000/login');
+          window.dispatchEvent(new Event('popstate'));
+        })
+        .catch((error) => {
+          // handle error response
+          console.log(error);
+        });
+    } else {
+      await fetch('http://127.0.0.1:5000/user/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(signUpdData),
+      })
+        .then((response) => {
+          // handle successful response
+          if (!response.ok) {
+            throw new Error(response.status);
+          }
+          window.history.pushState(null, null, 'http://localhost:3000/login');
+          window.dispatchEvent(new Event('popstate'));
+        })
+        .catch((error) => {
+          // handle error response
+          console.log(error);
+        });
+    }
   };
+
+  React.useEffect(() => {
+    if (localStorage.getItem('token')) {
+      window.history.pushState(null, null, 'http://localhost:3000/');
+      window.dispatchEvent(new Event('popstate'));
+      toast.error('You are Signed In !! Sign Out To Register', {
+        position: 'top-center',
+        autoClose: 4000,
+        transition: Slide,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -131,6 +173,12 @@ export default function SignUp() {
                     label='Access Code'
                     name='accessCode'
                     autoComplete='family-name'
+                    onChange={(e) =>
+                      setSignUpdData({
+                        ...signUpdData,
+                        secretCode: e.target.value,
+                      })
+                    }
                   />
                 </Grid>
               )}

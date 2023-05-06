@@ -14,6 +14,7 @@ const CourseInfo = ({ courseData }) => {
           <h4>Tags - {courseData.tags.join(',')}</h4>
           <h4>Language - {courseData.language}</h4>
           <h4>Duration - {courseData.timeRequired}</h4>
+          <h4>Price - {courseData.courseFee} Ⓝ</h4>
         </div>
         <div className='flex items-center w-full'>
           <Link
