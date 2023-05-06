@@ -7,7 +7,7 @@ function AllCoursesPage() {
 
   useEffect(() => {
     const getData = async () => {
-      await fetch(`http://127.0.0.1:5000/course`, {
+      await fetch('http://127.0.0.1:5000/course', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -19,6 +19,7 @@ function AllCoursesPage() {
           if (!data.status) {
             throw new Error(data.message);
           }
+          console.log(data.courses);
           setCourses(data.courses);
         })
         .catch((error) => {

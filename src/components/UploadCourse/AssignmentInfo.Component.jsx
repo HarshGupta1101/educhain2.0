@@ -10,14 +10,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { Divider } from '@mui/material';
 
 function Assignment({ courseDetails, setCourseDetails, CourseId }) {
-  const [questions, setQuestions] = useState([
-    {
-      questionNumber: 1,
-      question: '',
-      options: ['', '', '', ''],
-      answer: '',
-    },
-  ]);
+  const [questions, setQuestions] = useState([]);
 
   const handleQuestionChange = (event, index) => {
     const { value } = event.target;

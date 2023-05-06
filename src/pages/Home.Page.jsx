@@ -24,11 +24,13 @@ function HomePage() {
           if (!data.status) {
             throw new Error(data.message);
           }
-          let courseData = [];
-          for (let i = 0; i < 5; i++) {
-            courseData.push(data.courses[i]);
+          if (data.courses.length !== 0) {
+            let courseData = [];
+            for (let i = 0; i < (data.courses.length>5?5:data.courses.length); i++) {
+              courseData.push(data.courses[i]);
+            }
+            setCourses(courseData);
           }
-          setCourses(courseData);
         })
         .catch((error) => {
           // handle error response

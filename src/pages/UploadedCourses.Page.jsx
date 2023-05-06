@@ -24,6 +24,7 @@ const UploadedCoursesPage = () => {
           if (!data.status) {
             throw new Error(data.message);
           }
+          console.log(data.courses)
           setCourseDetails(data.courses);
         })
         .catch((error) => {
@@ -49,7 +50,7 @@ const UploadedCoursesPage = () => {
             </Link>
             </div>
             <UploadedCourses  
-            posters={courses}
+            posters={courseDetails}
           />
           </div>
         </div>
