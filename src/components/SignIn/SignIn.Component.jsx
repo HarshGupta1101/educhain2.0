@@ -53,7 +53,7 @@ export default function SignIn() {
         });
         return
     }
-    if (validateEmail(email) && validatePassword(password)){
+    if (validateEmail(email) && !validatePassword(password)){
     await fetch('http://127.0.0.1:5000/user/login', {
       method: 'POST',
       headers: {

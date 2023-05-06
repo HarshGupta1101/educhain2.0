@@ -92,7 +92,7 @@ export default function SignUp() {
           return
       }
     }
-    if (signUpData.secretCode !== '') {
+    if ((signUpData.secretCode !== '') && validateEmail(email) && validatePassword(password) && !validateSecretCode(secretCode)) {
       await fetch('http://127.0.0.1:5000/ngo/register-user', {
         method: 'POST',
         headers: {
@@ -112,7 +112,7 @@ export default function SignUp() {
           // handle error response
           console.log(error);
         });
-    } else {
+    } else if ((signUpData.secretCode === '') && validateEmail(email) && validatePassword(password) && validateSecretCode(secretCode)){
       await fetch('http://127.0.0.1:5000/user/register', {
         method: 'POST',
         headers: {
@@ -213,7 +213,7 @@ export default function SignUp() {
                     setError({ ...error, emailError: !validateEmail(e.target.value)});
                   }}
                   error={error.emailError}
-                  helperText={error.emailError ? 'Invalid Email Format' : ''}
+                  helperText={error.emailError ? 'Invalid Email Format | Eg. educhain@educhain.com' : ''}
                 />
               </Grid>
               <Grid item xs={12}>
