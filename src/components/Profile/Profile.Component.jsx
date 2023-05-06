@@ -16,6 +16,7 @@ const Profile = () => {
 
   function RemoveToken() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userType');
     window.history.pushState(null, null, 'http://localhost:3000/login');
     window.dispatchEvent(new Event('popstate'));
     toast.success('Successfully Signed Out !', {
@@ -103,6 +104,7 @@ const Profile = () => {
     getData();
   }, []);
 
+ 
   return (
     <>
       <div>

@@ -1,8 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Sidebar from '../components/Sidebar/Sidebar.Component';
 import Profile from '../components/Profile/Profile.Component';
+import { Slide, toast } from 'react-toastify';
 
 const ProfilePage = () => {
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      window.history.pushState(null, null, 'http://localhost:3000/');
+      window.dispatchEvent(new Event('popstate'));
+      toast.error('You are Not Signed In !! Sign In To View Profile', {
+        position: 'top-center',
+        autoClose: 4000,
+        transition: Slide,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+  }, []);
 
   return (
     <>
