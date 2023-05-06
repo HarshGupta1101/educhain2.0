@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const InProgressPoster = (props) => {
-  console.log(props)
   return (
     <div
       className='flex flex-col items-start border shadow rounded-lg gap-2 pb-2'
@@ -21,8 +20,8 @@ const InProgressPoster = (props) => {
         <h3 className='mb-3 font-bold'>Ⓝ {props.courseId.courseFee}</h3>
         <div className='flex gap-2'>
           <Link
-            to={`/course/${props.courseId._id}`}
-            className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white'
+            to={`/course/play/${props.courseId._id}`}
+            className='rounded text-black p-2 border-2 border-orange-400 hover:bg-orange-400 hover:text-white'
           >
             View Course
           </Link>

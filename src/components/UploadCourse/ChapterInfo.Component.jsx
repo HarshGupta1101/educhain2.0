@@ -14,7 +14,6 @@ function ChapterInfoComponent({
 }) {
   const [videoUpload, setVideoUpload] = useState(false);
   const [file, setFile] = React.useState(null);
-  // console.log(CourseId, moduleNumber, chapterNumber);
 
   const [chapterDetails, setChapterDetails] = useState({
     chapterName: '',
@@ -31,29 +30,28 @@ function ChapterInfoComponent({
     try {
       const response = await ipfs.add(file);
       const videoHash = `https://ipfs.io/ipfs/${response.path}`;
-      toast.success('Uploaded Successfully !', {
+      toast.success('Video Uploaded Successfully !', {
         position: 'top-center',
-        autoClose: 4000,
+        autoClose: 2000,
         transition: Slide,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
         theme: 'light',
       });
-      console.log(videoHash);
       setChapterDetails({
         ...chapterDetails,
         chapterVideoUrl: videoHash,
       });
       setVideoUpload(true);
     } catch (error) {
-      toast.error('Upload Failed !', {
+      toast.error('Video Upload Failed !', {
         position: 'top-center',
-        autoClose: 4000,
+        autoClose: 2000,
         transition: Slide,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
@@ -69,7 +67,6 @@ function ChapterInfoComponent({
     data['CourseId'] = CourseId;
     data['moduleNumber'] = moduleNumber;
     data['chapterSequence'] = chapterNumber;
-    console.log(data);
     await fetch('http://127.0.0.1:5000/course/addchapter', {
       method: 'POST',
       headers: {
@@ -86,9 +83,9 @@ function ChapterInfoComponent({
         }
         toast.success('Module Added Successfully !', {
           position: 'top-center',
-          autoClose: 4000,
+          autoClose: 2000,
           transition: Slide,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
@@ -98,7 +95,6 @@ function ChapterInfoComponent({
       })
       .catch((error) => {
         // handle error response
-        console.log(error);
       });
   };
 
@@ -133,7 +129,6 @@ function ChapterInfoComponent({
           });
           setVideoUpload(false);
           setFile(null);
-          console.log(error);
         });
     };
     getData();
@@ -187,7 +182,7 @@ function ChapterInfoComponent({
               disabled={videoUpload}
             />
             <button
-              className='mx-4 my-4 px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
+              className='mx-4 my-4 px-4 py-2 border border-2 rounded text-black border-orange-400 hover:bg-orange-400 hover:text-white'
               onClick={(e) => handleUpload(e)}
             >
               Upload
@@ -195,7 +190,7 @@ function ChapterInfoComponent({
           </div>
         </div>
         <button
-          className='mx-4 my-4 px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
+          className='mx-4 my-4 px-4 py-2 border border-2 rounded text-black border-orange-400 hover:bg-orange-400 hover:text-white'
           onClick={(e) => handleChapterSubmit(e)}
         >
           Submit Details

@@ -3,7 +3,7 @@ import React from 'react';
 const Instructor = ({courseInstructor}) => {
   return (
     <div className='flex flex-col'>
-      <div className='w-32 h-32'>
+      <div className='w-24 h-24'>
         <img
           src='https://res.cloudinary.com/diczskxkx/image/upload/v1681462487/avatar_cizxks.jpg'
           alt='cast and crew member'
@@ -11,7 +11,7 @@ const Instructor = ({courseInstructor}) => {
         />
       </div>
       <div className='flex flex-col items-center'>
-        <h1 className='text-xl text-gray-800'>{courseInstructor}</h1>
+        <h1 className='text-md text-gray-800 mt-5 italic'>{courseInstructor}</h1>
       </div>
     </div>
   );

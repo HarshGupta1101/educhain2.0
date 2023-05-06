@@ -31,11 +31,11 @@ export default function NGOReg() {
               fontWeight={'400'}
             >
             <h2 className='text-3xl font-bold text-gray-800 sm:ml-3 ml-0 mb-6'>
-                Calling Out All The NGOs & NPOs To Join Us Today <CampaignIcon fontSize="large" />
+                Calling Out All The NGOs To Join Us Today <CampaignIcon fontSize="large" />
             </h2>
             </Typography>
             <Link to='/ngoregistration'>
-            <button className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white">Register Now</button>
+            <button className="rounded text-black p-2 border-2 border-orange-400 hover:bg-orange-400 hover:text-white">Register Now</button>
             </Link>
           </Container>
         </Box>

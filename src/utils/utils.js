@@ -42,7 +42,6 @@ function login() {
 async function fetchMetadata() {
   let response = await window.contract.ft_metadata();
   // return response;
-  console.log(response);
 }
 
 async function paymentGateway(courseId, moduleIds, total_amount) {

@@ -13,12 +13,12 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { Slide, toast } from 'react-toastify';
+import { toast, Slide } from 'react-toastify';
 
 const theme = createTheme();
 
 export default function SignUp() {
-  const [signUpdData, setSignUpdData] = useState({
+  const [signUpData, setSignUpData] = useState({
     email: '',
     password: '',
     secretCode: '',
@@ -38,13 +38,27 @@ export default function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (signUpdData.secretCode !== '') {
+    if (!signUpData.email || !signUpData.password) {
+      toast.error('Kindly Fill All The Required Details.', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        return
+    }
+    if (signUpData.secretCode !== '') {
       await fetch('http://127.0.0.1:5000/ngo/register-user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(signUpdData),
+        body: JSON.stringify(signUpData),
       })
         .then((response) => {
           // handle successful response
@@ -64,7 +78,7 @@ export default function SignUp() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(signUpdData),
+        body: JSON.stringify(signUpData),
       })
         .then((response) => {
           // handle successful response
@@ -73,10 +87,31 @@ export default function SignUp() {
           }
           window.history.pushState(null, null, 'http://localhost:3000/login');
           window.dispatchEvent(new Event('popstate'));
+        toast.success("Successfully Signed Up !", {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         })
         .catch((error) => {
           // handle error response
-          console.log(error);
+        toast.error("Kindly Try Again !", {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+          hideProgressBar: true,
+            closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         });
     }
   };
@@ -132,9 +167,9 @@ export default function SignUp() {
                   label='Email Address'
                   name='email'
                   autoComplete='email'
-                  value={signUpdData.email}
+                  value={signUpData.email}
                   onChange={(e) =>
-                    setSignUpdData({ ...signUpdData, email: e.target.value })
+                    setSignUpData({ ...signUpData, email: e.target.value })
                   }
                 />
               </Grid>
@@ -147,9 +182,9 @@ export default function SignUp() {
                   type='password'
                   id='password'
                   autoComplete='new-password'
-                  value={signUpdData.password}
+                  value={signUpData.password}
                   onChange={(e) =>
-                    setSignUpdData({ ...signUpdData, password: e.target.value })
+                    setSignUpData({ ...signUpData, password: e.target.value })
                   }
                 />
               </Grid>
@@ -173,12 +208,10 @@ export default function SignUp() {
                     label='Access Code'
                     name='accessCode'
                     autoComplete='family-name'
+                    value={signUpData.secretCode}
                     onChange={(e) =>
-                      setSignUpdData({
-                        ...signUpdData,
-                        secretCode: e.target.value,
-                      })
-                    }
+                    setSignUpData({ ...signUpData, secretCode: e.target.value })
+                  }
                   />
                 </Grid>
               )}

@@ -33,7 +33,6 @@ function CourseAssignmentComponent(props) {
         correctOption: userAnswerArray[index],
       });
     });
-    console.log(data);
     await fetch(`http://127.0.0.1:5000/course/assessment/${props.courseId}`, {
       method: 'POST',
       headers: {
@@ -49,12 +48,11 @@ function CourseAssignmentComponent(props) {
         if (!data.status) {
           throw new Error(data.message);
         }
-        console.log(data);
-        toast.success(`Congratulations you have scored ${data.assessmentScore} out of ${questions.length}!`, {
+        toast.success(`Congratulations You Have Scored ${data.assessmentScore} Out Of ${questions.length} !`, {
           position: "top-center",
-          autoClose: 4000,
+          autoClose: 2000,
           transition: Slide,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
@@ -64,7 +62,6 @@ function CourseAssignmentComponent(props) {
       })
       .catch((error) => {
         // handle error response
-        console.log(error);
       });
   };
 

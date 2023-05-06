@@ -52,7 +52,6 @@ const CoursePlayComponent = (props) => {
       })
       .catch((error) => {
         // handle error response
-        console.log(error);
       });
   };
 

@@ -69,7 +69,7 @@ const Students = () => {
         <div className='flex gap-2 mt-3'>
           <h1 className='text-2xl font-bold my-1 mr-4'>NGO Students</h1>
           <button
-            className='rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white'
+            className='rounded bg-orange-400 text-white p-2 hover:text-orange-400 hover:bg-white hover:border-2 hover:border-orange-400'
             onClick={(e) => generateCode(e)}
           >
             NGO Access Code

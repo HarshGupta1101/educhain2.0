@@ -18,7 +18,7 @@ import { MuiFileInput } from 'mui-file-input';
 const theme = createTheme();
 
 export default function NGORegistration() {
-
+  const [label, setLabel] = useState('Upload');
   const [imageUpload, setImageUpload] = useState(false);
   const [file, setFile] = React.useState(null);
 
@@ -38,31 +38,42 @@ export default function NGORegistration() {
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
+      const toastId = toast.info('Uploading Document ...', {
+      position: "top-center",
+      autoClose: 1000,
+      transition: Slide,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
       const response = await ipfs.add(file);
+      toast.dismiss(toastId);
       const ImgHash = `https://ipfs.io/ipfs/${response.path}`;
-      toast.success('Uploaded Successfully !', {
+      toast.success('Document Uploaded Successfully !', {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2000,
             transition: Slide,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
             theme: "light",
             });
-      console.log(ImgHash);
       setSignUpData({
         ...signUpData,
         documentUrl: ImgHash,
       });
       setImageUpload(true);
     } catch (error) {
-      toast.error('Upload Failed !', {
+      toast.error('Document Upload Failed !', {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2000,
             transition: Slide,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
@@ -74,25 +85,59 @@ export default function NGORegistration() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await fetch('http://127.0.0.1:5000/ngo/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(signUpData),
-    })
-      .then((response) => {
-        // handle successful response
-        if (!response.ok) {
-          throw new Error(response.status);
-        }
-        window.history.pushState(null, null, 'http://localhost:3000/login');
-        window.dispatchEvent(new Event('popstate'));
-      })
-      .catch((error) => {
-        // handle error response
-        console.log(error);
+    const { email, password, name, phone, location, documentUrl } = signUpData;
+    if (!email || !password || !name || !phone || !location || !documentUrl) {
+      toast.error('Kindly Fill All The Required Details.', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        return
+    }
+    try {
+      const response = await fetch('http://127.0.0.1:5000/ngo/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(signUpData),
       });
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
+      window.history.pushState(null, null, 'http://localhost:3000/login');
+      window.dispatchEvent(new Event('popstate'));
+      toast.success('Successfully Signed Up! We Will Verify Your Details & Contact You Soon.', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    } catch (error) {
+      // handle error response
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }
   };
 
   React.useEffect(() => {
@@ -156,6 +201,7 @@ export default function NGORegistration() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  type='email'
                   value={signUpData.email}
                   onChange={(e) =>
                     setSignUpData({ ...signUpData, email: e.target.value })
@@ -170,6 +216,7 @@ export default function NGORegistration() {
                   label="Phone Number"
                   name="phone"
                   autoComplete="phoneNumber"
+                  type='number'
                   value={signUpData.phone}
                   onChange={(e) =>
                     setSignUpData({ ...signUpData, phone: e.target.value })
@@ -208,7 +255,7 @@ export default function NGORegistration() {
               <Grid item xs={12} sm={8}>
               <MuiFileInput
               value={file}
-              placeholder='Upload Image'
+              placeholder='Upload Govt. ID Card'
               onChange={handleChange}
               disabled={imageUpload}
               />
@@ -217,7 +264,7 @@ export default function NGORegistration() {
               <button
               className='px-4 py-2 mt-2 border border-2 rounded border-blue-400 hover:bg-gray-200'
               onClick={(e) => handleUpload(e)}>
-              Upload
+              {label}
               </button>
               </Grid>
             </Grid>
@@ -240,13 +287,6 @@ export default function NGORegistration() {
               Back To Home
             </Button>
             </Link>
-            {/* <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to='/login' variant="body2" className='underline text-blue-600 hover:text-blue-500'>
-                  {"Already Have An Account? Sign In"}
-                </Link>
-              </Grid>
-            </Grid> */}
           </Box>
         </Box>
       </Container>

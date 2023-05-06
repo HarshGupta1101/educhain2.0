@@ -14,6 +14,7 @@ import Profile from './pages/Profile.Page';
 import InProgressCourses from './pages/InProgressCourses.Page';
 import CompletedCourses from './pages/CompletedCourses.Page';
 import UploadedCourses from './pages/UploadedCourses.Page';
+import YourCoursesPage from './pages/YourCourses.Page';
 import Students from './pages/Students.Page';
 import SingleCourse from './pages/SingleCourse.Page';
 import CoursePlay from './pages/CoursePlay.Page';
@@ -22,10 +23,6 @@ import UploadCourseDraftPage from './pages/UploadCourseDraft.Page';
 import CategoryCoursesPage from './pages/CategoryCourses.Page';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-// import axios from 'axios';
-
-// Import css files
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import CategoriesPage from './pages/CategoriesPage';
@@ -100,6 +97,15 @@ function App() {
           element={
             <DefaultLayout>
               <UploadedCourses />
+            </DefaultLayout>
+          }
+        />
+         <Route
+          path='/yourcourses'
+          exact
+          element={
+            <DefaultLayout>
+              <YourCoursesPage />
             </DefaultLayout>
           }
         />

@@ -24,7 +24,6 @@ function HomePage() {
           if (!data.status) {
             throw new Error(data.message);
           }
-          console.log(data);
           let courseData = [];
           for (let i = 0; i < 5; i++) {
             courseData.push(data.courses[i]);
@@ -33,7 +32,6 @@ function HomePage() {
         })
         .catch((error) => {
           // handle error response
-          console.log(error);
         });
     };
     getData();

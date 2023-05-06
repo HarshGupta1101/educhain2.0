@@ -25,29 +25,28 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
     try {
       const response = await ipfs.add(file);
       const ImgHash = `https://ipfs.io/ipfs/${response.path}`;
-      toast.success('Uploaded Successfully !', {
+      toast.success('Course Image Uploaded Successfully !', {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2000,
             transition: Slide,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
             theme: "light",
             });
-      console.log(ImgHash);
       setCourseDetails({
         ...courseDetails,
         image: ImgHash,
       });
       setImageUpload(true);
     } catch (error) {
-      toast.error('Upload Failed !', {
+      toast.error('Course Image Upload Failed !', {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2000,
             transition: Slide,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
@@ -82,7 +81,6 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
       })
       .catch((error) => {
         // handle error response
-        console.log(error);
       });
   };
   return (
@@ -178,8 +176,8 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
               onChange={handleChange}
               disabled={imageUpload}
             />
-            <button
-              className='px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
+            <button 
+              className='px-4 py-2 border border-2 rounded text-black border-orange-400 hover:bg-orange-400 hover:text-white'
               onClick={(e) => handleUpload(e)}
             >
               Upload
@@ -200,8 +198,8 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
             }
           />
         </div>
-        <button
-          className='mx-4 my-4 px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100'
+        <button 
+          className='mx-4 my-4 px-4 py-2 border border-2 rounded text-black border-orange-400 hover:bg-orange-400 hover:text-white'
           onClick={(e) => handleCourseSubmit(e)}
         >
           Submit Details

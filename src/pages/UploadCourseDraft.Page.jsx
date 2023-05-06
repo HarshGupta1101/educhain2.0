@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BasicCourseInfoComponent from '../components/UploadCourse/CourseInfo.Component';
 import { useParams } from 'react-router-dom';
 import ModuleInfoComponent from '../components/UploadCourse/ModuleInfo.Component';
-
+import { toast, Slide } from 'react-toastify';
 // Disclosure
 import { Disclosure } from '@headlessui/react';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
@@ -14,14 +14,14 @@ const UploadCourseDraftPage = () => {
   const [openTab, setOpenTab] = useState('');
 
   const [courseDetails, setCourseDetails] = useState({
-    courseFee: 0,
+    courseFee: '',
     courseTitle: '',
     courseBrief: '',
     tags: [],
     timeRequired: '',
     language: '',
     image: '',
-    noOfModules: 0,
+    noOfModules: '',
     courseModules: [],
     courseAssessmentIds: [],
   });
@@ -30,9 +30,7 @@ const UploadCourseDraftPage = () => {
     const modules = [];
     const handleChapter = (noOfChapters, moduleNumber) => {
       let chapters = [];
-      // console.log(chapters)
       for (let i = 0; i < noOfChapters; i++) {
-        // console.log(i)
         chapters.push(
           // <div
           //   className='w-full text-lg flex justify-between border-dashed border-2 rounded px-4 py-2 hover:bg-gray-200 hover:rounded mb-4'
@@ -49,7 +47,6 @@ const UploadCourseDraftPage = () => {
           </div>
         );
       }
-      // console.log(chapters)
       return chapters;
     };
     for (let i = 0; i < courseDetails.noOfModules; i++) {
@@ -122,7 +119,17 @@ const UploadCourseDraftPage = () => {
           if (!data.status) {
             throw new Error(data.message);
           }
-          alert('Course submitted successfully');
+          toast.success('Course Submitted Successfully !', {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
           window.history.pushState(
             null,
             null,
@@ -132,10 +139,19 @@ const UploadCourseDraftPage = () => {
         })
         .catch((error) => {
           // handle error response
-          console.log(error);
         });
     } else {
-      alert('Please Add Course Details');
+      toast.error('Please Add Course Details !', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   };
 
@@ -159,7 +175,6 @@ const UploadCourseDraftPage = () => {
           })
           .catch((error) => {
             // handle error response
-            console.log(error);
           });
       };
       getData();
@@ -203,8 +218,8 @@ const UploadCourseDraftPage = () => {
             >
               Assignment
             </div>
-            <button
-              className='px-4 py-2 border border-2 rounded border-orange-400 hover:bg-gray-100 mb-4 disabled'
+            <button   
+              className='px-4 py-2 border border-2 rounded text-black border-orange-400 hover:bg-orange-400 hover:text-white mb-4 disabled'
               onClick={(e) => handleCourseSubmit(e)}
             >
               Submit Course

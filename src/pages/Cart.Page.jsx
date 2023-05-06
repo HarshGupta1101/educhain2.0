@@ -48,9 +48,9 @@ function CartPage() {
             'Transaction Successful! Course Enrolled Successfully.',
             {
               position: 'top-center',
-              autoClose: 4000,
+              autoClose: 2000,
               transition: Slide,
-              hideProgressBar: false,
+              hideProgressBar: true,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
@@ -60,7 +60,6 @@ function CartPage() {
           );
         })
         .catch((error) => {
-          console.error('Error :', error);
         });
     }
     else if (errorCode){
@@ -74,9 +73,9 @@ function CartPage() {
         'Transaction Failed! Kindly Try Again.',
         {
           position: 'top-center',
-          autoClose: 4000,
+          autoClose: 2000,
           transition: Slide,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
@@ -191,7 +190,7 @@ function CartPage() {
               <h2 className='text-xl font-bold mb-2'>Total</h2>
               <h2 className='text-2xl font-bold mb-4'>Ⓝ {total_amount}</h2>
               <button
-                className='px-4 py-2 bg-orange-400 rounded hover:bg-orange-500 text-white font-bold'
+                className='px-4 py-2 rounded border bg-orange-400 text-white hover:border-orange-400 hover:bg-white hover:text-orange-400 font-bold'
                 onClick={() =>
                   paymentGateway(
                     cartItems[0].courseId,

@@ -24,12 +24,10 @@ const UploadedCoursesPage = () => {
           if (!data.status) {
             throw new Error(data.message);
           }
-          console.log(data.courses)
           setCourseDetails(data.courses);
         })
         .catch((error) => {
           // handle error response
-          console.log(error);
         });
     };
     getData();
@@ -45,13 +43,13 @@ const UploadedCoursesPage = () => {
           </div>
           <div className='lg:w-4/5 p-4 bg-white rounded'>
           <div className='flex gap-2 mt-3'>
-            <h1 className='text-2xl font-bold my-1 mr-4'>Uploaded Courses</h1>
-            <Link to='/uploadcourses'>
-            <button className="rounded text-black p-2 border-2 border-black hover:bg-black hover:text-white"><AddIcon /> Upload Course</button>
+            <h1 className='text-2xl font-bold my-1 mr-4 mb-4'>Uploaded Courses</h1>
+            <Link to='/course/upload/draft'>
+            <button className="rounded bg-orange-400 text-white p-2 hover:text-orange-400 hover:bg-white hover:border-2 hover:border-orange-400 mb-4"><AddIcon /> Upload Course </button>
             </Link>
             </div>
             <UploadedCourses  
-            posters={courseDetails}
+            posters={courses}
           />
           </div>
         </div>
