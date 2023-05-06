@@ -6,11 +6,11 @@ const Categories = ({ category }) => {
   return (
     <Link to={`/courses/${category.category.split(" ").join('')}`}>
       <div
-        className='p-8 rounded-lg text-center bg-sky-100 max-h-64'
+        className='p-8 rounded-lg text-center bg-sky-100 max-h-66'
         style={{ marginRight: '20px' }}
       >
         <img
-          className='w-full h-full mb-3'
+          className='w-full h-full mb-8'
           src={category.image}
           alt='categories'
         />
@@ -25,7 +25,7 @@ const CategoriesSlider = () => {
     {
       image:
         'https://res.cloudinary.com/diczskxkx/image/upload/v1676156532/sxakrrgpsrusrm3byqcl.png',
-      category: 'Internet Marketing',
+      category: 'Digital Marketing',
     },
     {
       image:

@@ -68,19 +68,23 @@ const Students = () => {
       <div>
         <div className='flex gap-2 mt-3'>
           <h1 className='text-2xl font-bold my-1 mr-4'>NGO Students</h1>
+          { !code ?
           <button
-            className='rounded bg-orange-400 text-white p-2 hover:text-orange-400 hover:bg-white hover:border-2 hover:border-orange-400'
-            onClick={(e) => generateCode(e)}
-          >
-            NGO Access Code
+            className='rounded bg-orange-400 text-white p-2 hover:text-orange-400 hover:bg-white hover:border-2 hover:border-orange-400' onClick={(e) => generateCode(e)}>
+              Generate NGO Access Code
+          </button> : 
+          <button
+            className='rounded bg-orange-400 text-white p-2 hover:text-orange-400 hover:bg-white hover:border-2 hover:border-orange-400'>
+              Your NGO Access Code
           </button>
+          }
           <input
             placeholder={'Access Code'}
             color={'warning'}
             disabled={true}
             hidden={!code}
             value={code}
-            className='py-2 p-4 border-2 rounded border-black'
+            className='py-2 p-4 rounded text-black border-2 border-orange-400 hover:bg-orange-400 hover:text-white'
           />
         </div>
         <TableContainer className='mt-8 border-2' sx={{ maxWidth: 1000 }}>

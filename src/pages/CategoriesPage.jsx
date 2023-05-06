@@ -32,19 +32,21 @@ function CategoriesPage() {
     getData();
   }, [category]);
 
+  const categoryName = category.charAt(0).toUpperCase() + category.slice(1);;
+
   return (
     <>
       <div className='container mx-auto px-4 md:px-12 mt-8 mb-12'>
         {courses.length !== 0 ? (
           <AllCourses
-            title='Sorted By Category'
-            subtitle={category}
+            title='Search Results For'
+            subtitle={categoryName}
             posters={courses}
           />
         ) : (
           category && (
-            <p className='ml-3 text-gray-400 mt-2 border-dashed border-2 rounded-md w-1/3 p-4'>
-              Sorry No Courses Found For {category}!!{' '}
+            <p className='ml-3 text-xl text-black mt-2 border border-gray-300 border-2 rounded-md w-1/3 p-4'>
+              Sorry! No Courses Found Related To <b><i>{categoryName}.</i></b> {' '}
             </p>
           )
         )}
