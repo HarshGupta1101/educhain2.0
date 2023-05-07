@@ -27,6 +27,8 @@ const UploadCourseDraftPage = () => {
     courseAssessmentIds: [],
   });
 
+  
+
   const handleModules = () => {
     const modules = [];
     const handleChapter = (noOfChapters, moduleNumber) => {
@@ -40,7 +42,7 @@ const UploadCourseDraftPage = () => {
           //   Chapter {i + 1}
           // </div>
           <div
-            className='ml-4 text-lg px-4 py-2 border border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
+            className='ml-4 text-md px-4 py-2 border border-2 rounded hover:bg-gray-200 hover:rounded mb-4'
             key={`Module ${moduleNumber} Chapter ${i + 1}`}
             onClick={() => setOpenTab(`${moduleNumber} Chapter ${i + 1}`)}
           >
@@ -103,6 +105,21 @@ const UploadCourseDraftPage = () => {
 
   const handleCourseSubmit = async (e) => {
     e.preventDefault();
+    const { courseFee, courseTitle, courseBrief, tags, timeRequired, language, image, noOfModules, courseModules,  courseAssessmentIds} = courseDetails;
+    if (!courseFee || !courseTitle || !courseBrief || !tags || !timeRequired || !language || !image || !noOfModules || !courseModules ||  !courseAssessmentIds) {
+      toast.error('Kindly Fill All The Required Details.', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        return
+    }
     if (id) {
       await fetch('http://127.0.0.1:5000/course/submit', {
         method: 'POST',

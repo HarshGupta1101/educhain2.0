@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { Slide, toast } from 'react-toastify';
 
 function ModuleInfoComponent({
   courseDetails,
@@ -15,8 +16,44 @@ function ModuleInfoComponent({
     noOfChapters: '',
   });
 
+  const [error, setError] = useState({
+    moduleTitleError: false,
+    moduleBriefError: false,
+    noOfChaptersError: false,
+  });
+
+  const validateTitle = (title) => {
+    const regex = /^\s*$/;
+    return (!(regex.test(title)));
+  };
+
+  const validateDesc = (desc) => {
+    const regex = /^\s*$/;
+    return (!(regex.test(desc)));
+  };
+
+  const validateNoOfChapters = (chapters) => {
+    const regex = /^\d+$/;
+    return regex.test(chapters);
+  };
+
   const handleModuleSubmit = async (e) => {
     e.preventDefault();
+    const { moduleTitle, moduleBrief, noOfChapters } = moduleDetails;
+    if (!moduleTitle || !moduleBrief || !noOfChapters) {
+      toast.error('Kindly Fill All The Required Details.', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        return
+    }
     const data = moduleDetails;
     data['CourseId'] = CourseId;
     data['moduleNumber'] = parseInt(moduleNumber.split(' ')[1]);
@@ -105,12 +142,15 @@ function ModuleInfoComponent({
             multiline
             maxRows={3}
             value={moduleDetails.moduleTitle}
-            onChange={(e) =>
+            onChange={(e) => {
               setModuleDetails({
                 ...moduleDetails,
                 moduleTitle: e.target.value,
-              })
-            }
+              });
+              setError({ ...error, moduleTitleError: !validateTitle(e.target.value)});
+            }}
+            error={error.moduleTitleError}
+            helperText={error.moduleTitleError ? 'Title Is Required' : ''}
           />
 
           <TextField
@@ -119,12 +159,15 @@ function ModuleInfoComponent({
             multiline
             maxRows={3}
             value={moduleDetails.moduleBrief}
-            onChange={(e) =>
+            onChange={(e) => {
               setModuleDetails({
                 ...moduleDetails,
                 moduleBrief: e.target.value,
-              })
-            }
+              });
+              setError({ ...error, moduleBriefError: !validateDesc(e.target.value)});
+            }}
+            error={error.moduleBriefError}
+            helperText={error.moduleBriefError ? 'Description Is Required' : ''}
           />
           <TextField
             id='outlined-multiline-flexible'
@@ -132,12 +175,15 @@ function ModuleInfoComponent({
             multiline
             maxRows={3}
             value={moduleDetails.noOfChapters}
-            onChange={(e) =>
+            onChange={(e) => {
               setModuleDetails({
                 ...moduleDetails,
                 noOfChapters: parseInt(e.target.value),
-              })
-            }
+              });
+              setError({ ...error, noOfChaptersError: !validateNoOfChapters(e.target.value)});
+            }}
+            error={error.noOfChaptersError}
+            helperText={error.noOfChaptersError ? 'Invalid Number Of Chapters Format | Eg. 6' : ''}
           />
         </div>
         <button

@@ -21,6 +21,27 @@ function ChapterInfoComponent({
     chapterVideoUrl: '',
   });
 
+  const [error, setError] = useState({
+    chapterNameError: false,
+    chapterBriefError: false,
+    chapterVideoUrlError: false,
+  });
+
+  const validateTitle = (title) => {
+    const regex = /^\s*$/;
+    return (!(regex.test(title)));
+  };
+
+  const validateDesc = (desc) => {
+    const regex = /^\s*$/;
+    return (!(regex.test(desc)));
+  };
+
+  const validateVideoURL = (videourl) => {
+    const regex = /^\s*$/;
+    return regex.test(videourl);
+  };
+
   const handleChange = (newFile) => {
     setFile(newFile);
   };
@@ -63,6 +84,21 @@ function ChapterInfoComponent({
 
   const handleChapterSubmit = async (e) => {
     e.preventDefault();
+    const { chapterName, chapterBrief, chapterVideoUrl } = chapterDetails;
+    if (!chapterName || !chapterBrief || !chapterVideoUrl) {
+      toast.error('Kindly Fill All The Required Details.', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        return
+    }
     const data = chapterDetails;
     data['CourseId'] = CourseId;
     data['moduleNumber'] = moduleNumber;
@@ -81,7 +117,7 @@ function ChapterInfoComponent({
         if (!data.status) {
           throw new Error(data.message);
         }
-        toast.success('Module Added Successfully !', {
+        toast.success('Chapter Added Successfully !', {
           position: 'top-center',
           autoClose: 2000,
           transition: Slide,
@@ -152,12 +188,15 @@ function ChapterInfoComponent({
             multiline
             maxRows={3}
             value={chapterDetails.chapterName}
-            onChange={(e) =>
+            onChange={(e) => {
               setChapterDetails({
                 ...chapterDetails,
                 chapterName: e.target.value,
-              })
-            }
+              });
+              setError({ ...error, chapterNameError: !validateTitle(e.target.value)});
+            }}
+            error={error.chapterNameError}
+            helperText={error.chapterNameError ? 'Title Is Required' : ''}
           />
 
           <TextField
@@ -166,12 +205,15 @@ function ChapterInfoComponent({
             multiline
             maxRows={3}
             value={chapterDetails.chapterBrief}
-            onChange={(e) =>
+            onChange={(e) => {
               setChapterDetails({
                 ...chapterDetails,
                 chapterBrief: e.target.value,
-              })
-            }
+              });
+              setError({ ...error, chapterBriefError: !validateDesc(e.target.value)});
+            }}
+            error={error.chapterBriefError}
+            helperText={error.chapterBriefError ? 'Description Is Required' : ''}
           />
 
           <div className='flex items-center gap-4 w-4/5'>
