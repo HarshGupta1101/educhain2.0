@@ -184,7 +184,7 @@ export default function NGORegistration() {
     if (localStorage.getItem('token')) {
       window.history.pushState(null, null, 'http://localhost:3000/');
       window.dispatchEvent(new Event('popstate'));
-      toast.error('You are Signed In !! Sign Out To Register', {
+      toast.error('You Are Already Signed In! Sign Out To Register.', {
         position: 'top-center',
         autoClose: 4000,
         transition: Slide,

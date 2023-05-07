@@ -20,7 +20,7 @@ const CourseInfo = ({ courseData }) => {
           </Stack>
           <h4>Language - {courseData.language}</h4>
           <h4>Duration - {courseData.timeRequired}</h4>
-          <h4>Price - {courseData.courseFee} Ⓝ</h4>
+          <h4>Price - <b>Ⓝ</b> {courseData.courseFee}</h4>
         </div>
         <div className='flex items-center w-full'>
           <Link
