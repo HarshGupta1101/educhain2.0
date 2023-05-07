@@ -20,10 +20,10 @@ function CartCardComponent(props) {
             {props.cartItem.courseTitle}
           </h3>
           <p className='text-gray-400 text-sm mb-2'>
-            By {props.cartItem.instructor}, Web Developer
+            By {props.cartItem.instructor}
           </p>
           <h3 className='text-lg font-bold text-orange-400 mb-4'>Ⓝ {props.cartItem.courseFee}</h3>
-          <span className='font-bold flex items-center gap-1 cursor-pointer hover:text-red-400' onClick={() => removeFromCart(props.cartItem.courseId)}>Remove <ImBin/></span>
+          <span className='font-bold flex items-center gap-1 cursor-pointer hover:text-red-600' onClick={() => removeFromCart(props.cartItem.courseId)}>Remove <ImBin/></span>
         </div>
       </div>
     </>

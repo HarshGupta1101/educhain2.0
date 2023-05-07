@@ -8,7 +8,7 @@ const ProfilePage = () => {
     if (!localStorage.getItem('token')) {
       window.history.pushState(null, null, 'http://localhost:3000/');
       window.dispatchEvent(new Event('popstate'));
-      toast.error('You are Not Signed In !! Sign In To View Profile', {
+      toast.error('You Are Not Signed In! Sign In To View Your Profile.', {
         position: 'top-center',
         autoClose: 4000,
         transition: Slide,

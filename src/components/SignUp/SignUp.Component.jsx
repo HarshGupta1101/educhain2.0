@@ -28,6 +28,27 @@ export default function SignUp() {
     check: false,
   });
 
+  const [error, setError] = React.useState({
+    passwordError: false,
+    emailError: false,
+    secretCodeError: false,
+  });
+
+  const validateEmail = (email) => {
+    const regex = /\S+@\S+\.\S+/;
+    return regex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    return regex.test(password);
+  };
+
+  const validateSecretCode = (secretCode) => {
+    const regex = /^\s*$/;
+    return regex.test(secretCode);
+  };
+
   const inputChanged = () => {
     if (!credentials.check) {
       setCredentials({ ...credentials, check: true });
@@ -38,21 +59,40 @@ export default function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!signUpData.email || !signUpData.password) {
-      toast.error('Kindly Fill All The Required Details.', {
-        position: "top-center",
-        autoClose: 2000,
-        transition: Slide,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
-        return
+    const { check } = credentials;
+    const { email, password, secretCode } = signUpData;
+    if (check){
+      if (!email || !password || !secretCode) {
+        toast.error('Kindly Fill All The Required Details.', {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+          return
+      }
+    } else {
+      if (!email || !password) {
+        toast.error('Kindly Fill All The Required Details.', {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+          return
+      }
     }
-    if (signUpData.secretCode !== '') {
+    if ((signUpData.secretCode !== '') && validateEmail(email) && validatePassword(password) && !validateSecretCode(secretCode)) {
       await fetch('http://127.0.0.1:5000/ngo/register-user', {
         method: 'POST',
         headers: {
@@ -72,7 +112,7 @@ export default function SignUp() {
           // handle error response
           console.log(error);
         });
-    } else {
+    } else if ((signUpData.secretCode === '') && validateEmail(email) && validatePassword(password) && validateSecretCode(secretCode)){
       await fetch('http://127.0.0.1:5000/user/register', {
         method: 'POST',
         headers: {
@@ -120,7 +160,7 @@ export default function SignUp() {
     if (localStorage.getItem('token')) {
       window.history.pushState(null, null, 'http://localhost:3000/');
       window.dispatchEvent(new Event('popstate'));
-      toast.error('You are Signed In !! Sign Out To Register', {
+      toast.error('You Are Already Signed In! Sign Out To Register.', {
         position: 'top-center',
         autoClose: 4000,
         transition: Slide,
@@ -168,9 +208,12 @@ export default function SignUp() {
                   name='email'
                   autoComplete='email'
                   value={signUpData.email}
-                  onChange={(e) =>
-                    setSignUpData({ ...signUpData, email: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setSignUpData({ ...signUpData, email: e.target.value });
+                    setError({ ...error, emailError: !validateEmail(e.target.value)});
+                  }}
+                  error={error.emailError}
+                  helperText={error.emailError ? 'Invalid Email Format | Eg. educhain@educhain.com' : ''}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -183,8 +226,15 @@ export default function SignUp() {
                   id='password'
                   autoComplete='new-password'
                   value={signUpData.password}
-                  onChange={(e) =>
-                    setSignUpData({ ...signUpData, password: e.target.value })
+                  onChange={(e) => {
+                    setSignUpData({ ...signUpData, password: e.target.value });
+                    setError({ ...error, passwordError: !validatePassword(e.target.value)});
+                  }}
+                  error={error.passwordError}
+                  helperText={
+                    error.passwordError
+                      ? 'Password Must Contain At Least 8 Characters With At Least 1 Uppercase Letter, 1 Lowercase Letter, 1 One Number'
+                      : ''
                   }
                 />
               </Grid>
@@ -209,9 +259,12 @@ export default function SignUp() {
                     name='accessCode'
                     autoComplete='family-name'
                     value={signUpData.secretCode}
-                    onChange={(e) =>
-                    setSignUpData({ ...signUpData, secretCode: e.target.value })
-                  }
+                    onChange={(e) => {
+                      setSignUpData({ ...signUpData, secretCode: e.target.value });
+                      setError({ ...error, secretCodeError: validateSecretCode(e.target.value)});
+                    }}
+                    error={error.secretCodeError}
+                    helperText={error.secretCodeError ? 'Access Code Is Required' : ''}
                   />
                 </Grid>
               )}

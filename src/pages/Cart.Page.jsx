@@ -167,9 +167,9 @@ function CartPage() {
             <div className='mb-8'>
               <h2 className='text-xl font-bold mb-1'>Shopping Cart</h2>
               <div className='flex justify-between mb-4'>
-                <p>{total_items} Course in Cart</p>
+                {total_items==1 ? <p>{total_items} Course In Cart</p> : <p>{total_items} Courses In Cart</p>}
                 <span
-                  className='text-red-400 gap-1 flex items-center cursor-pointer hover:text-black'
+                  className='text-red-600 gap-1 flex items-center cursor-pointer hover:text-black'
                   onClick={() => clearCart()}
                 >
                   <RxCross2 /> Clear All

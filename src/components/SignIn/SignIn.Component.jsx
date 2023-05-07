@@ -20,6 +20,22 @@ export default function SignIn() {
     email: '',
   });
 
+  const [error, setError] = React.useState({
+    passwordError: false,
+    emailError: false,
+  });
+
+  const validateEmail = (email) => {
+    const regex = /\S+@\S+\.\S+/;
+    return regex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    // const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    const regex = /^\s*$/;
+    return regex.test(password);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = signInData;
@@ -37,6 +53,7 @@ export default function SignIn() {
         });
         return
     }
+    if (validateEmail(email) && !validatePassword(password)){
     await fetch('http://127.0.0.1:5000/user/login', {
       method: 'POST',
       headers: {
@@ -82,6 +99,7 @@ export default function SignIn() {
           theme: "light",
           });
       });
+    }
   };
 
   React.useEffect(() => {
@@ -136,9 +154,12 @@ export default function SignIn() {
               autoComplete='email'
               autoFocus
               value={signInData.email}
-              onChange={(e) =>
-                setSignInData({ ...signInData, email: e.target.value })
-              }
+              onChange={(e) => {
+                setSignInData({ ...signInData, email: e.target.value });
+                setError({ ...error, emailError: !validateEmail(e.target.value)});
+              }}
+              error={error.emailError}
+              helperText={error.emailError ? 'Invalid Email Format' : ''}
             />
             <TextField
               margin='normal'
@@ -150,8 +171,15 @@ export default function SignIn() {
               id='password'
               autoComplete='current-password'
               value={signInData.password}
-              onChange={(e) =>
-                setSignInData({ ...signInData, password: e.target.value })
+              onChange={(e) => {
+                setSignInData({ ...signInData, password: e.target.value });
+                setError({ ...error, passwordError: validatePassword(e.target.value)});
+              }}
+              error={error.passwordError}
+              helperText={
+                error.passwordError
+                  ? 'Password Is Required'
+                  : ''
               }
             />
             <Button

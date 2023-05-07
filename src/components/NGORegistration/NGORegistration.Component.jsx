@@ -35,6 +35,45 @@ export default function NGORegistration() {
     setFile(newFile);
   };
 
+  const [error, setError] = React.useState({
+    passwordError: false,
+    emailError: false,
+    nameError: false,
+    phoneError: false,
+    locationError: false,
+    documentUrlError: false,
+  });
+
+  const validateEmail = (email) => {
+    const regex = /\S+@\S+\.\S+/;
+    return regex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    return regex.test(password);
+  };
+
+  const validateName = (name) => {
+    const regex = /^\s*$/;
+    return regex.test(name);
+  };
+
+  const validatePhone = (phone) => {
+    const regex = /^\d{10}$/;
+    return regex.test(phone);
+  };
+  
+  const validateLocation = (location) => {
+    const regex = /^\s*$/;
+    return regex.test(location);
+  };
+
+  const validateDocumentURL = (documentUrl) => {
+    const regex = /^\s*$/;
+    return regex.test(documentUrl);
+  };
+
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
@@ -100,6 +139,7 @@ export default function NGORegistration() {
         });
         return
     }
+    if (validateEmail(email) && validatePassword(password) && validatePhone(phone) && !validateName(name) && !validateLocation(location) && !validateDocumentURL(documentUrl)) {
     try {
       const response = await fetch('http://127.0.0.1:5000/ngo/register', {
         method: 'POST',
@@ -137,14 +177,14 @@ export default function NGORegistration() {
         progress: undefined,
         theme: "light",
         });
-    }
+    }}
   };
 
   React.useEffect(() => {
     if (localStorage.getItem('token')) {
       window.history.pushState(null, null, 'http://localhost:3000/');
       window.dispatchEvent(new Event('popstate'));
-      toast.error('You are Signed In !! Sign Out To Register', {
+      toast.error('You Are Already Signed In! Sign Out To Register.', {
         position: 'top-center',
         autoClose: 4000,
         transition: Slide,
@@ -188,9 +228,12 @@ export default function NGORegistration() {
                   autoComplete="ngoname"
                   autoFocus
                   value={signUpData.name}
-                  onChange={(e) =>
-                    setSignUpData({ ...signUpData, name: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setSignUpData({ ...signUpData, name: e.target.value });
+                    setError({ ...error, nameError: validateName(e.target.value)});
+                  }}
+                  error={error.nameError}
+                  helperText={error.nameError ? 'Name Is Required' : ''}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -203,9 +246,12 @@ export default function NGORegistration() {
                   autoComplete="email"
                   type='email'
                   value={signUpData.email}
-                  onChange={(e) =>
-                    setSignUpData({ ...signUpData, email: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setSignUpData({ ...signUpData, email: e.target.value });
+                    setError({ ...error, emailError: !validateEmail(e.target.value)});
+                  }}
+                  error={error.emailError}
+                  helperText={error.emailError ? 'Invalid Email Format | Eg. educhain@educhain.com' : ''}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -218,9 +264,12 @@ export default function NGORegistration() {
                   autoComplete="phoneNumber"
                   type='number'
                   value={signUpData.phone}
-                  onChange={(e) =>
-                    setSignUpData({ ...signUpData, phone: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setSignUpData({ ...signUpData, phone: e.target.value });
+                    setError({ ...error, phoneError: !validatePhone(e.target.value)});
+                  }}
+                  error={error.phoneError}
+                  helperText={error.phoneError ? 'Invalid Phone Format | Eg. 9087654321' : ''}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -232,9 +281,12 @@ export default function NGORegistration() {
                   id="location"
                   autoComplete="location"
                   value={signUpData.location}
-                  onChange={(e) =>
-                    setSignUpData({ ...signUpData, location: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setSignUpData({ ...signUpData, location: e.target.value });
+                    setError({ ...error, locationError: validateLocation(e.target.value)});
+                  }}
+                  error={error.locationError}
+                  helperText={error.locationError ? 'Location Is Required' : ''}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -247,9 +299,12 @@ export default function NGORegistration() {
                   id="password"
                   autoComplete="password"
                   value={signUpData.password}
-                  onChange={(e) =>
-                    setSignUpData({ ...signUpData, password: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setSignUpData({ ...signUpData, password: e.target.value });
+                    setError({ ...error, passwordError: !validatePassword(e.target.value)});
+                  }}
+                  error={error.passwordError}
+                  helperText={error.passwordError ? 'Password Must Contain At Least 8 Characters With At Least 1 Uppercase Letter, 1 Lowercase Letter, 1 One Number' : ''}
                 />
               </Grid>
               <Grid item xs={12} sm={8}>
