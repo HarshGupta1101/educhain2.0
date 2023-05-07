@@ -107,7 +107,7 @@ function NavMd() {
             </Link>
           )}
           {isloggedIn && (
-            <Link to='/profile' className='text-white hover:text-gray-200'>
+            <Link to={window.localStorage.getItem('userType') === "admin" ?"/users":"/profile"} className='text-white hover:text-gray-200'>
               <AccountCircleIcon fontSize='large' />
             </Link>
           )}
@@ -222,7 +222,7 @@ function NavLg() {
             </Link>
           )}
           {isloggedIn && (
-            <Link to='/profile' className='text-white hover:text-gray-200'>
+            <Link to={window.localStorage.getItem('userType') === "admin" ?"/users":"/profile"} className='text-white hover:text-gray-200'>
               <AccountCircleIcon fontSize='large' />
             </Link>
           )}

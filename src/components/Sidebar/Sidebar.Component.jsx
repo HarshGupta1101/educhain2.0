@@ -18,19 +18,21 @@ export default function Sidebar() {
     <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       <nav aria-label='main mailbox folders'>
         <List>
-          <Link to='/profile'>
-            <ListItem
-              disablePadding
-              sx={{ border: '1px solid lightgray', marginBottom: '1rem' }}
-            >
-              <ListItemButton>
-                <ListItemIcon>
-                  <AccountBoxIcon />
-                </ListItemIcon>
-                <ListItemText primary='Profile' />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+          {window.localStorage.getItem('userType') !== 'admin' && (
+            <Link to='/profile'>
+              <ListItem
+                disablePadding
+                sx={{ border: '1px solid lightgray', marginBottom: '1rem' }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    <AccountBoxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Profile' />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          )}
           {window.localStorage.getItem('userType') === 'user' && (
             <Link to='/inprogresscourses'>
               <ListItem
@@ -63,22 +65,21 @@ export default function Sidebar() {
             </Link>
           )}
 
-          {(window.localStorage.getItem('userType') === 'user' ||
-            window.localStorage.getItem('userType') === 'admin') && (
-              <Link to='/uploadedcourses'>
-                <ListItem
-                  disablePadding
-                  sx={{ border: '1px solid lightgray', marginBottom: '1rem' }}
-                >
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <DriveFolderUploadIcon />
-                    </ListItemIcon>
-                    <ListItemText primary='Uploaded Courses' />
-                  </ListItemButton>
-                </ListItem>
-              </Link>
-            )}
+          {window.localStorage.getItem('userType') === 'user' && (
+            <Link to='/uploadedcourses'>
+              <ListItem
+                disablePadding
+                sx={{ border: '1px solid lightgray', marginBottom: '1rem' }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    <DriveFolderUploadIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Uploaded Courses' />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          )}
 
           {window.localStorage.getItem('userType') === 'ngoAdmin' && (
             <Link to='/students'>
@@ -97,6 +98,17 @@ export default function Sidebar() {
           )}
 
           {window.localStorage.getItem('userType') === 'admin' && (
+            <>
+             <Link to='/users'>
+              <ListItem disablePadding sx={{ border: '1px solid lightgray', marginBottom: '1rem' }}>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <FormatListBulletedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='List Of Users' />
+                </ListItemButton>
+              </ListItem>
+            </Link>
             <Link to='/ngolist'>
               <ListItem disablePadding sx={{ border: '1px solid lightgray' }}>
                 <ListItemButton>
@@ -107,6 +119,8 @@ export default function Sidebar() {
                 </ListItemButton>
               </ListItem>
             </Link>
+           
+            </>
           )}
         </List>
       </nav>

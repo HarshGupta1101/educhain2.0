@@ -95,6 +95,7 @@ const Profile = () => {
           if (!data.status) {
             throw new Error(data.message);
           }
+          console.log(data.user);
           setUserDetails(data.user);
         })
         .catch((error) => {
@@ -104,7 +105,6 @@ const Profile = () => {
     getData();
   }, []);
 
- 
   return (
     <>
       <div>
@@ -190,38 +190,44 @@ const Profile = () => {
                   />
                 </TableCell>
               </TableRow>
-              <TableRow>
-                <TableCell>Organization Name</TableCell>
-                <TableCell>
-                  <TextField
-                    placeholder={'Enter Organization Name'}
-                    color={'warning'}
-                    disabled={!editable}
-                    value={userDetails.organization}
-                    onChange={(e) =>
-                      setUserDetails({
-                        ...userDetails,
-                        organization: e.target.value,
-                      })
-                    }
-                  />
-                </TableCell>
-                <TableCell>NGO Name</TableCell>
-                <TableCell>
-                  <TextField
-                    placeholder={'Enter NGO / NPO Name'}
-                    color={'warning'}
-                    disabled={!editable}
-                    value={userDetails.ngo}
-                    onChange={(e) =>
-                      setUserDetails({
-                        ...userDetails,
-                        ngo: e.target.value,
-                      })
-                    }
-                  />
-                </TableCell>
-              </TableRow>
+              {localStorage.getItem('userType') === 'user' && (
+                <TableRow>
+                  <TableCell>Organization Name</TableCell>
+                  <TableCell>
+                    <TextField
+                      placeholder={'Enter Organization Name'}
+                      color={'warning'}
+                      disabled={!editable}
+                      value={userDetails.organization}
+                      onChange={(e) =>
+                        setUserDetails({
+                          ...userDetails,
+                          organization: e.target.value,
+                        })
+                      }
+                    />
+                  </TableCell>
+                  {userDetails.ngo && (
+                    <>
+                      <TableCell>NGO Name</TableCell>
+                      <TableCell>
+                        <TextField
+                          placeholder={'Enter NGO / NPO Name'}
+                          color={'warning'}
+                          disabled={true}
+                          value={userDetails.ngo}
+                          onChange={(e) =>
+                            setUserDetails({
+                              ...userDetails,
+                              ngo: e.target.value,
+                            })
+                          }
+                        />
+                      </TableCell>
+                    </>
+                  )}
+                </TableRow>
+              )}
               <TableRow>
                 <TableCell>NEAR ID</TableCell>
                 <TableCell>

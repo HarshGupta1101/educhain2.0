@@ -26,173 +26,183 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import CategoriesPage from './pages/CategoriesPage';
+import UsersPage from './pages/Users.Page';
 
 function App() {
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path='/'
-          exact
-          element={
-            <DefaultLayout>
-              <HomePage />
-            </DefaultLayout>
-          }
-        />
-        <Route path='/login' exact element={<SignIn />} />
-        <Route path='/register' exact element={<SignUp />} />
-        <Route path='/ngoregistration' exact element={<NGORegistration />} />
-        <Route path='/forgotpassword' exact element={<ForgotPassword />} />
-        <Route path='/changepassword' exact element={<ChangePassword />} />
-        <Route
-          path='/ngolist'
-          exact
-          element={
-            <DefaultLayout>
-              <NGOList />
-            </DefaultLayout>
-          }
-        />
-         <Route
-          path='/ngoapproval'
-          exact
-          element={
-            <DefaultLayout>
-              <NGOApproval />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/profile'
-          exact
-          element={
-            <DefaultLayout>
-              <Profile />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/inprogresscourses'
-          exact
-          element={
-            <DefaultLayout>
-              <InProgressCourses />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/completedcourses'
-          exact
-          element={
-            <DefaultLayout>
-              <CompletedCourses />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/uploadedcourses'
-          exact
-          element={
-            <DefaultLayout>
-              <UploadedCourses />
-            </DefaultLayout>
-          }
-        />
-         <Route
-          path='/yourcourses'
-          exact
-          element={
-            <DefaultLayout>
-              <YourCoursesPage />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/students'
-          exact
-          element={
-            <DefaultLayout>
-              <Students />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/courses'
-          exact
-          element={
-            <DefaultLayout>
-              <AllCourses />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/course/:id'
-          exact
-          element={
-            <DefaultLayout>
-              <SingleCourse />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/course/play/:id'
-          exact
-          element={
-            <DefaultLayout>
-              <CoursePlay />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/courses/category'
-          exact
-          element={
-            <DefaultLayout>
-              <CategoryCoursesPage />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/cart'
-          exact
-          element={
-            <DefaultLayout>
-              <CartPage />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/course/upload/draft'
-          exact
-          element={
-            <DefaultLayout>
-              <UploadCourseDraftPage />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/course/upload/draft/:id'
-          exact
-          element={
-            <DefaultLayout>
-              <UploadCourseDraftPage />
-            </DefaultLayout>
-          }
-        />
-        <Route
-          path='/courses/:category'
-          exact
-          element={
-            <DefaultLayout>
-              <CategoriesPage />
-            </DefaultLayout>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
-    <ToastContainer />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path='/'
+            exact
+            element={
+              <DefaultLayout>
+                <HomePage />
+              </DefaultLayout>
+            }
+          />
+          <Route path='/login' exact element={<SignIn />} />
+          <Route path='/register' exact element={<SignUp />} />
+          <Route path='/ngoregistration' exact element={<NGORegistration />} />
+          <Route path='/forgotpassword' exact element={<ForgotPassword />} />
+          <Route path='/changepassword' exact element={<ChangePassword />} />
+          <Route
+            path='/ngolist'
+            exact
+            element={
+              <DefaultLayout>
+                <NGOList />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/ngoapproval'
+            exact
+            element={
+              <DefaultLayout>
+                <NGOApproval />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/profile'
+            exact
+            element={
+              <DefaultLayout>
+                <Profile />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/inprogresscourses'
+            exact
+            element={
+              <DefaultLayout>
+                <InProgressCourses />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/completedcourses'
+            exact
+            element={
+              <DefaultLayout>
+                <CompletedCourses />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/uploadedcourses'
+            exact
+            element={
+              <DefaultLayout>
+                <UploadedCourses />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/yourcourses'
+            exact
+            element={
+              <DefaultLayout>
+                <YourCoursesPage />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/students'
+            exact
+            element={
+              <DefaultLayout>
+                <Students />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/courses'
+            exact
+            element={
+              <DefaultLayout>
+                <AllCourses />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/course/:id'
+            exact
+            element={
+              <DefaultLayout>
+                <SingleCourse />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/course/play/:id'
+            exact
+            element={
+              <DefaultLayout>
+                <CoursePlay />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/courses/category'
+            exact
+            element={
+              <DefaultLayout>
+                <CategoryCoursesPage />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/cart'
+            exact
+            element={
+              <DefaultLayout>
+                <CartPage />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/course/upload/draft'
+            exact
+            element={
+              <DefaultLayout>
+                <UploadCourseDraftPage />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/course/upload/draft/:id'
+            exact
+            element={
+              <DefaultLayout>
+                <UploadCourseDraftPage />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/courses/:category'
+            exact
+            element={
+              <DefaultLayout>
+                <CategoriesPage />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path='/users'
+            exact
+            element={
+              <DefaultLayout>
+                <UsersPage />
+              </DefaultLayout>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer />
     </>
   );
 }
