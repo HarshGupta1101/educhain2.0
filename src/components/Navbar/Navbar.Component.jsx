@@ -83,7 +83,7 @@ function NavMd() {
           'Web Development',
           'Data Analytics',
           'Social Media Marketing',
-          'UI/UX Development',
+          'UI Development',
           'Machine Learning',
           'Cyber Security',
         ].map((text, index) => (
@@ -229,7 +229,7 @@ function NavLg() {
           'Web Development',
           'Data Analytics',
           'Social Media Marketing',
-          'UI/UX Development',
+          'UI Development',
           'Machine Learning',
           'Cyber Security',
         ].map((text, index) => (

@@ -38,7 +38,7 @@ const Users = () => {
 
   return (
     <>
-      <h1 className='text-2xl font-bold my-1 mr-4'>Users Present</h1>
+      <h1 className='text-2xl font-bold my-1 mr-4'>Registered Users</h1>
       <TableContainer className='mt-8 border-2' sx={{ maxWidth: 1000 }}>
         <Table>
           <TableHead className='bg-gray-300'>

@@ -30,7 +30,7 @@ const CategoriesSlider = () => {
     {
       image:
         'https://res.cloudinary.com/diczskxkx/image/upload/v1676155812/f2f6aeuqdozg2tmt4nhn.png',
-      category: 'UI/UX Development',
+      category: 'UI Development',
     },
     {
       image:
