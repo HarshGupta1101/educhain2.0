@@ -57,6 +57,21 @@ function Assignment({ courseDetails, setCourseDetails, CourseId }) {
     ]);
   };
 
+  // const [error, setError] = useState({
+  //   question: false,
+  //   options: [false, false, false, false],
+  // });
+
+  // const validateQuestion = (que) => {
+  //   const regex = /^\s*$/;
+  //   return (!(regex.test(que)));
+  // };
+
+  // const validateOptions = (opt) => {
+  //   const regex = /^\s*$/;
+  //   return (!(regex.test(opt)));
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     questions.map((question) => {

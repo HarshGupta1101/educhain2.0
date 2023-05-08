@@ -6,11 +6,86 @@ import About from '../components/About/About.Component';
 import NGOReg from '../components/NGORegistration/NGORegBanner.Component';
 import { useState, useEffect } from 'react';
 // import courses from '../utils/data';
+import { toast, Slide } from 'react-toastify';
 
 function HomePage() {
   const [courses, setCourses] = useState([]);
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get('token');
+  const ngotoken = urlParams.get('ngotoken');
+
   useEffect(() => {
+    if (token){
+      const verifyUser = async () => {
+      await fetch(`http://127.0.0.1:5000/user/verify`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token: token,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // handle successful response
+          if (!data.status) {
+            throw new Error(data.message);
+          }
+          toast.success('Verified Successfully! You Can Now Login.', {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+        })
+        .catch((error) => {
+          // handle error response
+        });
+      };
+      verifyUser();
+    }
+    if (ngotoken){
+      const verifyNGO = async () => {
+      await fetch(`http://127.0.0.1:5000/ngo/verify`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token: ngotoken,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // handle successful response
+          if (!data.status) {
+            throw new Error(data.message);
+          }
+          toast.success('Verified Successfully! You Will Now Hear From Our Team Soon Via Email.', {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+        })
+        .catch((error) => {
+          // handle error response
+        });
+      };
+      verifyNGO();
+    }
     const getData = async () => {
       await fetch(`http://127.0.0.1:5000/course`, {
         method: 'GET',

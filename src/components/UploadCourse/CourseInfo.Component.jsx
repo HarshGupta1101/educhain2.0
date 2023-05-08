@@ -9,11 +9,58 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
   const [imageUpload, setImageUpload] = useState(false);
   const [file, setFile] = React.useState(null);
 
+  const [error, setError] = React.useState({
+    courseFeeError: false,
+    courseTitleError: false,
+    courseBriefError: false,
+    tagsError: false,
+    timeRequiredError: false,
+    languageError: false,
+    imageError: false,
+    noOfModulesError: false,
+  });
+
+  const validateTitle = (title) => {
+    const regex = /^\s*$/;
+    return (!(regex.test(title)));
+  };
+
+  const validateDesc = (desc) => {
+    const regex = /^\s*$/;
+    return (!(regex.test(desc)));
+  };
+
+  const validateLanguage = (language) => {
+    const regex = /^\s*$/;
+    return (!(regex.test(language)));
+  };
+
+  const validateTags = (tags) => {
+    const regex = /^([a-zA-Z0-9]+,)*[a-zA-Z0-9]+$/;
+    return regex.test(tags);
+  };
+
   const handleTags = (value) => {
     setCourseDetails({
       ...courseDetails,
       tags: value.split(','),
     });
+    setError({ ...error, tagsError: !validateTags(value)});
+  };
+
+  const validateTime = (time) => {
+    const regex = /^(\d+ hr)? ?(\d+ min)?$/;
+    return regex.test(time);
+  };
+
+  const validatePrice = (price) => {
+    const regex = /^\d+$/;
+    return regex.test(price);
+  };
+
+  const validateNoOfModules = (modules) => {
+    const regex = /^\d+$/;
+    return regex.test(modules);
   };
 
   const handleChange = (newFile) => {
@@ -58,6 +105,21 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
 
   const handleCourseSubmit = async (e) => {
     e.preventDefault();
+    const { courseFee, courseTitle, courseBrief, tags, timeRequired, language, image, noOfModules } = courseDetails;
+    if (!courseFee || !courseTitle || !courseBrief || !tags || !timeRequired || !language || !image || !noOfModules) {
+      toast.error('Kindly Fill All The Required Details.', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        return
+    }
     await fetch('http://127.0.0.1:5000/course/create', {
       method: 'POST',
       headers: {
@@ -101,12 +163,15 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
             multiline
             maxRows={3}
             value={courseDetails.courseTitle}
-            onChange={(e) =>
+            onChange={(e) => {
               setCourseDetails({
                 ...courseDetails,
                 courseTitle: e.target.value,
-              })
-            }
+              });
+              setError({ ...error, courseTitleError: !validateTitle(e.target.value)});
+            }}
+            error={error.courseTitleError}
+            helperText={error.courseTitleError ? 'Title Is Required' : ''}
           />
 
           <TextField
@@ -115,12 +180,15 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
             multiline
             maxRows={3}
             value={courseDetails.courseBrief}
-            onChange={(e) =>
+            onChange={(e) => {
               setCourseDetails({
                 ...courseDetails,
                 courseBrief: e.target.value,
-              })
-            }
+              });
+              setError({ ...error, courseBriefError: !validateDesc(e.target.value)});
+            }}
+            error={error.courseBriefError}
+            helperText={error.courseBriefError ? 'Description Is Required' : ''}
           />
           <TextField
             id='outlined-multiline-flexible'
@@ -128,12 +196,15 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
             multiline
             maxRows={3}
             value={courseDetails.language}
-            onChange={(e) =>
+            onChange={(e) => {
               setCourseDetails({
                 ...courseDetails,
                 language: e.target.value,
               })
-            }
+              setError({ ...error, languageError: !validateLanguage(e.target.value)});
+            }}
+            error={error.languageError}
+            helperText={error.languageError ? 'Language Is Required' : ''}
           />
           <TextField
             id='outlined-multiline-flexible'
@@ -142,6 +213,8 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
             maxRows={3}
             value={courseDetails.tags}
             onChange={(e) => handleTags(e.target.value)}
+            error={error.tagsError}
+            helperText={error.tagsError ? 'Invalid Tags Format | Eg. python,data,science ' : ''}
           />
           <TextField
             id='outlined-multiline-flexible'
@@ -149,12 +222,15 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
             multiline
             maxRows={3}
             value={courseDetails.timeRequired}
-            onChange={(e) =>
+            onChange={(e) => {
               setCourseDetails({
                 ...courseDetails,
                 timeRequired: e.target.value,
               })
-            }
+              setError({ ...error, timeRequiredError: !validateTime(e.target.value)});
+            }}
+            error={error.timeRequiredError}
+            helperText={error.timeRequiredError ? 'Invalid Duration Format | Eg. 10 hr 5 min' : ''}
           />
           <TextField
             id='outlined-multiline-flexible'
@@ -162,17 +238,20 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
             multiline
             maxRows={3}
             value={courseDetails.courseFee}
-            onChange={(e) =>
+            onChange={(e) => {
               setCourseDetails({
                 ...courseDetails,
                 courseFee: parseInt(e.target.value),
-              })
-            }
+              });
+              setError({ ...error, courseFeeError: !validatePrice(e.target.value)});
+            }}
+            error={error.courseFeeError}
+            helperText={error.courseFeeError ? 'Invalid Price Format | Eg. 5' : ''}
           />
           <div className='flex items-center gap-4 w-4/5'>
             <MuiFileInput
               value={file}
-              placeholder='Upload Image'
+              placeholder='Upload Course Thumbnail Image'
               onChange={handleChange}
               disabled={imageUpload}
             />
@@ -190,12 +269,15 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
             multiline
             maxRows={3}
             value={courseDetails.noOfModules}
-            onChange={(e) =>
+            onChange={(e) => {
               setCourseDetails({
                 ...courseDetails,
                 noOfModules: parseInt(e.target.value),
-              })
-            }
+              });
+              setError({ ...error, noOfModulesError: !validateNoOfModules(e.target.value)});
+            }}
+            error={error.noOfModulesError}
+            helperText={error.noOfModulesError ? 'Invalid Number Of Modules Format | Eg. 10' : ''}
           />
         </div>
         <button 
