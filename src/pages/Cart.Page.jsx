@@ -76,12 +76,12 @@ function CartPage() {
       )
         .then((response) => response.json())
         .then(() => {
-          window.history.pushState(
-            null,
-            null,
-            'http://localhost:3000/yourcourses'
-          );
-          window.dispatchEvent(new Event('popstate'));
+          // window.history.pushState(
+          //   null,
+          //   null,
+          //   'http://localhost:3000/yourcourses'
+          // );
+          // window.dispatchEvent(new Event('popstate'));
           toast.success(
             'Transaction Successful! Course Enrolled Successfully.',
             {

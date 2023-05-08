@@ -21,6 +21,7 @@ const CompletedCoursesPage = () => {
           if (!data.status) {
             throw new Error(data.message);
           }
+          // console.log(data.courses)
           setCourseDetails(data.courses);
         })
         .catch((error) => {

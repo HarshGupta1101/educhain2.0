@@ -101,7 +101,7 @@ function App() {
               </DefaultLayout>
             }
           />
-          <Route
+          {/* <Route
             path='/yourcourses'
             exact
             element={
@@ -109,7 +109,7 @@ function App() {
                 <YourCoursesPage />
               </DefaultLayout>
             }
-          />
+          /> */}
           <Route
             path='/students'
             exact

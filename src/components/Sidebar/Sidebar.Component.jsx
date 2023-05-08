@@ -33,7 +33,7 @@ export default function Sidebar() {
               </ListItem>
             </Link>
           )}
-          {
+          {/* {
             window.localStorage.getItem('userType') === 'ngoAdmin' && (
               <Link to='/yourcourses'>
               <ListItem
@@ -49,7 +49,7 @@ export default function Sidebar() {
               </ListItem>
             </Link>
             )
-          }
+          } */}
           {window.localStorage.getItem('userType') === 'user' && (
             <Link to='/inprogresscourses'>
               <ListItem
