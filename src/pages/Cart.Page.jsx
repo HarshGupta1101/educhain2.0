@@ -23,7 +23,7 @@ function CartPage() {
     const errorCode = urlParams.get('errorCode');
     // setTransaction(transactionHashes);
     // setErrorCode(errorCode);
-    if (transactionHashes) {
+    if (transactionHashes && localStorage.getItem("userType") === "user") {
       clearCart();
       fetch(
         `http://127.0.0.1:5000/course/approval?transactionId=${transactionHashes}`,
@@ -42,6 +42,44 @@ function CartPage() {
             null,
             null,
             'http://localhost:3000/inprogresscourses'
+          );
+          window.dispatchEvent(new Event('popstate'));
+          toast.success(
+            'Transaction Successful! Course Enrolled Successfully.',
+            {
+              position: 'top-center',
+              autoClose: 2000,
+              transition: Slide,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'light',
+            }
+          );
+        })
+        .catch((error) => {
+        });
+    } else  if (transactionHashes && localStorage.getItem("userType") === "ngoAdmin") {
+      clearCart();
+      fetch(
+        `http://127.0.0.1:5000/course/ngo-approval?transactionId=${transactionHashes}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: String(localStorage.getItem('token')),
+          },
+          body: JSON.stringify({ transactionHashes }),
+        }
+      )
+        .then((response) => response.json())
+        .then(() => {
+          window.history.pushState(
+            null,
+            null,
+            'http://localhost:3000/yourcourses'
           );
           window.dispatchEvent(new Event('popstate'));
           toast.success(

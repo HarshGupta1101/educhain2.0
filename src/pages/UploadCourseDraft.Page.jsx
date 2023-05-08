@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 const UploadCourseDraftPage = () => {
   const { id } = useParams();
-  const [openTab, setOpenTab] = useState('');
+  const [openTab, setOpenTab] = useState('Basic Details');
 
   const [courseDetails, setCourseDetails] = useState({
     courseFee: '',

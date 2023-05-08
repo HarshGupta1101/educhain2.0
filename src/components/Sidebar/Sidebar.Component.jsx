@@ -33,6 +33,23 @@ export default function Sidebar() {
               </ListItem>
             </Link>
           )}
+          {
+            window.localStorage.getItem('userType') === 'ngoAdmin' && (
+              <Link to='/yourcourses'>
+              <ListItem
+                disablePadding
+                sx={{ border: '1px solid lightgray', marginBottom: '1rem' }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    <PendingIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Your Courses' />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+            )
+          }
           {window.localStorage.getItem('userType') === 'user' && (
             <Link to='/inprogresscourses'>
               <ListItem
