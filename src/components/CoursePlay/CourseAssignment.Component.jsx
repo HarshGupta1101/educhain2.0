@@ -59,6 +59,8 @@ function CourseAssignmentComponent(props) {
           progress: undefined,
           theme: "light",
           });
+          window.history.pushState(null, null, 'http://localhost:3000/completedcourses');
+          window.dispatchEvent(new Event('popstate'));
       })
       .catch((error) => {
         // handle error response
