@@ -67,7 +67,17 @@ function ModuleInfoComponent({
     })
       .then((response) => response.json())
       .then((data) => {
-        // handle successful response
+        toast.success('Added Module Successfully !', {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         if (!data.status) {
           throw new Error(data.message);
         }
