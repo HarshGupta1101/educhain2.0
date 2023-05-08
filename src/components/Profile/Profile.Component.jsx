@@ -81,28 +81,53 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    const getData = async () => {
-      await fetch('http://127.0.0.1:5000/user/profile', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: String(localStorage.getItem('token')),
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // handle successful response
-          if (!data.status) {
-            throw new Error(data.message);
-          }
-          console.log(data.user);
-          setUserDetails(data.user);
+    if (localStorage.getItem('userType') === 'user') {
+      const getData = async () => {
+        await fetch('http://127.0.0.1:5000/user/profile', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: String(localStorage.getItem('token')),
+          },
         })
-        .catch((error) => {
-          // handle error response
-        });
-    };
-    getData();
+          .then((response) => response.json())
+          .then((data) => {
+            // handle successful response
+            if (!data.status) {
+              throw new Error(data.message);
+            }
+            console.log(data.user);
+            setUserDetails(data.user);
+          })
+          .catch((error) => {
+            // handle error response
+          });
+      };
+      getData();
+    } else if (localStorage.getItem('userType') === 'ngoAdmin') {
+      const getData = async () => {
+        await fetch('http://127.0.0.1:5000/ngo', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: String(localStorage.getItem('token')),
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // handle successful response
+            if (!data.status) {
+              throw new Error(data.message);
+            }
+            console.log(data.ngo);
+            setUserDetails(data.ngo);
+          })
+          .catch((error) => {
+            // handle error response
+          });
+      };
+      getData();
+    }
   }, []);
 
   return (
@@ -132,102 +157,156 @@ const Profile = () => {
         <TableContainer className='mt-8 mb-8 border-2' sx={{ maxWidth: 1000 }}>
           <Table>
             <TableHead>
-              <TableRow>
-                <TableCell>First Name</TableCell>
-                <TableCell>
-                  <TextField
-                    placeholder={'Enter First Name'}
-                    color={'warning'}
-                    disabled={!editable}
-                    value={userDetails.firstName}
-                    onChange={(e) =>
-                      setUserDetails({
-                        ...userDetails,
-                        firstName: e.target.value,
-                      })
-                    }
-                  />
-                </TableCell>
-                <TableCell>Last Name</TableCell>
-                <TableCell>
-                  <TextField
-                    placeholder={'Enter Last Name'}
-                    color={'warning'}
-                    disabled={!editable}
-                    value={userDetails.lastName}
-                    onChange={(e) =>
-                      setUserDetails({
-                        ...userDetails,
-                        lastName: e.target.value,
-                      })
-                    }
-                  />
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Email Id</TableCell>
-                <TableCell>
-                  <TextField
-                    placeholder={'Enter Email Id'}
-                    color={'warning'}
-                    disabled={true}
-                    value={userDetails.email}
-                  />
-                </TableCell>
-                <TableCell>Area Of Interest</TableCell>
-                <TableCell>
-                  <TextField
-                    placeholder={'Enter Area Of Interest'}
-                    color={'warning'}
-                    disabled={!editable}
-                    value={userDetails.areaOfInterests}
-                    onChange={(e) =>
-                      setUserDetails({
-                        ...userDetails,
-                        areaOfInterests: e.target.value,
-                      })
-                    }
-                  />
-                </TableCell>
-              </TableRow>
               {localStorage.getItem('userType') === 'user' && (
-                <TableRow>
-                  <TableCell>Organization Name</TableCell>
-                  <TableCell>
-                    <TextField
-                      placeholder={'Enter Organization Name'}
-                      color={'warning'}
-                      disabled={!editable}
-                      value={userDetails.organization}
-                      onChange={(e) =>
-                        setUserDetails({
-                          ...userDetails,
-                          organization: e.target.value,
-                        })
-                      }
-                    />
-                  </TableCell>
-                  {userDetails.ngo && (
-                    <>
-                      <TableCell>NGO Name</TableCell>
-                      <TableCell>
-                        <TextField
-                          placeholder={'Enter NGO / NPO Name'}
-                          color={'warning'}
-                          disabled={true}
-                          value={userDetails.ngo}
-                          onChange={(e) =>
-                            setUserDetails({
-                              ...userDetails,
-                              ngo: e.target.value,
-                            })
-                          }
-                        />
-                      </TableCell>
-                    </>
-                  )}
-                </TableRow>
+                <>
+                  <TableRow>
+                    <TableCell>First Name</TableCell>
+                    <TableCell>
+                      <TextField
+                        placeholder={'Enter First Name'}
+                        color={'warning'}
+                        disabled={!editable}
+                        value={userDetails.firstName}
+                        onChange={(e) =>
+                          setUserDetails({
+                            ...userDetails,
+                            firstName: e.target.value,
+                          })
+                        }
+                      />
+                    </TableCell>
+                    <TableCell>Last Name</TableCell>
+                    <TableCell>
+                      <TextField
+                        placeholder={'Enter Last Name'}
+                        color={'warning'}
+                        disabled={!editable}
+                        value={userDetails.lastName}
+                        onChange={(e) =>
+                          setUserDetails({
+                            ...userDetails,
+                            lastName: e.target.value,
+                          })
+                        }
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Email Id</TableCell>
+                    <TableCell>
+                      <TextField
+                        placeholder={'Enter Email Id'}
+                        color={'warning'}
+                        disabled={true}
+                        value={userDetails.email}
+                      />
+                    </TableCell>
+                    <TableCell>Area Of Interest</TableCell>
+                    <TableCell>
+                      <TextField
+                        placeholder={'Enter Area Of Interest'}
+                        color={'warning'}
+                        disabled={!editable}
+                        value={userDetails.areaOfInterests}
+                        onChange={(e) =>
+                          setUserDetails({
+                            ...userDetails,
+                            areaOfInterests: e.target.value,
+                          })
+                        }
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Organization Name</TableCell>
+                    <TableCell>
+                      <TextField
+                        placeholder={'Enter Organization Name'}
+                        color={'warning'}
+                        disabled={!editable}
+                        value={userDetails.organization}
+                        onChange={(e) =>
+                          setUserDetails({
+                            ...userDetails,
+                            organization: e.target.value,
+                          })
+                        }
+                      />
+                    </TableCell>
+                    {userDetails.ngo ? (
+                      <>
+                        <TableCell>NGO Name</TableCell>
+                        <TableCell>
+                          <TextField
+                            placeholder={'Enter NGO / NPO Name'}
+                            color={'warning'}
+                            disabled={true}
+                            value={userDetails.ngo}
+                          />
+                        </TableCell>
+                      </>
+                    ) : (
+                      <>
+                        <TableCell>NGO Name</TableCell>
+                        <TableCell>
+                          <TextField
+                            placeholder={'Enter NGO / NPO Name'}
+                            color={'warning'}
+                            disabled={true}
+                            value={'NA'}
+                          />
+                        </TableCell>
+                      </>
+                    )}
+                  </TableRow>
+                </>
               )}
+
+              {localStorage.getItem('userType') === 'ngoAdmin' && (
+                <>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>
+                      <TextField
+                        placeholder={'Enter Name'}
+                        color={'warning'}
+                        disabled={true}
+                        value={userDetails.name}
+                      />
+                    </TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>
+                      <TextField
+                        placeholder={'Enter Email'}
+                        color={'warning'}
+                        disabled={true}
+                        value={userDetails.email}
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Phone</TableCell>
+                    <TableCell>
+                      <TextField
+                        placeholder={'Enter Phone'}
+                        color={'warning'}
+                        disabled={true}
+                        value={userDetails.phone}
+                      />
+                    </TableCell>
+                    <TableCell>Location</TableCell>
+                    <TableCell>
+                      <TextField
+                        placeholder={'Enter Location'}
+                        color={'warning'}
+                        disabled={true}
+                        value={userDetails.location}
+                      />
+                    </TableCell>
+                  </TableRow>
+                </>
+              )}
+
               <TableRow>
                 <TableCell>NEAR ID</TableCell>
                 <TableCell>

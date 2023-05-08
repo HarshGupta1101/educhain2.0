@@ -11,7 +11,7 @@ import AssignmentInfoComponent from '../components/UploadCourse/AssignmentInfo.C
 
 const UploadCourseDraftPage = () => {
   const { id } = useParams();
-  const [openTab, setOpenTab] = useState('');
+  const [openTab, setOpenTab] = useState('Basic Details');
 
   const [courseDetails, setCourseDetails] = useState({
     courseFee: '',
