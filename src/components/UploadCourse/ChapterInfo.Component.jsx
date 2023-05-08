@@ -49,7 +49,19 @@ function ChapterInfoComponent({
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
-      const response = await ipfs.add(file);
+      const toastId = toast.info('Uploading Video ...', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        const response = await ipfs.add(file);
+        toast.dismiss(toastId);
       const videoHash = `https://ipfs.io/ipfs/${response.path}`;
       toast.success('Video Uploaded Successfully !', {
         position: 'top-center',

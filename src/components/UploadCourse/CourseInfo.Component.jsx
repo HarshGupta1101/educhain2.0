@@ -70,7 +70,19 @@ function CourseInfoComponent({ courseDetails, setCourseDetails }) {
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
-      const response = await ipfs.add(file);
+      const toastId = toast.info('Uploading Course Thumbnail Image ...', {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        const response = await ipfs.add(file);
+        toast.dismiss(toastId);
       const ImgHash = `https://ipfs.io/ipfs/${response.path}`;
       toast.success('Course Image Uploaded Successfully !', {
             position: "top-center",
